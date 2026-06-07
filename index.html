@@ -63,7 +63,7 @@ img{display:block;max-width:100%}
 .nav-links a:hover{color:var(--white)}
 .nav-order{background:var(--red)!important;color:var(--white)!important;padding:9px 22px!important;font-weight:600!important;transition:background 0.2s!important}
 .nav-order:hover{background:var(--red-d)!important}
-.lang-btn{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:5px 10px;font-size:11px;font-weight:600;letter-spacing:0.1em;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;margin-left:8px}
+.lang-btn{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:5px 10px;font-size:11px;font-weight:600;letter-spacing:0.1em;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;margin-left:4px}.lang-btn.active-lang{background:var(--red);border-color:var(--red);color:var(--white)}
 .lang-btn:hover{border-color:var(--white);color:var(--white)}
 .nav-ham{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
 .nav-ham span{display:block;width:22px;height:1.5px;background:var(--white);transition:0.2s}
@@ -255,6 +255,55 @@ img{display:block;max-width:100%}
   .footer-main{grid-template-columns:1fr;gap:28px;padding:40px 20px}
   .footer-bot{padding:12px 20px;flex-direction:column;gap:6px}
 }
+
+/* ═══ CHAT WIDGET ═══ */
+#cfab{position:fixed;bottom:28px;right:28px;z-index:2000;width:58px;height:58px;background:var(--red);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(212,32,32,0.45);transition:all 0.3s}
+#cfab:hover{background:var(--red-d);transform:scale(1.08)}
+#cfab .fm{display:block;width:24px;height:24px}
+#cfab .fx{display:none;width:20px;height:20px}
+#cfab.open .fm{display:none}
+#cfab.open .fx{display:block}
+.cfab-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:var(--red);animation:pulse-ring 2s ease-out infinite;opacity:0}
+@keyframes pulse-ring{0%{transform:scale(1);opacity:0.6}100%{transform:scale(1.5);opacity:0}}
+#cpanel{position:fixed;bottom:100px;right:28px;width:360px;max-height:520px;background:var(--white);border:1px solid var(--g100);border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,0.18);display:flex;flex-direction:column;z-index:1999;opacity:0;transform:translateY(16px) scale(0.97);pointer-events:none;transition:all 0.25s cubic-bezier(0.4,0,0.2,1)}
+#cpanel.open{opacity:1;transform:none;pointer-events:all}
+.ch-hdr{background:var(--black);border-radius:16px 16px 0 0;padding:16px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ch-ava{width:36px;height:36px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:16px;color:var(--white);flex-shrink:0}
+.ch-name{font-size:14px;font-weight:600;color:var(--white);font-family:'DM Serif Display',serif}
+.ch-status{display:flex;align-items:center;gap:6px;margin-top:2px}
+.ch-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
+#chStatusTxt{font-size:11px;color:rgba(255,255,255,0.5)}
+.ch-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.ch-msgs::-webkit-scrollbar{width:4px}
+.ch-msgs::-webkit-scrollbar-track{background:transparent}
+.ch-msgs::-webkit-scrollbar-thumb{background:var(--g200);border-radius:4px}
+.cm{display:flex;gap:8px;align-items:flex-start}
+.cm.user{flex-direction:row-reverse}
+.cm-a{width:28px;height:28px;border-radius:50%;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;color:var(--g600)}
+.cm.assistant .cm-a{background:var(--red);color:var(--white);font-family:'DM Serif Display',serif;font-size:13px}
+.cm-b{font-size:13px;line-height:1.55;padding:10px 13px;border-radius:12px;max-width:240px;word-break:break-word}
+.cm.assistant .cm-b{background:var(--off-white);color:var(--black);border-radius:4px 12px 12px 12px}
+.cm.user .cm-b{background:var(--red);color:var(--white);border-radius:12px 4px 12px 12px}
+.cm-t{font-size:10px;color:var(--g400);margin-top:4px;padding:0 4px}
+.cm.user .cm-t{text-align:right}
+.ch-typing{display:flex;gap:4px;padding:12px 14px;background:var(--off-white);border-radius:4px 12px 12px 12px}
+.td{width:7px;height:7px;background:var(--g400);border-radius:50%;animation:bounce 1.2s infinite}
+.td:nth-child(2){animation-delay:0.15s}
+.td:nth-child(3){animation-delay:0.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.ch-qr{display:flex;flex-wrap:wrap;gap:6px;padding:8px 16px;border-top:1px solid var(--g100)}
+.ch-qb{font-size:11px;font-weight:500;padding:6px 10px;background:var(--white);border:1px solid var(--g200);border-radius:20px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;color:var(--black);white-space:nowrap}
+.ch-qb:hover{background:var(--black);color:var(--white);border-color:var(--black)}
+.ch-in-area{display:flex;align-items:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--g100);flex-shrink:0}
+.ch-in{flex:1;border:1px solid var(--g200);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Outfit',sans-serif;resize:none;outline:none;line-height:1.4;max-height:80px;transition:border-color 0.2s;color:var(--black);background:var(--white)}
+.ch-in:focus{border-color:var(--red)}
+.ch-send{width:36px;height:36px;background:var(--red);border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s}
+.ch-send:hover{background:var(--red-d)}
+.ch-send svg{width:16px;height:16px}
+.ch-send:disabled{opacity:0.5;cursor:not-allowed}
+.ch-note{font-size:10px;color:var(--g400);text-align:center;padding:6px 0 10px;flex-shrink:0}
+@media(max-width:480px){#cpanel{width:calc(100vw - 24px);right:12px;bottom:88px}#cfab{bottom:16px;right:16px}}
 </style>
 </head>
 <body>
@@ -267,26 +316,26 @@ img{display:block;max-width:100%}
       <span class="nav-name">BAMICO</span>
     </a>
     <div class="nav-links">
-      <a href="#menu" data-cz="Menu" data-en="Menu">Menu</a>
-      <a href="#about" data-cz="O nás" data-en="About">O nás</a>
-      <a href="#reviews" data-cz="Recenze" data-en="Reviews">Recenze</a>
-      <a href="#gallery" data-cz="Galerie" data-en="Gallery">Galerie</a>
-      <a href="#delivery" data-cz="Rozvoz" data-en="Delivery">Rozvoz</a>
-      <a href="#locations" data-cz="Pobočky" data-en="Locations">Pobočky</a>
-      <a href="#order" class="nav-order" data-cz="Objednat" data-en="Order">Objednat</a>
-      <button class="lang-btn" onclick="toggleLang()" id="langBtn">EN</button>
+      <a href="#menu" data-cz="Menu" data-en="Menu" data-vi="Menu">Menu</a>
+      <a href="#about" data-cz="O nás" data-en="About" data-vi="Về chúng tôi">O nás</a>
+      <a href="#reviews" data-cz="Recenze" data-en="Reviews" data-vi="Đánh giá">Recenze</a>
+      <a href="#gallery" data-cz="Galerie" data-en="Gallery" data-vi="Thư viện ảnh">Galerie</a>
+      <a href="#delivery" data-cz="Rozvoz" data-en="Delivery" data-vi="Giao hàng">Rozvoz</a>
+      <a href="#locations" data-cz="Pobočky" data-en="Locations" data-vi="Chi nhánh">Pobočky</a>
+      <a href="#order" class="nav-order" data-cz="Objednat" data-en="Order" data-vi="Đặt hàng">Objednat</a>
+      <button class="lang-btn" onclick="setLang('en')" id="langBtn-en">EN</button><button class="lang-btn" onclick="setLang('vi')" id="langBtn-vi">VI</button>
     </div>
     <button class="nav-ham" onclick="toggleMob()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mob-menu" id="mobMenu">
-  <a href="#menu" onclick="closeMob()" data-cz="Menu" data-en="Menu">Menu</a>
-  <a href="#about" onclick="closeMob()" data-cz="O nás" data-en="About">O nás</a>
-  <a href="#reviews" onclick="closeMob()" data-cz="Recenze" data-en="Reviews">Recenze</a>
-  <a href="#delivery" onclick="closeMob()" data-cz="Rozvoz" data-en="Delivery">Rozvoz</a>
-  <a href="#locations" onclick="closeMob()" data-cz="Pobočky" data-en="Locations">Pobočky</a>
+  <a href="#menu" onclick="closeMob()" data-cz="Menu" data-en="Menu" data-vi="Menu">Menu</a>
+  <a href="#about" onclick="closeMob()" data-cz="O nás" data-en="About" data-vi="Về chúng tôi">O nás</a>
+  <a href="#reviews" onclick="closeMob()" data-cz="Recenze" data-en="Reviews" data-vi="Đánh giá">Recenze</a>
+  <a href="#delivery" onclick="closeMob()" data-cz="Rozvoz" data-en="Delivery" data-vi="Giao hàng">Rozvoz</a>
+  <a href="#locations" onclick="closeMob()" data-cz="Pobočky" data-en="Locations" data-vi="Chi nhánh">Pobočky</a>
   <a href="#order" onclick="closeMob()" class="btn-r" style="text-align:center;margin-top:8px" data-cz="Objednat" data-en="Order Now">Objednat</a>
-  <button class="lang-btn" onclick="toggleLang()" style="align-self:flex-start;margin-top:8px" id="langBtn2">EN</button>
+  <button class="lang-btn" onclick="setLang('en')" style="margin-top:8px">EN</button><button class="lang-btn" onclick="setLang('vi')" style="margin-top:8px">VI</button>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -294,46 +343,46 @@ img{display:block;max-width:100%}
   <div class="hero-bg"><img src="images/ca-phe-banh-my.webp" alt="BAMICO interior" loading="eager"></div>
   <div class="hero-grain"></div>
   <div class="hero-ct">
-    <p class="hero-label" data-cz="Vietnamské bagety · Praha" data-en="Vietnamese Baguettes · Prague">Vietnamské bagety · Praha</p>
-    <h1 class="hero-h" data-cz-html="Bánh Mì<br><em>jak má</em><br>být." data-en-html="Bánh Mì<br><em>done</em><br>right.">Bánh Mì<br><em>jak má</em><br>být.</h1>
+    <p class="hero-label" data-cz="Vietnamské bagety · Praha" data-en="Vietnamese Baguettes · Prague" data-vi="Bánh mì Việt Nam · Praha">Vietnamské bagety · Praha</p>
+    <h1 class="hero-h" data-cz-html="Bánh Mì<br><em>jak má</em><br>být." data-en-html="Bánh Mì<br><em>done</em><br>right." data-vi-html="Bánh Mì<br><em>chuẩn vị</em><br>Hà Nội.">Bánh Mì<br><em>jak má</em><br>být.</h1>
     <div class="hero-line"></div>
-    <p class="hero-sub" data-cz="Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy." data-en="Family-run. Fresh-baked every morning. Authentic pâté, house pickles, crispy baguettes — straight from Hanoi to the streets of Prague.">Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy.</p>
+    <p class="hero-sub" data-cz="Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy." data-en="Family-run. Fresh-baked every morning. Authentic pâté, house pickles, crispy baguettes — straight from Hanoi to the streets of Prague." data-vi="Quán gia đình. Bánh nướng tươi mỗi sáng. Pâté truyền thống, dưa góp nhà làm, bánh mì giòn rụm — thẳng từ phố phường Hà Nội đến Praha.">Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy.</p>
     <div class="hero-ctas">
-      <a href="#menu" class="btn-r" data-cz="Prohlédnout menu" data-en="Explore menu">Prohlédnout menu</a>
-      <a href="#order" class="btn-o" data-cz="Objednat rozvoz" data-en="Order delivery">Objednat rozvoz</a>
+      <a href="#menu" class="btn-r" data-cz="Prohlédnout menu" data-en="Explore menu" data-vi="Xem thực đơn">Prohlédnout menu</a>
+      <a href="#order" class="btn-o" data-cz="Objednat rozvoz" data-en="Order delivery" data-vi="Đặt giao hàng">Objednat rozvoz</a>
     </div>
   </div>
 </section>
 
 <!-- ═══ MARQUEE ═══ -->
 <div class="mq"><div class="mq-track">
-  <span class="mq-item" data-cz="Čerstvé bagety denně" data-en="Fresh baguettes daily">Čerstvé bagety denně</span>
-  <span class="mq-item" data-cz="Vietnamské pouliční jídlo" data-en="Vietnamese street food">Vietnamské pouliční jídlo</span>
-  <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague">Dvě pobočky v Praze</span>
+  <span class="mq-item" data-cz="Čerstvé bagety denně" data-en="Fresh baguettes daily" data-vi="Bánh mì tươi mỗi ngày">Čerstvé bagety denně</span>
+  <span class="mq-item" data-cz="Vietnamské pouliční jídlo" data-en="Vietnamese street food" data-vi="Ẩm thực đường phố Việt Nam">Vietnamské pouliční jídlo</span>
+  <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague" data-vi="Hai chi nhánh tại Praha">Dvě pobočky v Praze</span>
   <span class="mq-item" data-cz="Egg coffee & Matcha" data-en="Egg coffee & Matcha">Egg coffee & Matcha</span>
-  <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
-  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00">Otevřeno 11:00–22:00</span>
+  <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora" data-vi="Giao hàng qua Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
+  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00" data-vi="Mở cửa 11:00–22:00">Otevřeno 11:00–22:00</span>
   <!-- duplicate items for seamless loop -->
-  <span class="mq-item" data-cz="Čerstvé bagety denně" data-en="Fresh baguettes daily">Čerstvé bagety denně</span>
-  <span class="mq-item" data-cz="Vietnamské pouliční jídlo" data-en="Vietnamese street food">Vietnamské pouliční jídlo</span>
-  <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague">Dvě pobočky v Praze</span>
+  <span class="mq-item" data-cz="Čerstvé bagety denně" data-en="Fresh baguettes daily" data-vi="Bánh mì tươi mỗi ngày">Čerstvé bagety denně</span>
+  <span class="mq-item" data-cz="Vietnamské pouliční jídlo" data-en="Vietnamese street food" data-vi="Ẩm thực đường phố Việt Nam">Vietnamské pouliční jídlo</span>
+  <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague" data-vi="Hai chi nhánh tại Praha">Dvě pobočky v Praze</span>
   <span class="mq-item" data-cz="Egg coffee & Matcha" data-en="Egg coffee & Matcha">Egg coffee & Matcha</span>
-  <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
-  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00">Otevřeno 11:00–22:00</span>
+  <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora" data-vi="Giao hàng qua Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
+  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00" data-vi="Mở cửa 11:00–22:00">Otevřeno 11:00–22:00</span>
 </div></div>
 
 <!-- ═══ FEATURED ═══ -->
 <div class="sec-alt">
   <div class="sec rv">
-    <p class="sec-lbl" data-cz="Doporučujeme" data-en="Recommended">Doporučujeme</p>
-    <h2 class="sec-h" data-cz="Naše bestsellery." data-en="Our bestsellers.">Naše bestsellery.</h2>
-    <p class="sec-sub" data-cz="Tři bagety, které Prahu nepřestávají bavit." data-en="Three baguettes that keep Prague coming back.">Tři bagety, které Prahu nepřestávají bavit.</p>
+    <p class="sec-lbl" data-cz="Doporučujeme" data-en="Recommended" data-vi="Món nổi bật">Doporučujeme</p>
+    <h2 class="sec-h" data-cz="Naše bestsellery." data-en="Our bestsellers." data-vi="Món bán chạy nhất.">Naše bestsellery.</h2>
+    <p class="sec-sub" data-cz="Tři bagety, které Prahu nepřestávají bavit." data-en="Three baguettes that keep Prague coming back." data-vi="Ba chiếc bánh mì khiến Praha không thể cưỡng.">Tři bagety, které Prahu nepřestávají bavit.</p>
     <div class="feat-grid">
       <div class="feat-card rv rv-d1">
         <div class="feat-img"><img src="images/grilled-pork-banh-mi.webp" alt="Grilled Pork Bánh Mì" loading="lazy"></div>
         <div class="feat-info">
           <div class="feat-name">Grilled Pork Bánh Mì</div>
-          <div class="feat-desc" data-cz="Grilované vepřové, čerstvé bylinky, domácí omáčka" data-en="Charcoal-grilled pork, fresh herbs, Bamico sauce">Grilované vepřové, čerstvé bylinky, domácí omáčka</div>
+          <div class="feat-desc" data-cz="Grilované vepřové, čerstvé bylinky, domácí omáčka" data-en="Charcoal-grilled pork, fresh herbs, Bamico sauce" data-vi="Thịt lợn nướng than, rau thơm tươi, sốt Bamico">Grilované vepřové, čerstvé bylinky, domácí omáčka</div>
           <div class="feat-row"><span class="feat-price">160 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
         </div>
       </div>
@@ -341,7 +390,7 @@ img{display:block;max-width:100%}
         <div class="feat-img"><img src="images/crispy-pork-banh-mi.webp" alt="Crispy Pork Bánh Mì" loading="lazy"></div>
         <div class="feat-info">
           <div class="feat-name">Crispy Pork Bánh Mì</div>
-          <div class="feat-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot">Křupavý vepřový bok, nakládaná ředkev a mrkev</div>
+          <div class="feat-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot" data-vi="Ba chỉ heo giòn, củ cải và cà rốt dưa góp">Křupavý vepřový bok, nakládaná ředkev a mrkev</div>
           <div class="feat-row"><span class="feat-price">170 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
         </div>
       </div>
@@ -349,7 +398,7 @@ img{display:block;max-width:100%}
         <div class="feat-img"><img src="images/bbq-pork-banh-mi.webp" alt="BBQ Pork Bánh Mì" loading="lazy"></div>
         <div class="feat-info">
           <div class="feat-name">BBQ Pork Bánh Mì</div>
-          <div class="feat-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky" data-en="Slow-roasted BBQ pork, cucumber, fresh herbs">Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky</div>
+          <div class="feat-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky" data-en="Slow-roasted BBQ pork, cucumber, fresh herbs" data-vi="Thịt BBQ nướng chậm, dưa leo, rau thơm tươi">Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky</div>
           <div class="feat-row"><span class="feat-price">160 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
         </div>
       </div>
@@ -359,8 +408,8 @@ img{display:block;max-width:100%}
 
 <!-- ═══ MENU ═══ -->
 <div id="menu"><div class="sec rv">
-  <p class="sec-lbl" data-cz="Kompletní menu" data-en="Full menu">Kompletní menu</p>
-  <h2 class="sec-h" data-cz="Vše, co nabízíme." data-en="Everything we serve.">Vše, co nabízíme.</h2>
+  <p class="sec-lbl" data-cz="Kompletní menu" data-en="Full menu" data-vi="Thực đơn đầy đủ">Kompletní menu</p>
+  <h2 class="sec-h" data-cz="Vše, co nabízíme." data-en="Everything we serve." data-vi="Tất cả món chúng tôi phục vụ.">Vše, co nabízíme.</h2>
   <div class="menu-controls">
     <div class="menu-tabs" role="tablist">
       <button class="menu-tab active" onclick="showC(this,'mc-coffee')">Vietnamese Coffee</button>
@@ -371,10 +420,10 @@ img{display:block;max-width:100%}
       <button class="menu-tab" onclick="showC(this,'mc-tea')">Fruit Tea</button>
     </div>
     <div class="filter-row">
-      <span class="filter-label" data-cz="Filtr:" data-en="Filter:">Filtr:</span>
+      <span class="filter-label" data-cz="Filtr:" data-en="Filter:" data-vi="Lọc:">Filtr:</span>
       <button class="filter-btn" onclick="toggleFilter(this,'all')" data-active="true">All</button>
-      <button class="filter-btn" onclick="toggleFilter(this,'no-pork')" data-cz="Bez vepřového" data-en="No pork">Bez vepřového</button>
-      <button class="filter-btn" onclick="toggleFilter(this,'no-gluten')" data-cz="Bez lepku" data-en="No gluten">Bez lepku</button>
+      <button class="filter-btn" onclick="toggleFilter(this,'no-pork')" data-cz="Bez vepřového" data-en="No pork" data-vi="Không thịt lợn">Bez vepřového</button>
+      <button class="filter-btn" onclick="toggleFilter(this,'no-gluten')" data-cz="Bez lepku" data-en="No gluten" data-vi="Không gluten">Bez lepku</button>
     </div>
   </div>
 
@@ -389,7 +438,7 @@ img{display:block;max-width:100%}
     <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/bbq-pork-banh-mi.webp" alt="BBQ Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">BBQ Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, bylinky" data-en="Slow-roasted BBQ pork, cucumber, herbs">Pomalu pečené BBQ vepřové, okurka, bylinky</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
     <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/grilled-pork-banh-mi.webp" alt="Grilled Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Grilled Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Grilované vepřové, domácí nakládaná zelenina" data-en="Charcoal-grilled pork, house pickles">Grilované vepřové, domácí nakládaná zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
     <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/shredded-chicken-banh-mi.webp" alt="Shredded Chicken" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Shredded Chicken Bánh Mì</div><div class="menu-card-desc" data-cz="Trhané kuřecí, majonéza, čerstvá zelenina" data-en="Tender shredded chicken, mayo, fresh vegetables">Trhané kuřecí, majonéza, čerstvá zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span></div></div></div></div>
-    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/crispy-pork-banh-mi.webp" alt="Crispy Pork" loading="lazy"><div class="menu-card-badge">★ TOP</div></div><div class="menu-card-body"><div class="menu-card-name">Crispy Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot">Křupavý vepřový bok, nakládaná ředkev a mrkev</div><div class="menu-card-foot"><span class="menu-card-price">170 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/crispy-pork-banh-mi.webp" alt="Crispy Pork" loading="lazy"><div class="menu-card-badge">★ TOP</div></div><div class="menu-card-body"><div class="menu-card-name">Crispy Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot" data-vi="Ba chỉ heo giòn, củ cải và cà rốt dưa góp">Křupavý vepřový bok, nakládaná ředkev a mrkev</div><div class="menu-card-foot"><span class="menu-card-price">170 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
   </div></div>
 
   <div class="menu-cat" id="mc-fried"><div class="menu-grid">
@@ -422,18 +471,18 @@ img{display:block;max-width:100%}
 
 <!-- ═══ ABOUT ═══ -->
 <div class="sec-alt" id="about"><div class="sec rv">
-  <p class="sec-lbl" data-cz="Náš příběh" data-en="Our story">Náš příběh</p>
-  <h2 class="sec-h" data-cz="Autentická chuť Vietnamu v Praze." data-en="The authentic taste of Vietnam in Prague.">Autentická chuť Vietnamu v Praze.</h2>
+  <p class="sec-lbl" data-cz="Náš příběh" data-en="Our story" data-vi="Câu chuyện của chúng tôi">Náš příběh</p>
+  <h2 class="sec-h" data-cz="Autentická chuť Vietnamu v Praze." data-en="The authentic taste of Vietnam in Prague." data-vi="Hương vị Việt Nam chính thống tại Praha.">Autentická chuť Vietnamu v Praze.</h2>
   <div class="about-lay">
     <div class="about-img"><img src="images/food-making.webp" alt="Making bánh mì" loading="lazy"></div>
     <div class="about-txt">
-      <h3 data-cz="Tradice v každém soustu." data-en="Tradition in every bite.">Tradice v každém soustu.</h3>
+      <h3 data-cz="Tradice v každém soustu." data-en="Tradition in every bite." data-vi="Truyền thống trong từng miếng cắn.">Tradice v každém soustu.</h3>
       <p data-cz="BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy." data-en="BAMICO is a <strong>family-run bistro</strong> serving authentic Vietnamese bánh mì baguettes. We use only the highest quality ingredients and traditional preparation methods." data-html>BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy.</p>
       <p data-cz="Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy." data-en="Our baguettes are baked <strong>fresh every day</strong> for that perfect crispy crust. We bring the atmosphere of Vietnamese street food right to the heart of Prague." data-html>Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy.</p>
       <div class="about-stats">
-        <div><div class="stat-n" data-count="2">0</div><div class="stat-l" data-cz="Pobočky v Praze" data-en="Prague locations">Pobočky v Praze</div></div>
-        <div><div class="stat-n" data-count="7">0</div><div class="stat-l" data-cz="Dní v týdnu" data-en="Days a week">Dní v týdnu</div></div>
-        <div><div class="stat-n">∞</div><div class="stat-l" data-cz="Chilli na přání" data-en="Chilli on request">Chilli na přání</div></div>
+        <div><div class="stat-n" data-count="2">0</div><div class="stat-l" data-cz="Pobočky v Praze" data-en="Prague locations" data-vi="Chi nhánh tại Praha">Pobočky v Praze</div></div>
+        <div><div class="stat-n" data-count="7">0</div><div class="stat-l" data-cz="Dní v týdnu" data-en="Days a week" data-vi="Ngày trong tuần">Dní v týdnu</div></div>
+        <div><div class="stat-n">∞</div><div class="stat-l" data-cz="Chilli na přání" data-en="Chilli on request" data-vi="Ớt theo yêu cầu">Chilli na přání</div></div>
       </div>
     </div>
   </div>
@@ -441,8 +490,8 @@ img{display:block;max-width:100%}
 
 <!-- ═══ REVIEWS ═══ -->
 <div id="reviews"><div class="sec rv">
-  <p class="sec-lbl" data-cz="Recenze" data-en="Reviews">Recenze</p>
-  <h2 class="sec-h" data-cz="Co říkají naši zákazníci." data-en="What our customers say.">Co říkají naši zákazníci.</h2>
+  <p class="sec-lbl" data-cz="Recenze" data-en="Reviews" data-vi="Đánh giá">Recenze</p>
+  <h2 class="sec-h" data-cz="Co říkají naši zákazníci." data-en="What our customers say." data-vi="Khách hàng nói gì về chúng tôi.">Co říkají naši zákazníci.</h2>
   <div class="reviews-grid">
     <div class="review-card rv rv-d1">
       <div class="review-quote">"</div>
@@ -477,8 +526,8 @@ img{display:block;max-width:100%}
 
 <!-- ═══ DELIVERY ═══ -->
 <div class="sec-dk" id="delivery"><div class="sec rv">
-  <p class="sec-lbl" data-cz="Zóny rozvozu" data-en="Delivery zones">Zóny rozvozu</p>
-  <h2 class="sec-h" style="color:var(--white)" data-cz="Doručíme po celé Praze." data-en="We deliver across Prague.">Doručíme po celé Praze.</h2>
+  <p class="sec-lbl" data-cz="Zóny rozvozu" data-en="Delivery zones" data-vi="Khu vực giao hàng">Zóny rozvozu</p>
+  <h2 class="sec-h" style="color:var(--white)" data-cz="Doručíme po celé Praze." data-en="We deliver across Prague." data-vi="Giao hàng khắp Praha.">Doručíme po celé Praze.</h2>
   <p class="sec-sub" style="color:rgba(255,255,255,0.4)" data-cz="Odstupňované ceny rozvozu podle vzdálenosti. K dispozici přes Wolt, Bolt Food a Foodora." data-en="Tiered delivery pricing by distance. Available via Wolt, Bolt Food, and Foodora.">Odstupňované ceny rozvozu podle vzdálenosti. K dispozici přes Wolt, Bolt Food a Foodora.</p>
   <div class="del-tiers">
     <div class="del-tier"><div class="del-dist" data-cz="Do 1 km" data-en="Up to 1 km">Do 1 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>69 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>49 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>29 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>19 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free">Zdarma</td></tr></table></div>
@@ -486,7 +535,7 @@ img{display:block;max-width:100%}
     <div class="del-tier"><div class="del-dist">3 — 6 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>109 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>89 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>59 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>39 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free">Zdarma</td></tr></table></div>
   </div>
   <div style="display:flex;gap:14px;justify-content:center;margin-top:44px;flex-wrap:wrap" id="order">
-    <a href="https://wolt.com" target="_blank" class="btn-r" data-cz="Objednat na Woltu" data-en="Order on Wolt">Objednat na Woltu</a>
+    <a href="https://wolt.com" target="_blank" class="btn-r" data-cz="Objednat na Woltu" data-en="Order on Wolt" data-vi="Đặt trên Wolt">Objednat na Woltu</a>
     <a href="https://food.bolt.eu" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Bolt Food</a>
     <a href="https://www.foodora.cz" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Foodora</a>
   </div>
@@ -494,11 +543,11 @@ img{display:block;max-width:100%}
 
 <!-- ═══ LOCATIONS ═══ -->
 <div id="locations"><div class="sec rv">
-  <p class="sec-lbl" data-cz="Najdete nás" data-en="Find us">Najdete nás</p>
-  <h2 class="sec-h" data-cz="Dvě místa. Jedna vášeň." data-en="Two spots. One obsession.">Dvě místa. Jedna vášeň.</h2>
+  <p class="sec-lbl" data-cz="Najdete nás" data-en="Find us" data-vi="Tìm chúng tôi">Najdete nás</p>
+  <h2 class="sec-h" data-cz="Dvě místa. Jedna vášeň." data-en="Two spots. One obsession." data-vi="Hai địa điểm. Một đam mê.">Dvě místa. Jedna vášeň.</h2>
   <div class="loc-grid">
-    <div class="loc-card"><div class="loc-tag">Nové Město</div><div class="loc-name">Masarykovo nábřeží</div><div class="loc-addr">Masarykovo nábř. 2014/2<br>120 00 Praha 2 – Nové Město</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 777 057 696</div></div><a href="https://maps.google.com/?q=Masarykovo+nábřeží+2014/2+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →">Zobrazit na mapě →</a></div>
-    <div class="loc-card"><div class="loc-tag">Žižkov</div><div class="loc-name">Seifertova</div><div class="loc-addr">Seifertova 11<br>130 00 Praha 3 – Žižkov</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 773 601 999</div></div><a href="https://maps.google.com/?q=Seifertova+11+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →">Zobrazit na mapě →</a></div>
+    <div class="loc-card"><div class="loc-tag">Nové Město</div><div class="loc-name">Masarykovo nábřeží</div><div class="loc-addr">Masarykovo nábř. 2014/2<br>120 00 Praha 2 – Nové Město</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 777 057 696</div></div><a href="https://maps.google.com/?q=Masarykovo+nábřeží+2014/2+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →" data-vi="Xem trên bản đồ →">Zobrazit na mapě →</a></div>
+    <div class="loc-card"><div class="loc-tag">Žižkov</div><div class="loc-name">Seifertova</div><div class="loc-addr">Seifertova 11<br>130 00 Praha 3 – Žižkov</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 773 601 999</div></div><a href="https://maps.google.com/?q=Seifertova+11+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →" data-vi="Xem trên bản đồ →">Zobrazit na mapě →</a></div>
   </div>
 </div></div>
 
@@ -506,8 +555,8 @@ img{display:block;max-width:100%}
 <footer class="footer"><div class="footer-main">
   <div><div class="footer-brand"><div class="footer-logo"><img src="images/logo.webp" alt="BAMICO logo"></div><div class="footer-brand-name">BAMICO</div></div><p class="footer-tagline" data-cz="Autentické vietnamské bánh mì,<br>čerstvě pečené každé ráno v Praze." data-en="Authentic Vietnamese bánh mì,<br>baked fresh every morning in Prague.">Autentické vietnamské bánh mì,<br>čerstvě pečené každé ráno v Praze.</p></div>
   <div><h4>Menu</h4><ul><li><a href="#menu">Bánh Mì</a></li><li><a href="#menu">Vietnamese Coffee</a></li><li><a href="#menu">Matcha Series</a></li><li><a href="#menu">Fried & Sides</a></li></ul></div>
-  <div><h4 data-cz="Pobočky" data-en="Visit">Pobočky</h4><ul><li><a href="#locations">Masarykovo, Nové Město</a></li><li><a href="#locations">Seifertova, Žižkov</a></li><li><a href="#delivery" data-cz="Zóny rozvozu" data-en="Delivery zones">Zóny rozvozu</a></li></ul></div>
-  <div><h4 data-cz="Sledujte nás" data-en="Connect">Sledujte nás</h4><ul><li><a href="https://www.instagram.com/bamico.prg/" target="_blank">Instagram</a></li><li><a href="https://www.facebook.com/p/Bamico-Vietnamese-baguettes-61572476219304/" target="_blank">Facebook</a></li><li><a href="mailto:bamico.prg@gmail.com">bamico.prg@gmail.com</a></li></ul></div>
+  <div><h4 data-cz="Pobočky" data-en="Visit" data-vi="Chi nhánh">Pobočky</h4><ul><li><a href="#locations">Masarykovo, Nové Město</a></li><li><a href="#locations">Seifertova, Žižkov</a></li><li><a href="#delivery" data-cz="Zóny rozvozu" data-en="Delivery zones" data-vi="Khu vực giao hàng">Zóny rozvozu</a></li></ul></div>
+  <div><h4 data-cz="Sledujte nás" data-en="Connect" data-vi="Theo dõi chúng tôi">Sledujte nás</h4><ul><li><a href="https://www.instagram.com/bamico.prg/" target="_blank">Instagram</a></li><li><a href="https://www.facebook.com/p/Bamico-Vietnamese-baguettes-61572476219304/" target="_blank">Facebook</a></li><li><a href="mailto:bamico.prg@gmail.com">bamico.prg@gmail.com</a></li></ul></div>
 </div><div class="footer-bot"><p>© 2026 BAMICO · Vietnamese Baguettes</p><p>Praha, Česká republika</p></div></footer>
 
 <!-- ═══ CHAT WIDGET ═══ -->
@@ -515,41 +564,83 @@ img{display:block;max-width:100%}
 <div id="cpanel"><div class="ch-hdr"><div class="ch-ava">B</div><div><div class="ch-name">BAMICO</div><div class="ch-status"><div class="ch-dot"></div><span id="chStatusTxt">Xin chào — here to help</span></div></div></div>
 <div class="ch-msgs" id="chM"></div>
 <div class="ch-qr" id="chQ">
-  <button class="ch-qb" onclick="qS('Jaké bánh mì máte?')" data-cz="🥖 Menu" data-en="🥖 Menu">🥖 Menu</button>
-  <button class="ch-qb" onclick="qS('Kde vás najdu?')" data-cz="📍 Pobočky" data-en="📍 Locations">📍 Pobočky</button>
-  <button class="ch-qb" onclick="qS('Jaká je otevírací doba?')" data-cz="🕙 Otevírací doba" data-en="🕙 Hours">🕙 Otevírací doba</button>
-  <button class="ch-qb" onclick="qS('Máte rozvoz?')" data-cz="🛵 Rozvoz" data-en="🛵 Delivery">🛵 Rozvoz</button>
+  <button class="ch-qb" onclick="qS('Jaké bánh mì máte?')">🥖 Menu</button>
+  <button class="ch-qb" onclick="qS('Kde vás najdu?')">📍 Pobočky</button>
+  <button class="ch-qb" onclick="qS('Jaká je otevírací doba?')">🕙 Otevírací doba</button>
+  <button class="ch-qb" onclick="qS('Máte rozvoz?')">🛵 Rozvoz</button>
+  <button class="ch-qb" onclick="qS('Jaké alergeny jsou v jídle?')">🌿 Alergeny</button>
 </div>
 <div class="ch-in-area"><textarea id="chIn" class="ch-in" rows="1" placeholder="Zeptejte se na menu, rozvoz, alergeny…"></textarea><button class="ch-send" id="sBtn" onclick="sM()"><svg viewBox="0 0 24 24" fill="none" stroke="#FAFAFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
 <div class="ch-note">AI · bamico.prg@gmail.com</div></div>
 
 <script>
-// ═══ LANGUAGE SYSTEM ═══
+// ═══ LANGUAGE SYSTEM (CZ / EN / VI) ═══
 let lang = 'cz';
-function toggleLang() {
-  lang = lang === 'cz' ? 'en' : 'cz';
-  const btn = document.getElementById('langBtn');
-  if (btn) btn.textContent = lang === 'cz' ? 'EN' : 'CZ';
-  const btn2 = document.getElementById('langBtn2');
-  if (btn2) btn2.textContent = lang === 'cz' ? 'EN' : 'CZ';
-  document.documentElement.lang = lang === 'cz' ? 'cs' : 'en';
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l === 'cz' ? 'cs' : l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active-lang'));
+  const active = document.getElementById('langBtn-' + l);
+  if (active) active.classList.add('active-lang');
+
   document.querySelectorAll('[data-cz]').forEach(el => {
-    const txt = el.getAttribute('data-' + lang);
-    if (txt) {
-      if (el.hasAttribute('data-html') || (el.tagName === 'P' && txt.includes('<strong>'))) {
-        el.innerHTML = txt;
-      } else if (el.hasAttribute('data-cz-html')) {
-        el.innerHTML = el.getAttribute('data-' + lang + '-html') || txt;
-      } else {
-        el.textContent = txt;
-      }
+    // Handle special html variants for hero heading
+    const htmlKey = 'data-' + l + '-html';
+    if (el.hasAttribute('data-cz-html')) {
+      const htmlVal = el.getAttribute(htmlKey) || el.getAttribute('data-cz-html');
+      el.innerHTML = htmlVal;
+      return;
+    }
+    const val = el.getAttribute('data-' + l) || el.getAttribute('data-cz');
+    if (!val) return;
+    if (el.hasAttribute('data-html') || val.includes('<strong>')) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
     }
   });
+
   const inp = document.getElementById('chIn');
-  if (inp) inp.placeholder = lang === 'cz' ? 'Zeptejte se na menu, rozvoz, alergeny…' : 'Ask about menu, delivery, allergens…';
-  const statusSpan = document.getElementById('chStatusTxt');
-  if (statusSpan) statusSpan.textContent = lang === 'cz' ? 'Xin chào — jsme tu pro vás' : 'Xin chào — here to help';
+  const placeholders = {
+    cz: 'Zeptejte se na menu, rozvoz, alergeny…',
+    en: 'Ask about menu, delivery, allergens…',
+    vi: 'Hỏi về menu, giao hàng, dị ứng…'
+  };
+  if (inp) inp.placeholder = placeholders[l] || placeholders.cz;
+
+  const statusTxt = document.getElementById('chStatusTxt');
+  const statuses = {
+    cz: 'Xin chào — jsme tu pro vás',
+    en: 'Xin chào — here to help',
+    vi: 'Xin chào — chúng tôi sẵn sàng hỗ trợ'
+  };
+  if (statusTxt) statusTxt.textContent = statuses[l] || statuses.cz;
+
+  // Update quick reply buttons
+  const qBtns = {
+    cz: ['🥖 Menu', '📍 Pobočky', '🕙 Otevírací doba', '🛵 Rozvoz', '🌿 Alergeny'],
+    en: ['🥖 Menu', '📍 Locations', '🕙 Opening hours', '🛵 Delivery', '🌿 Allergens'],
+    vi: ['🥖 Thực đơn', '📍 Địa điểm', '🕙 Giờ mở cửa', '🛵 Giao hàng', '🌿 Dị ứng']
+  };
+  const qTexts = {
+    cz: ['Jaké bánh mì máte?', 'Kde vás najdu?', 'Jaká je otevírací doba?', 'Máte rozvoz?', 'Jaké alergeny jsou v jídle?'],
+    en: ['What bánh mì do you have?', 'Where are you located?', 'What are your opening hours?', 'Do you offer delivery?', 'What allergens are in the food?'],
+    vi: ['Bạn có những bánh mì gì?', 'Quán ở đâu?', 'Giờ mở cửa là mấy giờ?', 'Có giao hàng không?', 'Món ăn có chất gây dị ứng gì không?']
+  };
+  const btns = document.querySelectorAll('.ch-qb');
+  const labels = qBtns[l] || qBtns.cz;
+  const texts  = qTexts[l] || qTexts.cz;
+  btns.forEach((btn, i) => {
+    if (labels[i]) {
+      btn.textContent = labels[i];
+      btn.onclick = () => qS(texts[i]);
+    }
+  });
 }
+
+// Legacy support
+function toggleLang() { setLang(lang === 'cz' ? 'en' : 'cz'); }
 
 // ═══ MOBILE NAV ═══
 function toggleMob() {
@@ -570,7 +661,6 @@ function showC(btn, id) {
   if (target) target.classList.add('active');
   applyFilter();
 }
-
 let activeFilter = 'all';
 function toggleFilter(btn, f) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -582,9 +672,8 @@ function applyFilter() {
   const active = document.querySelector('.menu-cat.active');
   if (!active) return;
   active.querySelectorAll('.menu-card').forEach(card => {
-    if (activeFilter === 'all') {
-      card.style.display = '';
-    } else {
+    if (activeFilter === 'all') { card.style.display = ''; }
+    else {
       const tags = card.getAttribute('data-tags') || '';
       card.style.display = tags.includes(activeFilter) ? '' : 'none';
     }
@@ -610,22 +699,46 @@ document.querySelectorAll('.rv').forEach(el => observer.observe(el));
 // ═══ CHAT ═══
 let cOpen = false, ld = false;
 const H = [];
-const SYS = "You are the friendly bilingual assistant for BAMICO... (full system prompt from previous version)";
+
+const SYS = `You are BAMICO's friendly restaurant assistant. You help customers ONLY with these topics:
+1. MENU & ORDERING: Full menu with prices — Vietnamese Coffee (Milk Coffee 110 CZK, Egg Coffee 130 CZK, Salted Coffee 130 CZK), Bánh Mì sandwiches (Vietnamese Ham 145 CZK, BBQ Pork 160 CZK, Grilled Pork 160 CZK, Shredded Chicken 160 CZK, Crispy Pork 170 CZK), Fried sides (Bamico Fries 95 CZK, Bacon & Cheese Fries 120 CZK, Mozzarella Sticks 3pcs 75 CZK / 5pcs 115 CZK), Matcha drinks (Matcha Latte 105 CZK, Matcha Mango 125 CZK, Matcha Strawberry 125 CZK), Soft drinks (Coca-Cola/Zero/Sprite/Fanta/Cozy teas 55 CZK), Fruit Tea (Peach 100 CZK). Order via Wolt, Bolt Food, or Foodora.
+2. RESERVATIONS: We are a walk-in bánh mì bistro — we do not take table reservations. Direct customers to visit us in person.
+3. OPENING HOURS: Open every day Monday–Sunday, 11:00–22:00, both locations.
+4. LOCATIONS: Two branches — (1) Masarykovo nábřeží 2014/2, Praha 2 – Nové Město, phone +420 777 057 696. (2) Seifertova 11, Praha 3 – Žižkov, phone +420 773 601 999. Email: bamico.prg@gmail.com
+5. ALLERGENS: Gluten (in all bánh mì baguettes and fried items), Pork (in ham/BBQ/grilled/crispy pork items and bacon fries), Dairy (in all coffee and matcha drinks, cheese fries, mozzarella sticks), Eggs (in Egg Coffee). Shredded Chicken Bánh Mì has NO pork. All coffees and matcha drinks have NO gluten. Bamico Fries have NO pork.
+
+IMPORTANT RULES:
+- ONLY answer questions related to the 5 topics above.
+- If asked anything else (politics, personal advice, coding, general knowledge, etc.), politely say you can only help with menu, orders, hours, locations, and allergens.
+- Be warm, friendly, and concise. Use occasional Vietnamese phrases naturally (Xin chào, Cảm ơn).
+- Respond in the same language the customer uses (Czech, English, or Vietnamese).
+- Keep replies short — max 3–4 sentences unless listing menu items.
+- Never make up prices or items not listed above.`;
 
 window.addEventListener('DOMContentLoaded', () => {
   const inp = document.getElementById('chIn');
-  if (inp) inp.placeholder = 'Zeptejte se na menu, rozvoz, alergeny…';
+  if (inp) {
+    inp.placeholder = 'Zeptejte se na menu, rozvoz, alergeny…';
+    inp.addEventListener('keydown', chK);
+    inp.addEventListener('input', () => aH(inp));
+  }
+  // Active lang button styling
+  const enBtn = document.getElementById('langBtn-en');
+  const viBtn = document.getElementById('langBtn-vi');
+  if (enBtn) enBtn.style.cssText += '';
   setTimeout(() => {
-    addM('assistant', lang === 'cz' ? 'Xin chào! 👋 Jsem asistent BAMICO. Zeptejte se mě na cokoliv — menu, pobočky, otevírací dobu nebo alergeny.' : 'Xin chào! 👋 I\'m the Bamico assistant. Ask me anything about our menu, locations, hours, or allergens.');
-  }, 400);
+    addM('assistant', 'Xin chào! 👋 Jsem asistent BAMICO. Mohu vám pomoci s menu, otevírací dobou, pobočkami, alergeny nebo objednávkou.
+
+Xin chào! I\'m the BAMICO assistant — ask me about our menu, hours, locations, allergens or how to order. 🥖');
+  }, 500);
 });
 
 function tChat() {
   cOpen = !cOpen;
   const panel = document.getElementById('cpanel');
-  const fab = document.getElementById('cfab');
+  const fab   = document.getElementById('cfab');
   if (panel) panel.classList.toggle('open', cOpen);
-  if (fab) fab.classList.toggle('open', cOpen);
+  if (fab)   fab.classList.toggle('open', cOpen);
   if (cOpen) {
     const pulse = document.querySelector('.cfab-pulse');
     if (pulse) pulse.remove();
@@ -639,8 +752,8 @@ function addM(role, text) {
   if (!container) return;
   const time = new Date().toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
   const div = document.createElement('div');
-  div.className = `cm ${role}`;
-  div.innerHTML = `<div class="cm-a">${role === 'user' ? 'Vy' : 'B'}</div><div><div class="cm-b">${escapeHtml(text).replace(/\n/g, '<br>')}</div><div class="cm-t">${time}</div></div>`;
+  div.className = 'cm ' + role;
+  div.innerHTML = '<div class="cm-a">' + (role === 'user' ? '👤' : 'B') + '</div><div><div class="cm-b">' + escapeHtml(text).replace(/\n/g, '<br>') + '</div><div class="cm-t">' + time + '</div></div>';
   container.appendChild(div);
   scrollChat();
   if (role === 'user') {
@@ -650,8 +763,8 @@ function addM(role, text) {
 }
 
 function scrollChat() {
-  const container = document.getElementById('chM');
-  if (container) setTimeout(() => container.scrollTop = container.scrollHeight, 30);
+  const c = document.getElementById('chM');
+  if (c) setTimeout(() => c.scrollTop = c.scrollHeight, 30);
 }
 
 function escapeHtml(str) {
@@ -660,22 +773,19 @@ function escapeHtml(str) {
 
 let typingIndicator = null;
 function showTyping() {
-  const container = document.getElementById('chM');
-  if (!container) return;
+  const c = document.getElementById('chM');
+  if (!c) return;
   hideTyping();
   const div = document.createElement('div');
   div.className = 'cm assistant';
   div.id = 'typingIndicator';
-  div.innerHTML = `<div class="cm-a">B</div><div class="ch-typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
-  container.appendChild(div);
+  div.innerHTML = '<div class="cm-a">B</div><div class="ch-typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>';
+  c.appendChild(div);
   scrollChat();
   typingIndicator = div;
 }
 function hideTyping() {
-  if (typingIndicator) {
-    typingIndicator.remove();
-    typingIndicator = null;
-  }
+  if (typingIndicator) { typingIndicator.remove(); typingIndicator = null; }
 }
 
 async function sM() {
@@ -692,20 +802,25 @@ async function sM() {
   H.push({ role: 'user', content: text });
   showTyping();
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYS, messages: H })
+      body: JSON.stringify({ system: SYS, messages: H })
     });
     hideTyping();
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     const reply = data.content?.[0]?.text || '?';
     H.push({ role: 'assistant', content: reply });
     addM('assistant', reply);
   } catch (e) {
     hideTyping();
-    addM('assistant', lang === 'cz' ? '⚠️ Něco se pokazilo. Zkuste to znovu nebo zavolejte +420 777 057 696.' : '⚠️ Something went wrong. Try again or call +420 777 057 696.');
+    const errs = {
+      cz: '⚠️ Něco se pokazilo. Zkuste to znovu nebo zavolejte +420 777 057 696.',
+      en: '⚠️ Something went wrong. Please try again or call +420 777 057 696.',
+      vi: '⚠️ Đã xảy ra lỗi. Vui lòng thử lại hoặc gọi +420 777 057 696.'
+    };
+    addM('assistant', errs[lang] || errs.cz);
   }
   ld = false;
   if (sendBtn) sendBtn.disabled = false;
@@ -714,27 +829,15 @@ async function sM() {
 
 function qS(text) {
   const inp = document.getElementById('chIn');
-  if (inp) {
-    inp.value = text;
-    sM();
-  }
+  if (inp) { inp.value = text; sM(); }
 }
 function chK(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sM();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sM(); }
 }
 function aH(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 80) + 'px';
 }
-
-// Attach event listeners after DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-  const inp = document.getElementById('chIn');
-  if (inp) inp.addEventListener('keydown', chK);
-});
 </script>
 </body>
 </html>
