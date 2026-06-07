@@ -388,6 +388,41 @@ img{display:block;max-width:100%}
 .ch-note{font-size:10px;color:var(--g400);text-align:center;padding:5px 0 8px;flex-shrink:0}
 @media(max-width:480px){#cpanel{width:calc(100vw - 24px);right:12px;bottom:86px}#cfab{bottom:16px;right:16px}}
 
+
+/* ═══ DELIVERY MAP ═══ */
+.del-layout{display:grid;grid-template-columns:1fr 420px;gap:32px;margin-top:44px;align-items:start}
+.del-map-wrap{position:relative;width:100%}
+.del-map-svg{display:none}
+.del-map-embed{position:relative;width:100%;height:420px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
+.del-map-embed iframe{position:absolute;inset:0;width:100%;height:100%}
+.del-circle{position:absolute;border-radius:50%;border:2px dashed rgba(212,32,32,0.7);cursor:pointer;transition:all 0.25s;transform:translate(-50%,-50%);left:50%;top:50%}
+.del-circle:hover{background:rgba(212,32,32,0.15)!important}
+.del-c1{width:80px;height:80px;background:rgba(212,32,32,0.18);border-style:solid}
+.del-c2{width:230px;height:230px;background:rgba(212,32,32,0.10)}
+.del-c3{width:420px;height:420px;background:rgba(212,32,32,0.05)}
+.del-pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
+.del-pin-dot{width:14px;height:14px;background:var(--red);border-radius:50%;border:2px solid white;box-shadow:0 0 0 4px rgba(212,32,32,0.3)}
+.del-pin span{background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:0.08em;margin-top:2px}
+.del-zone-labels{position:absolute;inset:0;pointer-events:none}
+.del-zlbl{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;color:rgba(255,255,255,0.45);background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:3px;white-space:nowrap}
+/* Pricing side */
+.del-pricing{display:flex;flex-direction:column;gap:0}
+.del-ztabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:20px}
+.del-ztab{flex:1;padding:10px 8px;background:none;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,0.4);font-size:11px;font-weight:600;letter-spacing:0.1em;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;text-transform:uppercase}
+.del-ztab.active,.del-ztab:hover{color:var(--red);border-bottom-color:var(--red)}
+.del-zone-panel{display:none}
+.del-zone-panel.active{display:block}
+.del-zone-badge{font-size:12px;font-weight:600;color:var(--red);letter-spacing:0.05em;margin-bottom:14px}
+.del-table2{width:100%;border-collapse:collapse}
+.del-table2 th{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:0 0 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08)}
+.del-table2 th:last-child,.del-table2 td:last-child{text-align:right}
+.del-table2 td{padding:9px 0;font-size:13px;color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.05)}
+.del-table2 td:last-child{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--white)}
+.del-free-row td{color:rgba(255,255,255,0.7)!important}
+.del-free{color:var(--red)!important}
+@media(max-width:1024px){.del-layout{grid-template-columns:1fr}.del-map-embed{height:300px}.del-c3{width:300px;height:300px}}
+@media(max-width:768px){.del-layout{gap:20px}.del-map-embed{height:260px}.del-c2{width:160px;height:160px}.del-c3{width:260px;height:260px}}
+
 </style>
 </head>
 <body>
@@ -632,16 +667,113 @@ img{display:block;max-width:100%}
 <div class="sec-dk" id="delivery"><div class="sec rv">
   <p class="sec-lbl" data-cz="Zóny rozvozu" data-en="Delivery zones" data-vi="Khu vực giao hàng">Zóny rozvozu</p>
   <h2 class="sec-h" style="color:var(--white)" data-cz="Doručíme po celé Praze." data-en="We deliver across Prague." data-vi="Giao hàng khắp Praha.">Doručíme po celé Praze.</h2>
-  <p class="sec-sub" style="color:rgba(255,255,255,0.4)" data-cz="Odstupňované ceny rozvozu podle vzdálenosti. K dispozici přes Wolt, Bolt Food a Foodora." data-en="Tiered delivery pricing by distance. Available via Wolt, Bolt Food, and Foodora." data-vi="Phí giao hàng theo khoảng cách. Đặt qua Wolt, Bolt Food và Foodora.">Odstupňované ceny rozvozu podle vzdálenosti. K dispozici přes Wolt, Bolt Food a Foodora.</p>
-  <div class="del-tiers">
-    <div class="del-tier"><div class="del-dist" data-cz="Do 1 km" data-en="Up to 1 km">Do 1 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>69 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>49 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>29 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>19 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free">Zdarma</td></tr></table></div>
-    <div class="del-tier"><div class="del-dist">1 — 3 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>99 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>79 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>49 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>29 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free">Zdarma</td></tr></table></div>
-    <div class="del-tier"><div class="del-dist">3 — 6 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>109 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>89 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>59 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>39 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free">Zdarma</td></tr></table></div>
-  </div>
-  <div style="display:flex;gap:14px;justify-content:center;margin-top:44px;flex-wrap:wrap" id="order">
-    <a href="https://wolt.com" target="_blank" class="btn-r" data-cz="Objednat na Woltu" data-en="Order on Wolt" data-vi="Đặt trên Wolt">Objednat na Woltu</a>
-    <a href="https://food.bolt.eu" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Bolt Food</a>
-    <a href="https://www.foodora.cz" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Foodora</a>
+  <p class="sec-sub" style="color:rgba(255,255,255,0.4)" data-cz="Klikněte na zónu na mapě a zjistěte cenu dovozu. K dispozici přes Wolt, Bolt Food a Foodora." data-en="Click a zone on the map to see delivery pricing. Available via Wolt, Bolt Food, and Foodora." data-vi="Nhấp vào vùng trên bản đồ để xem giá giao hàng. Đặt qua Wolt, Bolt Food và Foodora.">Klikněte na zónu na mapě a zjistěte cenu dovozu. K dispozici přes Wolt, Bolt Food a Foodora.</p>
+
+  <!-- MAP + PRICING SIDE BY SIDE -->
+  <div class="del-layout">
+    <!-- Interactive Map with delivery circles -->
+    <div class="del-map-wrap">
+      <svg class="del-map-svg" viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg">
+        <!-- Map tiles via iframe underneath, SVG overlay on top -->
+        <image href="https://maps.googleapis.com/maps/api/staticmap?center=50.0755,14.4378&zoom=12&size=600x440&style=element:geometry%7Ccolor:0x1a1a1a&style=element:labels.text.fill%7Ccolor:0x666666&style=feature:road%7Celement:geometry%7Ccolor:0x2a2a2a&style=feature:water%7Ccolor:0x111111" width="600" height="440" preserveAspectRatio="xMidYMid slice"/>
+        <!-- Delivery zone circles centred on BAMICO Nové Město ~50.0755,14.4128 -->
+        <!-- Zone 3: 6km -->
+        <circle cx="285" cy="220" r="195" fill="rgba(212,32,32,0.08)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="6,4" class="del-zone" data-zone="3" style="cursor:pointer"/>
+        <!-- Zone 2: 3km -->
+        <circle cx="285" cy="220" r="120" fill="rgba(212,32,32,0.12)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="6,4" class="del-zone" data-zone="2" style="cursor:pointer"/>
+        <!-- Zone 1: 1km -->
+        <circle cx="285" cy="220" r="40" fill="rgba(212,32,32,0.2)" stroke="#D42020" stroke-width="2" class="del-zone" data-zone="1" style="cursor:pointer"/>
+        <!-- Zone labels -->
+        <text x="285" y="174" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">6 KM</text>
+        <text x="285" y="100" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">3 KM</text>
+        <text x="285" y="52" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">FREE DELIVERY</text>
+        <!-- Location pin -->
+        <circle cx="285" cy="220" r="8" fill="#D42020"/>
+        <circle cx="285" cy="220" r="4" fill="white"/>
+        <text x="302" y="216" fill="white" font-size="11" font-family="Outfit,sans-serif" font-weight="600">BAMICO</text>
+      </svg>
+      <!-- Actual interactive map embed -->
+      <div class="del-map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20752.3!2d14.39!3d50.075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94eae0f2bfe1%3A0x5aedef29a02f89b9!2sMasarykovo%20n%C3%A1b%C5%99e%C5%BE%C3%AD%202014%2F2%2C%20120%2000%20Nov%C3%A9%20M%C4%9Bsto!5e0!3m2!1sen!2scz!4v1699000000000!5m2!1sen!2scz"
+          width="100%" height="100%" style="border:0;filter:grayscale(80%) invert(90%) hue-rotate(180deg)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <!-- Overlay circles drawn via CSS -->
+        <div class="del-circle del-c1" data-zone="1" onclick="selectZone(1)"></div>
+        <div class="del-circle del-c2" data-zone="2" onclick="selectZone(2)"></div>
+        <div class="del-circle del-c3" data-zone="3" onclick="selectZone(3)"></div>
+        <div class="del-pin">
+          <div class="del-pin-dot"></div>
+          <span>BAMICO</span>
+        </div>
+        <div class="del-zone-labels">
+          <div class="del-zlbl" style="bottom:58%;left:50%;transform:translateX(-50%)">1 km</div>
+          <div class="del-zlbl" style="bottom:72%;left:50%;transform:translateX(-50%)">3 km</div>
+          <div class="del-zlbl" style="bottom:88%;left:50%;transform:translateX(-50%)">6 km</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing panels -->
+    <div class="del-pricing">
+      <!-- Zone selector tabs -->
+      <div class="del-ztabs">
+        <button class="del-ztab active" onclick="selectZone(1)" id="zt1" data-cz="Do 1 km" data-en="Up to 1 km" data-vi="Trong 1 km">Do 1 km</button>
+        <button class="del-ztab" onclick="selectZone(2)" id="zt2" data-cz="1–3 km" data-en="1–3 km" data-vi="1–3 km">1–3 km</button>
+        <button class="del-ztab" onclick="selectZone(3)" id="zt3" data-cz="3–6 km" data-en="3–6 km" data-vi="3–6 km">3–6 km</button>
+      </div>
+
+      <!-- Zone 1 -->
+      <div class="del-zone-panel active" id="dzp1">
+        <div class="del-zone-badge" data-cz="Nejrychlejší doručení" data-en="Fastest delivery" data-vi="Giao hàng nhanh nhất">⚡ Nejrychlejší doručení</div>
+        <table class="del-table2">
+          <thead><tr><th data-cz="Objednávka" data-en="Order value" data-vi="Giá trị đơn hàng">Objednávka</th><th data-cz="Doručení" data-en="Delivery" data-vi="Phí giao">Doručení</th></tr></thead>
+          <tbody>
+            <tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč" data-vi="Dưới 299 Kč">Do 299 Kč</td><td>69 Kč</td></tr>
+            <tr><td data-cz="Od 300 Kč" data-en="From 300 Kč" data-vi="Từ 300 Kč">Od 300 Kč</td><td>49 Kč</td></tr>
+            <tr><td data-cz="Od 500 Kč" data-en="From 500 Kč" data-vi="Từ 500 Kč">Od 500 Kč</td><td>29 Kč</td></tr>
+            <tr><td data-cz="Od 650 Kč" data-en="From 650 Kč" data-vi="Từ 650 Kč">Od 650 Kč</td><td>19 Kč</td></tr>
+            <tr class="del-free-row"><td data-cz="Od 800 Kč" data-en="From 800 Kč" data-vi="Từ 800 Kč">Od 800 Kč</td><td class="del-free" data-cz="ZDARMA" data-en="FREE" data-vi="MIỄN PHÍ">ZDARMA</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Zone 2 -->
+      <div class="del-zone-panel" id="dzp2">
+        <div class="del-zone-badge" data-cz="Standardní doručení" data-en="Standard delivery" data-vi="Giao hàng tiêu chuẩn">🛵 Standardní doručení</div>
+        <table class="del-table2">
+          <thead><tr><th data-cz="Objednávka" data-en="Order value" data-vi="Giá trị đơn hàng">Objednávka</th><th data-cz="Doručení" data-en="Delivery" data-vi="Phí giao">Doručení</th></tr></thead>
+          <tbody>
+            <tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč" data-vi="Dưới 299 Kč">Do 299 Kč</td><td>99 Kč</td></tr>
+            <tr><td data-cz="Od 300 Kč" data-en="From 300 Kč" data-vi="Từ 300 Kč">Od 300 Kč</td><td>79 Kč</td></tr>
+            <tr><td data-cz="Od 500 Kč" data-en="From 500 Kč" data-vi="Từ 500 Kč">Od 500 Kč</td><td>49 Kč</td></tr>
+            <tr><td data-cz="Od 650 Kč" data-en="From 650 Kč" data-vi="Từ 650 Kč">Od 650 Kč</td><td>29 Kč</td></tr>
+            <tr class="del-free-row"><td data-cz="Od 800 Kč" data-en="From 800 Kč" data-vi="Từ 800 Kč">Od 800 Kč</td><td class="del-free" data-cz="ZDARMA" data-en="FREE" data-vi="MIỄN PHÍ">ZDARMA</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Zone 3 -->
+      <div class="del-zone-panel" id="dzp3">
+        <div class="del-zone-badge" data-cz="Celá Praha" data-en="All of Prague" data-vi="Toàn Praha">🗺️ Celá Praha</div>
+        <table class="del-table2">
+          <thead><tr><th data-cz="Objednávka" data-en="Order value" data-vi="Giá trị đơn hàng">Objednávka</th><th data-cz="Doručení" data-en="Delivery" data-vi="Phí giao">Doručení</th></tr></thead>
+          <tbody>
+            <tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč" data-vi="Dưới 299 Kč">Do 299 Kč</td><td>109 Kč</td></tr>
+            <tr><td data-cz="Od 300 Kč" data-en="From 300 Kč" data-vi="Từ 300 Kč">Od 300 Kč</td><td>89 Kč</td></tr>
+            <tr><td data-cz="Od 500 Kč" data-en="From 500 Kč" data-vi="Từ 500 Kč">Od 500 Kč</td><td>59 Kč</td></tr>
+            <tr><td data-cz="Od 650 Kč" data-en="From 650 Kč" data-vi="Từ 650 Kč">Od 650 Kč</td><td>39 Kč</td></tr>
+            <tr class="del-free-row"><td data-cz="Od 800 Kč" data-en="From 800 Kč" data-vi="Từ 800 Kč">Od 800 Kč</td><td class="del-free" data-cz="ZDARMA" data-en="FREE" data-vi="MIỄN PHÍ">ZDARMA</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px" id="order">
+        <a href="https://wolt.com" target="_blank" class="btn-r" data-cz="Objednat na Woltu" data-en="Order on Wolt" data-vi="Đặt trên Wolt">Objednat na Woltu</a>
+        <a href="https://food.bolt.eu" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Bolt Food</a>
+        <a href="https://www.foodora.cz" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Foodora</a>
+      </div>
+    </div>
   </div>
 </div></div>
 
@@ -812,12 +944,28 @@ const SYS = `You are BAMICO's friendly restaurant assistant. You ONLY help with 
    (2) Seifertova 11, Praha 3 – Žižkov, phone +420 773 601 999.
    Email: bamico.prg@gmail.com
 
-5. ALLERGENS — Gluten: all bánh mì and fried items. Pork: ham/BBQ/grilled/crispy pork, bacon fries. Dairy: all coffee/matcha drinks, cheese fries, mozzarella sticks. Eggs: Egg Coffee only. Pork-free items: Shredded Chicken Bánh Mì, all coffees, matcha drinks, Bamico Fries, drinks.
+5. ALLERGENS — Gluten: all bánh mì and fried items. Pork: ham/BBQ/grilled/crispy pork, bacon fries. Dairy: all coffee/matcha drinks, cheese fries, mozzarella sticks. Eggs: Egg Coffee only. Pork-free: Shredded Chicken Bánh Mì, all coffees, matcha, drinks, Bamico Fries, mozzarella sticks.
+
+6. SMART UPSELLING — Always suggest a drink pairing when someone picks food:
+   - Any Bánh Mì → suggest Egg Coffee or Salted Coffee ("That pairs really well with our Egg Coffee 😊")
+   - Fried items → suggest Milk Coffee or Matcha Latte
+   - Keep it natural and brief, one sentence only.
+
+7. ALLERGY ADVISOR — If someone mentions an allergy, proactively list ALL safe options for them:
+   - Lactose intolerant: all bánh mì, Bamico Fries, all soft drinks and fruit teas
+   - Pork-free: Shredded Chicken Bánh Mì, all coffees, all matcha, all drinks, Bamico Fries, mozzarella sticks
+   - Gluten-free: all coffees, all matcha drinks, all soft drinks and fruit teas
+   End with: "Want me to suggest a full meal based on your needs?"
+
+8. SMART HOURS — Current time matters:
+   - After 21:30: warn "We close at 22:00 — order quickly on Wolt to make it! 🛵"
+   - Before 11:00: "We open at 11:00 — you can pre-order on Wolt now!"
 
 STRICT RULES:
-- If asked about ANYTHING outside these 5 topics, say: "I can only help with our menu, opening hours, locations, allergens, or orders. For other questions, please contact us at bamico.prg@gmail.com"
+- If asked about ANYTHING outside these 8 topics, politely say you can only help with menu, hours, locations, allergens, or orders, and suggest bamico.prg@gmail.com for other questions.
 - Reply in the same language the customer uses (Czech, English, or Vietnamese).
-- Be warm and brief. Max 3–4 sentences unless listing menu items.
+- Be warm, friendly, use occasional emoji. Max 3-4 sentences unless listing items.
+- Always end food recommendations with a drink pairing suggestion.
 - Never invent items or prices not listed above.`;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -893,6 +1041,25 @@ async function sM() {
 }
 
 function qS(text) { const inp=document.getElementById('chIn'); if(inp){inp.value=text;sM();} }
+
+// ═══ DELIVERY ZONE SELECTOR ═══
+function selectZone(z) {
+  document.querySelectorAll('.del-ztab').forEach((t,i) => t.classList.toggle('active', i+1===z));
+  document.querySelectorAll('.del-zone-panel').forEach((p,i) => p.classList.toggle('active', i+1===z));
+  // Highlight circle
+  document.querySelectorAll('.del-circle').forEach((c,i) => {
+    c.style.borderStyle = i+1===z ? 'solid' : 'dashed';
+    c.style.background = i+1===z ? 'rgba(212,32,32,0.2)' : ['rgba(212,32,32,0.18)','rgba(212,32,32,0.10)','rgba(212,32,32,0.05)'][i];
+  });
+}
+
+// ═══ AUTO DETECT BROWSER LANGUAGE ═══
+(function() {
+  const bl = (navigator.language || navigator.userLanguage || 'cs').toLowerCase().slice(0,2);
+  if (bl === 'vi') setLang('vi');
+  else if (['cs','sk'].includes(bl)) setLang('cz');
+  else setLang('en');
+})();
 </script>
 </body>
 </html>
