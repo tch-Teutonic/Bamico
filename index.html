@@ -237,7 +237,7 @@ img{display:block;max-width:100%}
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:1024px){
-  .feat-grid,.reviews-grid{grid-template-columns:1fr}
+  .feat-grid,.reviews-grid{grid-template-columns:1fr 1fr}
   .about-lay{grid-template-columns:1fr;gap:36px}
   .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
   .gallery-cell.tall{grid-row:auto}.gallery-cell.wide{grid-column:auto}
@@ -246,18 +246,101 @@ img{display:block;max-width:100%}
 }
 @media(max-width:768px){
   .nav-links{display:none!important}.nav-ham{display:flex}
-  .nav-in{padding:0 20px}
-  .hero-ct{padding:0 24px 56px}
-  .sec{padding:56px 20px}
-  .hero-ctas{flex-direction:column}
-  .about-stats{flex-direction:column;gap:20px}
+  .reviews-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
   .menu-controls{flex-direction:column}
-  .footer-main{grid-template-columns:1fr;gap:28px;padding:40px 20px}
-  .footer-bot{padding:12px 20px;flex-direction:column;gap:6px}
 }
 
-/* ═══ LANG BUTTONS ═══ */
-.lang-btn.active-lang{background:var(--red);border-color:var(--red);color:var(--white)}
+/* ═══ LANGUAGE DROPDOWN ═══ */
+.lang-drop{position:relative;margin-left:10px}
+.lang-curr{background:none;border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.75);padding:6px 11px;font-size:12px;font-weight:600;letter-spacing:0.08em;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:6px;border-radius:6px}
+.lang-curr:hover{border-color:var(--white);color:var(--white)}
+.lang-curr svg{opacity:0.5;transition:transform 0.2s}
+.lang-drop.open .lang-curr svg{transform:rotate(180deg)}
+.lang-opts{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#1a1a1a;border:1px solid rgba(255,255,255,0.12);border-radius:10px;overflow:hidden;min-width:150px;box-shadow:0 12px 32px rgba(0,0,0,0.5);z-index:9999}
+.lang-drop.open .lang-opts{display:block;animation:fadeDown 0.18s ease}
+.lang-opt{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.65);background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.15s;text-align:left}
+.lang-opt:hover{background:rgba(255,255,255,0.07);color:var(--white)}
+.lang-opt.active-opt{color:var(--red)}
+.mob-lang{margin-top:12px}
+.mob-lang .lang-curr{border-color:rgba(255,255,255,0.15);width:100%;justify-content:space-between}
+.mob-lang .lang-opts{position:static;box-shadow:none;border-radius:8px;margin-top:4px;background:#111}
+
+/* ═══ MOBILE IMPROVEMENTS ═══ */
+@media(max-width:768px){
+  /* Hero */
+  .hero-ct{padding:0 20px 56px}
+  .hero-h{font-size:clamp(44px,13vw,80px)}
+  .hero-line{margin:20px 0}
+  .hero-sub{font-size:14px}
+  .hero-ctas{flex-direction:column;gap:10px}
+  .btn-r,.btn-o{padding:14px 24px;font-size:11px;text-align:center;width:100%;display:block}
+
+  /* Sections */
+  .sec{padding:48px 20px}
+  .sec-h{font-size:clamp(28px,7vw,44px)}
+
+  /* Featured — single col on mobile */
+  .feat-grid{grid-template-columns:1fr;gap:2px}
+
+  /* Menu tabs — horizontal scroll */
+  .menu-tabs{-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .menu-tabs::-webkit-scrollbar{display:none}
+  .menu-tab{padding:10px 14px;font-size:10.5px}
+  .menu-grid{grid-template-columns:1fr;gap:12px}
+  .menu-controls{gap:12px}
+  .filter-row{gap:4px}
+  .filter-btn{font-size:10px;padding:5px 8px}
+
+  /* Menu cards bigger touch targets */
+  .menu-card-body{padding:14px 16px}
+  .menu-card-img{height:180px}
+
+  /* About */
+  .about-lay{grid-template-columns:1fr;gap:28px}
+  .about-img{aspect-ratio:16/9}
+  .about-txt h3{font-size:22px}
+  .about-stats{flex-wrap:wrap;gap:16px}
+  .about-stats > div{flex:1;min-width:80px}
+
+  /* Reviews */
+  .reviews-grid{grid-template-columns:1fr;gap:14px}
+  .review-card{padding:20px 18px}
+
+  /* Gallery */
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gallery-cell.tall,.gallery-cell.wide{grid-row:auto;grid-column:auto}
+  .gallery-cell{height:160px}
+
+  /* Delivery */
+  .del-tiers{grid-template-columns:1fr;gap:2px}
+  .del-tier{padding:24px 20px}
+
+  /* Locations */
+  .loc-grid{grid-template-columns:1fr;gap:2px}
+  .loc-card{padding:32px 24px}
+
+  /* Footer */
+  .footer-main{grid-template-columns:1fr;gap:24px;padding:36px 20px}
+  .footer-bot{padding:12px 20px;flex-direction:column;gap:4px;text-align:center}
+
+  /* Chat panel full-width on mobile */
+  #cpanel{width:calc(100vw - 16px);right:8px;bottom:80px;max-height:75vh}
+  #cfab{bottom:14px;right:14px;width:52px;height:52px}
+
+  /* Nav */
+  .nav-in{padding:0 16px;height:60px}
+  .mob-menu{top:60px;padding:20px 16px}
+  .mob-menu a{font-size:15px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+}
+
+@media(max-width:480px){
+  .menu-card-img{height:150px}
+  .hero-h{font-size:clamp(38px,12vw,60px)}
+  .sec-h{font-size:clamp(24px,6vw,36px)}
+  .gallery-cell{height:130px}
+}
+
 
 /* ═══ CHAT WIDGET ═══ */
 #cfab{position:fixed;bottom:28px;right:28px;z-index:2000;width:58px;height:58px;background:var(--red);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(212,32,32,0.45);transition:all 0.3s}
@@ -324,7 +407,17 @@ img{display:block;max-width:100%}
       <a href="#delivery" data-cz="Rozvoz" data-en="Delivery" data-vi="Giao hàng">Rozvoz</a>
       <a href="#locations" data-cz="Pobočky" data-en="Locations" data-vi="Chi nhánh">Pobočky</a>
       <a href="#order" class="nav-order" data-cz="Objednat" data-en="Order" data-vi="Đặt hàng">Objednat</a>
-      <button class="lang-btn" onclick="setLang('en')" id="lb-en">EN</button><button class="lang-btn" onclick="setLang('vi')" id="lb-vi">VI</button>
+      <div class="lang-drop" id="langDrop">
+        <button class="lang-curr" onclick="toggleLangDrop(event)" id="langCurr">
+          <span id="langFlag">🇨🇿</span><span id="langLabel">CZ</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="lang-opts" id="langOpts">
+          <button onclick="setLang('cz');toggleLangDrop()" class="lang-opt" data-l="cz"><span>🇨🇿</span> Čeština</button>
+          <button onclick="setLang('en');toggleLangDrop()" class="lang-opt" data-l="en"><span>🇬🇧</span> English</button>
+          <button onclick="setLang('vi');toggleLangDrop()" class="lang-opt" data-l="vi"><span>🇻🇳</span> Tiếng Việt</button>
+        </div>
+      </div>
     </div>
     <button class="nav-ham" onclick="toggleMob()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -336,7 +429,17 @@ img{display:block;max-width:100%}
   <a href="#delivery" onclick="closeMob()" data-cz="Rozvoz" data-en="Delivery" data-vi="Giao hàng">Rozvoz</a>
   <a href="#locations" onclick="closeMob()" data-cz="Pobočky" data-en="Locations" data-vi="Chi nhánh">Pobočky</a>
   <a href="#order" onclick="closeMob()" class="btn-r" style="text-align:center;margin-top:8px" data-cz="Objednat" data-en="Order Now">Objednat</a>
-  <button class="lang-btn" onclick="setLang('en')" style="margin-top:8px">EN</button><button class="lang-btn" onclick="setLang('vi')" style="margin-top:8px">VI</button>
+  <div class="lang-drop mob-lang" id="langDropMob">
+        <button class="lang-curr" onclick="toggleLangDrop(event,'mob')">
+          <span id="langFlagMob">🇨🇿</span><span id="langLabelMob">CZ</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="lang-opts" id="langOptsMob">
+          <button onclick="setLang('cz');toggleLangDrop(null,'mob');closeMob()" class="lang-opt"><span>🇨🇿</span> Čeština</button>
+          <button onclick="setLang('en');toggleLangDrop(null,'mob');closeMob()" class="lang-opt"><span>🇬🇧</span> English</button>
+          <button onclick="setLang('vi');toggleLangDrop(null,'mob');closeMob()" class="lang-opt"><span>🇻🇳</span> Tiếng Việt</button>
+        </div>
+      </div>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -383,7 +486,7 @@ img{display:block;max-width:100%}
         <div class="feat-img"><img src="images/grilled-pork-banh-mi.webp" alt="Grilled Pork Bánh Mì" loading="lazy"></div>
         <div class="feat-info">
           <div class="feat-name">Grilled Pork Bánh Mì</div>
-          <div class="feat-desc" data-cz="Grilované vepřové, čerstvé bylinky, domácí omáčka" data-en="Charcoal-grilled pork, fresh herbs, Bamico sauce">Grilované vepřové, čerstvé bylinky, domácí omáčka</div>
+          <div class="feat-desc" data-cz="Grilované vepřové, čerstvé bylinky, domácí omáčka" data-en="Charcoal-grilled pork, fresh herbs, Bamico sauce" data-vi="Thịt heo nướng than, rau thơm tươi, sốt Bamico">Grilované vepřové, čerstvé bylinky, domácí omáčka</div>
           <div class="feat-row"><span class="feat-price">160 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
         </div>
       </div>
@@ -391,7 +494,7 @@ img{display:block;max-width:100%}
         <div class="feat-img"><img src="images/crispy-pork-banh-mi.webp" alt="Crispy Pork Bánh Mì" loading="lazy"></div>
         <div class="feat-info">
           <div class="feat-name">Crispy Pork Bánh Mì</div>
-          <div class="feat-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot">Křupavý vepřový bok, nakládaná ředkev a mrkev</div>
+          <div class="feat-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot" data-vi="Ba chỉ heo giòn rụm, củ cải & cà rốt dưa góp">Křupavý vepřový bok, nakládaná ředkev a mrkev</div>
           <div class="feat-row"><span class="feat-price">170 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
         </div>
       </div>
@@ -399,7 +502,7 @@ img{display:block;max-width:100%}
         <div class="feat-img"><img src="images/bbq-pork-banh-mi.webp" alt="BBQ Pork Bánh Mì" loading="lazy"></div>
         <div class="feat-info">
           <div class="feat-name">BBQ Pork Bánh Mì</div>
-          <div class="feat-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky" data-en="Slow-roasted BBQ pork, cucumber, fresh herbs">Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky</div>
+          <div class="feat-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky" data-en="Slow-roasted BBQ pork, cucumber, fresh herbs" data-vi="Thịt BBQ nướng chậm, dưa leo, rau thơm tươi">Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky</div>
           <div class="feat-row"><span class="feat-price">160 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
         </div>
       </div>
@@ -429,30 +532,30 @@ img{display:block;max-width:100%}
   </div>
 
   <div class="menu-cat active" id="mc-coffee"><div class="menu-grid">
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/milk-coffee.webp" alt="Milk Coffee" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Milk Coffee</div><div class="menu-card-desc" data-cz="Ledová vietnamská káva se slazeným mlékem" data-en="Iced Vietnamese coffee with condensed milk">Ledová vietnamská káva se slazeným mlékem</div><div class="menu-card-foot"><span class="menu-card-price">110 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/egg-coffee.webp" alt="Egg Coffee" loading="lazy"><div class="menu-card-badge">Hanoi special</div></div><div class="menu-card-body"><div class="menu-card-name">Egg Coffee</div><div class="menu-card-desc" data-cz="Robusta se šlehaným vaječným krémem" data-en="Robusta with creamy whipped egg">Robusta se šlehaným vaječným krémem</div><div class="menu-card-foot"><span class="menu-card-price">130 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span><span class="allergen-tag tag-e">Egg</span></div></div></div></div>
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/salted-coffee.webp" alt="Salted Coffee" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Salted Coffee</div><div class="menu-card-desc" data-cz="Černá Robusta se slaným šlehaným krémem" data-en="Black Robusta with salted whipped cream">Černá Robusta se slaným šlehaným krémem</div><div class="menu-card-foot"><span class="menu-card-price">130 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/milk-coffee.webp" alt="Milk Coffee" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Milk Coffee</div><div class="menu-card-desc" data-cz="Ledová vietnamská káva se slazeným mlékem" data-en="Iced Vietnamese coffee with condensed milk" data-vi="Cà phê Việt Nam đá với sữa đặc">Ledová vietnamská káva se slazeným mlékem</div><div class="menu-card-foot"><span class="menu-card-price">110 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/egg-coffee.webp" alt="Egg Coffee" loading="lazy"><div class="menu-card-badge">Hanoi special</div></div><div class="menu-card-body"><div class="menu-card-name">Egg Coffee</div><div class="menu-card-desc" data-cz="Robusta se šlehaným vaječným krémem" data-en="Robusta with creamy whipped egg" data-vi="Robusta với kem trứng đánh bông mịn">Robusta se šlehaným vaječným krémem</div><div class="menu-card-foot"><span class="menu-card-price">130 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span><span class="allergen-tag tag-e">Egg</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/salted-coffee.webp" alt="Salted Coffee" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Salted Coffee</div><div class="menu-card-desc" data-cz="Černá Robusta se slaným šlehaným krémem" data-en="Black Robusta with salted whipped cream" data-vi="Robusta đen với kem muối đánh bông">Černá Robusta se slaným šlehaným krémem</div><div class="menu-card-foot"><span class="menu-card-price">130 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
   </div></div>
 
   <div class="menu-cat" id="mc-banh"><div class="menu-grid">
-    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/vietnamese-ham-banh-mi.webp" alt="Vietnamese Ham" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Vietnamese Ham Bánh Mì</div><div class="menu-card-desc" data-cz="Vietnamská šunka, paté, nakládaná zelenina, koriandr" data-en="Traditional ham, pâté, pickled vegetables, coriander">Vietnamská šunka, paté, nakládaná zelenina, koriandr</div><div class="menu-card-foot"><span class="menu-card-price">145 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
-    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/bbq-pork-banh-mi.webp" alt="BBQ Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">BBQ Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, bylinky" data-en="Slow-roasted BBQ pork, cucumber, herbs">Pomalu pečené BBQ vepřové, okurka, bylinky</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
-    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/grilled-pork-banh-mi.webp" alt="Grilled Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Grilled Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Grilované vepřové, domácí nakládaná zelenina" data-en="Charcoal-grilled pork, house pickles">Grilované vepřové, domácí nakládaná zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
-    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/shredded-chicken-banh-mi.webp" alt="Shredded Chicken" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Shredded Chicken Bánh Mì</div><div class="menu-card-desc" data-cz="Trhané kuřecí, majonéza, čerstvá zelenina" data-en="Tender shredded chicken, mayo, fresh vegetables">Trhané kuřecí, majonéza, čerstvá zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span></div></div></div></div>
-    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/crispy-pork-banh-mi.webp" alt="Crispy Pork" loading="lazy"><div class="menu-card-badge">★ TOP</div></div><div class="menu-card-body"><div class="menu-card-name">Crispy Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot">Křupavý vepřový bok, nakládaná ředkev a mrkev</div><div class="menu-card-foot"><span class="menu-card-price">170 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/vietnamese-ham-banh-mi.webp" alt="Vietnamese Ham" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Vietnamese Ham Bánh Mì</div><div class="menu-card-desc" data-cz="Vietnamská šunka, paté, nakládaná zelenina, koriandr" data-en="Traditional ham, pâté, pickled vegetables, coriander" data-vi="Giăm bông Việt Nam, pa-tê, đồ chua, ngò rí">Vietnamská šunka, paté, nakládaná zelenina, koriandr</div><div class="menu-card-foot"><span class="menu-card-price">145 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/bbq-pork-banh-mi.webp" alt="BBQ Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">BBQ Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, bylinky" data-en="Slow-roasted BBQ pork, cucumber, herbs" data-vi="Thịt heo BBQ nướng chậm, dưa leo, rau thơm">Pomalu pečené BBQ vepřové, okurka, bylinky</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/grilled-pork-banh-mi.webp" alt="Grilled Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Grilled Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Grilované vepřové, domácí nakládaná zelenina" data-en="Charcoal-grilled pork, house pickles" data-vi="Thịt heo nướng than, đồ chua tự làm">Grilované vepřové, domácí nakládaná zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/shredded-chicken-banh-mi.webp" alt="Shredded Chicken" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Shredded Chicken Bánh Mì</div><div class="menu-card-desc" data-cz="Trhané kuřecí, majonéza, čerstvá zelenina" data-en="Tender shredded chicken, mayo, fresh vegetables" data-vi="Gà xé mềm, sốt mayo, rau củ tươi">Trhané kuřecí, majonéza, čerstvá zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/crispy-pork-banh-mi.webp" alt="Crispy Pork" loading="lazy"><div class="menu-card-badge">★ TOP</div></div><div class="menu-card-body"><div class="menu-card-name">Crispy Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot" data-vi="Ba chỉ heo giòn rụm, củ cải & cà rốt dưa góp">Křupavý vepřový bok, nakládaná ředkev a mrkev</div><div class="menu-card-foot"><span class="menu-card-price">170 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
   </div></div>
 
   <div class="menu-cat" id="mc-fried"><div class="menu-grid">
-    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/bamico-fries.webp" alt="Bamico Fries" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Bamico Fries</div><div class="menu-card-desc" data-cz="Domácí kořeněné hranolky" data-en="House-seasoned crispy fries">Domácí kořeněné hranolky</div><div class="menu-card-foot"><span class="menu-card-price">95 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span></div></div></div></div>
-    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/bacon-and-cheese-fries.webp" alt="Bacon Cheese Fries" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Bacon & Cheese Fries</div><div class="menu-card-desc" data-cz="Hranolky se slaninou a sýrovou omáčkou" data-en="Loaded fries with bacon and cheese sauce">Hranolky se slaninou a sýrovou omáčkou</div><div class="menu-card-foot"><span class="menu-card-price">120 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
-    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/mozzarella3pcs-sticks.webp" alt="Mozzarella Sticks" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Mozzarella Sticks · 3 pcs</div><div class="menu-card-desc" data-cz="Smažená mozzarella" data-en="Golden fried mozzarella">Smažená mozzarella</div><div class="menu-card-foot"><span class="menu-card-price">75 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
-    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/mozzarella-sticks-5pcs.webp" alt="Mozzarella Sticks 5" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Mozzarella Sticks · 5 pcs</div><div class="menu-card-desc" data-cz="Smažená mozzarella, větší porce" data-en="Golden fried mozzarella, larger">Smažená mozzarella, větší porce</div><div class="menu-card-foot"><span class="menu-card-price">115 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/bamico-fries.webp" alt="Bamico Fries" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Bamico Fries</div><div class="menu-card-desc" data-cz="Domácí kořeněné hranolky" data-en="House-seasoned crispy fries" data-vi="Khoai tây chiên giòn gia vị nhà làm">Domácí kořeněné hranolky</div><div class="menu-card-foot"><span class="menu-card-price">95 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="images/bacon-and-cheese-fries.webp" alt="Bacon Cheese Fries" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Bacon & Cheese Fries</div><div class="menu-card-desc" data-cz="Hranolky se slaninou a sýrovou omáčkou" data-en="Loaded fries with bacon and cheese sauce" data-vi="Khoai tây chiên với bacon và sốt phô mai">Hranolky se slaninou a sýrovou omáčkou</div><div class="menu-card-foot"><span class="menu-card-price">120 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/mozzarella3pcs-sticks.webp" alt="Mozzarella Sticks" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Mozzarella Sticks · 3 pcs</div><div class="menu-card-desc" data-cz="Smažená mozzarella" data-en="Golden fried mozzarella" data-vi="Mozzarella chiên vàng giòn">Smažená mozzarella</div><div class="menu-card-foot"><span class="menu-card-price">75 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="images/mozzarella-sticks-5pcs.webp" alt="Mozzarella Sticks 5" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Mozzarella Sticks · 5 pcs</div><div class="menu-card-desc" data-cz="Smažená mozzarella, větší porce" data-en="Golden fried mozzarella, larger" data-vi="Mozzarella chiên vàng, phần lớn hơn">Smažená mozzarella, větší porce</div><div class="menu-card-foot"><span class="menu-card-price">115 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
   </div></div>
 
   <div class="menu-cat" id="mc-matcha"><div class="menu-grid">
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/matcha-latte.webp" alt="Matcha Latte" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Latte</div><div class="menu-card-desc" data-cz="Krémové matcha s mlékem" data-en="Creamy matcha with milk">Krémové matcha s mlékem</div><div class="menu-card-foot"><span class="menu-card-price">105 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/mango-matcha.webp" alt="Matcha Mango" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Mango</div><div class="menu-card-desc" data-cz="Vrstvené matcha s mangovým pyré" data-en="Layered matcha with mango purée">Vrstvené matcha s mangovým pyré</div><div class="menu-card-foot"><span class="menu-card-price">125 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/strawberry-matcha.webp" alt="Matcha Strawberry" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Strawberry</div><div class="menu-card-desc" data-cz="Vrstvené matcha s jahodami" data-en="Layered matcha with strawberry">Vrstvené matcha s jahodami</div><div class="menu-card-foot"><span class="menu-card-price">125 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/matcha-latte.webp" alt="Matcha Latte" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Latte</div><div class="menu-card-desc" data-cz="Krémové matcha s mlékem" data-en="Creamy matcha with milk" data-vi="Matcha kem béo với sữa">Krémové matcha s mlékem</div><div class="menu-card-foot"><span class="menu-card-price">105 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/mango-matcha.webp" alt="Matcha Mango" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Mango</div><div class="menu-card-desc" data-cz="Vrstvené matcha s mangovým pyré" data-en="Layered matcha with mango purée" data-vi="Matcha lớp với xoài xay nhuyễn">Vrstvené matcha s mangovým pyré</div><div class="menu-card-foot"><span class="menu-card-price">125 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/strawberry-matcha.webp" alt="Matcha Strawberry" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Strawberry</div><div class="menu-card-desc" data-cz="Vrstvené matcha s jahodami" data-en="Layered matcha with strawberry" data-vi="Matcha lớp với dâu tây">Vrstvené matcha s jahodami</div><div class="menu-card-foot"><span class="menu-card-price">125 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
   </div></div>
 
   <div class="menu-cat" id="mc-drinks"><div class="menu-grid">
@@ -460,13 +563,13 @@ img{display:block;max-width:100%}
     <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Coca-Cola Zero</div><div class="menu-card-desc">Sugar-free</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
     <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Sprite</div><div class="menu-card-desc">Lemon-lime</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
     <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Fanta</div><div class="menu-card-desc">Orange</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Peach</div><div class="menu-card-desc" data-cz="Vietnamský broskvový čaj" data-en="Vietnamese peach tea">Vietnamský broskvový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Oolong Mango</div><div class="menu-card-desc" data-cz="Vietnamský oolong mangový čaj" data-en="Vietnamese oolong mango tea">Vietnamský oolong mangový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Guava</div><div class="menu-card-desc" data-cz="Vietnamský guavový čaj" data-en="Vietnamese guava tea">Vietnamský guavový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Peach</div><div class="menu-card-desc" data-cz="Vietnamský broskvový čaj" data-en="Vietnamese peach tea" data-vi="Trà đào Việt Nam">Vietnamský broskvový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Oolong Mango</div><div class="menu-card-desc" data-cz="Vietnamský oolong mangový čaj" data-en="Vietnamese oolong mango tea" data-vi="Trà oolong xoài Việt Nam">Vietnamský oolong mangový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Guava</div><div class="menu-card-desc" data-cz="Vietnamský guavový čaj" data-en="Vietnamese guava tea" data-vi="Trà ổi Việt Nam">Vietnamský guavový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
   </div></div>
 
   <div class="menu-cat" id="mc-tea"><div class="menu-grid">
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/vege-banh-mi.webp" alt="Peach Tea" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Peach Fruit Tea</div><div class="menu-card-desc" data-cz="Čerstvý broskvový ledový čaj" data-en="Fresh peach-infused iced tea">Čerstvý broskvový ledový čaj</div><div class="menu-card-foot"><span class="menu-card-price">100 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/vege-banh-mi.webp" alt="Peach Tea" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Peach Fruit Tea</div><div class="menu-card-desc" data-cz="Čerstvý broskvový ledový čaj" data-en="Fresh peach-infused iced tea" data-vi="Trà đào lạnh pha chế tươi">Čerstvý broskvový ledový čaj</div><div class="menu-card-foot"><span class="menu-card-price">100 Kč</span></div></div></div>
   </div></div>
 </div></div>
 
@@ -478,8 +581,8 @@ img{display:block;max-width:100%}
     <div class="about-img"><img src="images/food-making.webp" alt="Making bánh mì" loading="lazy"></div>
     <div class="about-txt">
       <h3 data-cz="Tradice v každém soustu." data-en="Tradition in every bite." data-vi="Truyền thống trong từng miếng cắn.">Tradice v každém soustu.</h3>
-      <p data-cz="BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy." data-en="BAMICO is a <strong>family-run bistro</strong> serving authentic Vietnamese bánh mì baguettes. We use only the highest quality ingredients and traditional preparation methods." data-html>BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy.</p>
-      <p data-cz="Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy." data-en="Our baguettes are baked <strong>fresh every day</strong> for that perfect crispy crust. We bring the atmosphere of Vietnamese street food right to the heart of Prague." data-html>Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy.</p>
+      <p data-cz="BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy." data-en="BAMICO is a <strong>family-run bistro</strong> serving authentic Vietnamese bánh mì baguettes. We use only the highest quality ingredients and traditional preparation methods." data-vi="BAMICO là <strong>quán gia đình</strong> phục vụ bánh mì Việt Nam chính thống. Chúng tôi chỉ dùng nguyên liệu chất lượng cao nhất và phương pháp truyền thống." data-html>BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy.</p>
+      <p data-cz="Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy." data-en="Our baguettes are baked <strong>fresh every day</strong> for that perfect crispy crust. We bring the atmosphere of Vietnamese street food right to the heart of Prague." data-vi="Bánh mì được nướng <strong>tươi mỗi ngày</strong> để có lớp vỏ giòn hoàn hảo. Chúng tôi mang không khí ẩm thực đường phố Việt Nam đến trái tim Praha." data-html>Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy.</p>
       <div class="about-stats">
         <div><div class="stat-n" data-count="2">0</div><div class="stat-l" data-cz="Pobočky v Praze" data-en="Prague locations" data-vi="Chi nhánh tại Praha">Pobočky v Praze</div></div>
         <div><div class="stat-n" data-count="7">0</div><div class="stat-l" data-cz="Dní v týdnu" data-en="Days a week" data-vi="Ngày trong tuần">Dní v týdnu</div></div>
@@ -497,19 +600,19 @@ img{display:block;max-width:100%}
     <div class="review-card rv rv-d1">
       <div class="review-quote">"</div>
       <div class="review-stars">★★★★★</div>
-      <div class="review-text" data-cz="Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden." data-en="Best bánh mì in Prague, no question! Crispy baguette, amazing meat, perfect sauce. I come here every week.">Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden.</div>
+      <div class="review-text" data-cz="Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden." data-en="Best bánh mì in Prague, no question! Crispy baguette, amazing meat, perfect sauce. I come here every week." data-vi="Bánh mì ngon nhất Praha, không phải bàn! Vỏ bánh giòn, thịt tuyệt, sốt hoàn hảo. Tôi đến đây mỗi tuần.">Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden.</div>
       <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Martin K.</div><div class="review-source">Google Reviews</div></div></div>
     </div>
     <div class="review-card rv rv-d2">
       <div class="review-quote">"</div>
       <div class="review-stars">★★★★★</div>
-      <div class="review-text" data-cz="Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu." data-en="The egg coffee is absolutely fantastic — you can't get anything like it elsewhere in Prague. And the baguettes! Authentic Vietnamese taste.">Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu.</div>
+      <div class="review-text" data-cz="Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu." data-en="The egg coffee is absolutely fantastic — you can't get anything like it elsewhere in Prague. And the baguettes! Authentic Vietnamese taste." data-vi="Cà phê trứng thật tuyệt vời — không nơi nào ở Praha có. Và bánh mì! Hương vị Việt Nam đích thực.">Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu.</div>
       <div class="review-author"><div class="review-avatar">T</div><div><div class="review-name">Tereza V.</div><div class="review-source">Instagram</div></div></div>
     </div>
     <div class="review-card rv rv-d3">
       <div class="review-quote">"</div>
       <div class="review-stars">★★★★★</div>
-      <div class="review-text" data-cz="Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně." data-en="Great food, wonderful staff, fast service. The Crispy Pork is absolutely addictive. Delivery via Wolt works flawlessly.">Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně.</div>
+      <div class="review-text" data-cz="Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně." data-en="Great food, wonderful staff, fast service. The Crispy Pork is absolutely addictive. Delivery via Wolt works flawlessly." data-vi="Đồ ăn ngon, nhân viên thân thiện, phục vụ nhanh. Crispy Pork nghiện luôn. Giao hàng qua Wolt hoàn hảo.">Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně.</div>
       <div class="review-author"><div class="review-avatar">J</div><div><div class="review-name">Jakub M.</div><div class="review-source">Google Reviews</div></div></div>
     </div>
   </div>
@@ -581,49 +684,68 @@ let lang = 'cz';
 // SAFE text-only selectors — does NOT touch menu cards, images, or HTML structure
 const TEXT_ATTRS = ['data-cz','data-en','data-vi'];
 
+const LANG_META = {
+  cz: {flag:'🇨🇿', label:'CZ'},
+  en: {flag:'🇬🇧', label:'EN'},
+  vi: {flag:'🇻🇳', label:'VI'}
+};
+
 function setLang(l) {
   lang = l;
   document.documentElement.lang = l === 'cz' ? 'cs' : l;
-  // highlight active button
-  ['lb-en','lb-vi'].forEach(id => {
-    const b = document.getElementById(id);
-    if (b) b.classList.remove('active-lang');
+
+  // Update dropdown display
+  const m = LANG_META[l] || LANG_META.cz;
+  ['','Mob'].forEach(suffix => {
+    const f = document.getElementById('langFlag'+suffix);
+    const lb = document.getElementById('langLabel'+suffix);
+    if(f) f.textContent = m.flag;
+    if(lb) lb.textContent = m.label;
   });
-  const ab = document.getElementById('lb-' + l);
-  if (ab) ab.classList.add('active-lang');
+  document.querySelectorAll('.lang-opt').forEach(b => {
+    b.classList.toggle('active-opt', b.textContent.includes(m.label) || (l==='cz'&&b.textContent.includes('Čeština')) || (l==='en'&&b.textContent.includes('English')) || (l==='vi'&&b.textContent.includes('Tiếng')));
+  });
 
+  // Translate all data-cz elements
   document.querySelectorAll('[data-cz]').forEach(el => {
-    // Skip menu cards and their children — they contain images and structure
-    if (el.closest('.menu-card') || el.closest('.feat-card')) return;
-
-    // Hero h1 uses data-XX-html special variant
+    // Hero h1 special html variant
     if (el.hasAttribute('data-cz-html')) {
-      const key = 'data-' + l + '-html';
-      el.innerHTML = el.getAttribute(key) || el.getAttribute('data-cz-html');
+      el.innerHTML = el.getAttribute('data-'+l+'-html') || el.getAttribute('data-cz-html');
       return;
     }
-
-    // Elements with data-html attr contain <strong> etc — use innerHTML
-    const val = el.getAttribute('data-' + l) || el.getAttribute('data-cz');
+    const val = el.getAttribute('data-'+l) || el.getAttribute('data-cz');
     if (!val) return;
     if (el.hasAttribute('data-html')) {
       el.innerHTML = val;
     } else {
+      // For menu-card-desc elements, update text content safely
       el.textContent = val;
     }
   });
 
-  // Chat UI strings
+  // Chat UI
   const inp = document.getElementById('chIn');
-  if (inp) inp.placeholder = {cz:'Zeptejte se na menu, rozvoz, alergeny…',en:'Ask about menu, delivery, allergens…',vi:'Hỏi về menu, giao hàng, dị ứng…'}[l] || '';
+  if(inp) inp.placeholder = {cz:'Zeptejte se na menu, rozvoz, alergeny…',en:'Ask about menu, delivery, allergens…',vi:'Hỏi về menu, giao hàng, dị ứng…'}[l]||'';
   const st = document.getElementById('chStatusTxt');
-  if (st) st.textContent = {cz:'Xin chào — jsme tu pro vás',en:'Xin chào — here to help',vi:'Xin chào — chúng tôi sẵn sàng hỗ trợ'}[l] || '';
+  if(st) st.textContent = {cz:'Xin chào — jsme tu pro vás',en:'Xin chào — here to help',vi:'Xin chào — chúng tôi sẵn sàng hỗ trợ'}[l]||'';
 
-  // Quick reply buttons
-  const labels = {cz:['🥖 Menu','📍 Pobočky','🕙 Otevírací doba','🛵 Rozvoz','🌿 Alergeny'],en:['🥖 Menu','📍 Locations','🕙 Opening hours','🛵 Delivery','🌿 Allergens'],vi:['🥖 Thực đơn','📍 Địa điểm','🕙 Giờ mở cửa','🛵 Giao hàng','🌿 Dị ứng']}[l];
-  const texts  = {cz:['Jaké bánh mì máte?','Kde vás najdu?','Jaká je otevírací doba?','Máte rozvoz?','Jaké alergeny jsou v jídle?'],en:['What bánh mì do you have?','Where are you located?','What are your opening hours?','Do you offer delivery?','What allergens are in the food?'],vi:['Bạn có những bánh mì gì?','Quán ở đâu?','Giờ mở cửa là mấy giờ?','Có giao hàng không?','Món ăn có chất gây dị ứng gì không?']}[l];
-  document.querySelectorAll('.ch-qb').forEach((btn,i)=>{ if(labels&&labels[i]){btn.textContent=labels[i];btn.onclick=()=>qS(texts[i]);} });
+  // Quick replies
+  const labels={cz:['🥖 Menu','📍 Pobočky','🕙 Otevírací doba','🛵 Rozvoz','🌿 Alergeny'],en:['🥖 Menu','📍 Locations','🕙 Opening hours','🛵 Delivery','🌿 Allergens'],vi:['🥖 Thực đơn','📍 Địa điểm','🕙 Giờ mở cửa','🛵 Giao hàng','🌿 Dị ứng']}[l];
+  const texts={cz:['Jaké bánh mì máte?','Kde vás najdu?','Jaká je otevírací doba?','Máte rozvoz?','Jaké alergeny jsou v jídle?'],en:['What bánh mì do you have?','Where are you located?','What are your opening hours?','Do you offer delivery?','What allergens are in the food?'],vi:['Bạn có những bánh mì gì?','Quán ở đâu?','Giờ mở cửa là mấy giờ?','Có giao hàng không?','Món ăn có chất gây dị ứng gì không?']}[l];
+  document.querySelectorAll('.ch-qb').forEach((btn,i)=>{if(labels&&labels[i]){btn.textContent=labels[i];btn.onclick=()=>qS(texts[i]);}});
 }
+
+function toggleLangDrop(e, suffix='') {
+  if(e) e.stopPropagation();
+  const id = 'langDrop' + (suffix==='mob'?'Mob':'');
+  const drop = document.getElementById(id);
+  if(drop) drop.classList.toggle('open');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => {
+  document.querySelectorAll('.lang-drop.open').forEach(d => d.classList.remove('open'));
+});
 
 // ═══ MOBILE NAV ═══
 function toggleMob() { document.getElementById('mobMenu')?.classList.toggle('open'); }
