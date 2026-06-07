@@ -423,6 +423,24 @@ img{display:block;max-width:100%}
 @media(max-width:1024px){.del-layout{grid-template-columns:1fr}.del-map-embed{height:300px}.del-c3{width:300px;height:300px}}
 @media(max-width:768px){.del-layout{gap:20px}.del-map-embed{height:260px}.del-c2{width:160px;height:160px}.del-c3{width:260px;height:260px}}
 
+
+/* ═══ LOCATIONS NEW LAYOUT ═══ */
+.loc-layout{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:44px;align-items:start}
+.loc-cards-col{display:flex;flex-direction:column;gap:3px}
+.loc-card{background:var(--black);padding:36px 32px;position:relative;overflow:hidden;transition:all 0.3s;cursor:pointer;border-left:3px solid transparent}
+.loc-card::before{display:none}
+.loc-card:hover,.loc-card-sel{border-left-color:var(--red);background:#111}
+.loc-card-sel .loc-name{color:var(--red)}
+.loc-map-panel{position:relative;border-radius:0;overflow:hidden;height:100%;min-height:420px}
+.loc-iframe{position:absolute;inset:0;width:100%;height:100%;display:none;border:none}
+.loc-iframe.active-map{display:block}
+.loc-map-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);color:rgba(255,255,255,0.6);font-size:11px;padding:5px 12px;border-radius:20px;white-space:nowrap;pointer-events:none;backdrop-filter:blur(4px)}
+@media(max-width:900px){
+  .loc-layout{grid-template-columns:1fr}
+  .loc-cards-col{flex-direction:column}
+  .loc-map-panel{min-height:300px;height:300px}
+}
+
 </style>
 </head>
 <body>
@@ -695,8 +713,8 @@ img{display:block;max-width:100%}
       <!-- Actual interactive map embed -->
       <div class="del-map-embed">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20752.3!2d14.39!3d50.075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94eae0f2bfe1%3A0x5aedef29a02f89b9!2sMasarykovo%20n%C3%A1b%C5%99e%C5%BE%C3%AD%202014%2F2%2C%20120%2000%20Nov%C3%A9%20M%C4%9Bsto!5e0!3m2!1sen!2scz!4v1699000000000!5m2!1sen!2scz"
-          width="100%" height="100%" style="border:0;filter:grayscale(80%) invert(90%) hue-rotate(180deg)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          src="https://www.google.com/maps/embed?pb=!1m16!1m8!1m3!1d10374.8!2d14.4269!3d50.0805!3m2!1i1024!2i768!4f13.1!2m5!1e0!2s!4m1!2i50!4m5!1s0x470b94eae0f2bfe1%3A0x5aedef29a02f89b9!2sMasarykovo+n%C3%A1b%C5%99.+2014%2F2%2C+120+00+Nov%C3%A9+M%C4%9Bsto!3m2!1d50.0754!2d14.4124!5e0!3m2!1sen!2scz!4v1699000000000"
+          width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
         <!-- Overlay circles drawn via CSS -->
         <div class="del-circle del-c1" data-zone="1" onclick="selectZone(1)"></div>
@@ -781,9 +799,71 @@ img{display:block;max-width:100%}
 <div id="locations"><div class="sec rv">
   <p class="sec-lbl" data-cz="Najdete nás" data-en="Find us" data-vi="Tìm chúng tôi">Najdete nás</p>
   <h2 class="sec-h" data-cz="Dvě místa. Jedna vášeň." data-en="Two spots. One obsession." data-vi="Hai địa điểm. Một đam mê.">Dvě místa. Jedna vášeň.</h2>
-  <div class="loc-grid">
-    <div class="loc-card"><div class="loc-tag">Nové Město</div><div class="loc-name">Masarykovo nábřeží</div><div class="loc-addr">Masarykovo nábř. 2014/2<br>120 00 Praha 2 – Nové Město</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 777 057 696</div></div><a href="https://maps.google.com/?q=Masarykovo+nábřeží+2014/2+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →" data-vi="Xem trên bản đồ →">Zobrazit na mapě →</a></div>
-    <div class="loc-card"><div class="loc-tag">Žižkov</div><div class="loc-name">Seifertova</div><div class="loc-addr">Seifertova 11<br>130 00 Praha 3 – Žižkov</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 773 601 999</div></div><a href="https://maps.google.com/?q=Seifertova+11+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →" data-vi="Xem trên bản đồ →">Zobrazit na mapě →</a></div>
+
+  <!-- Location cards + shared map -->
+  <div class="loc-layout">
+    <div class="loc-cards-col">
+      <!-- Card 1 — Nové Město -->
+      <div class="loc-card loc-card-sel" id="locCard1" onclick="switchMap(1)">
+        <div class="loc-tag">① Nové Město</div>
+        <div class="loc-name">Masarykovo nábřeží</div>
+        <div class="loc-addr">Masarykovo nábř. 2014/2<br>120 00 Praha 2 – Nové Město</div>
+        <div class="loc-sep"></div>
+        <div class="loc-det">
+          <div class="loc-det-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Po – Ne · 11:00 – 22:00
+          </div>
+          <div class="loc-det-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>
+            <a href="tel:+420777057696" style="color:inherit">+420 777 057 696</a>
+          </div>
+          <div class="loc-det-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Praha 2, 1.2 km from centre
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=Masarykovo+nábřeží+2014/2,+Praha+2" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →" data-vi="Xem trên bản đồ →">Zobrazit na mapě →</a>
+      </div>
+
+      <!-- Card 2 — Žižkov -->
+      <div class="loc-card" id="locCard2" onclick="switchMap(2)">
+        <div class="loc-tag">② Žižkov</div>
+        <div class="loc-name">Seifertova</div>
+        <div class="loc-addr">Seifertova 11<br>130 00 Praha 3 – Žižkov</div>
+        <div class="loc-sep"></div>
+        <div class="loc-det">
+          <div class="loc-det-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Po – Ne · 11:00 – 22:00
+          </div>
+          <div class="loc-det-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>
+            <a href="tel:+420773601999" style="color:inherit">+420 773 601 999</a>
+          </div>
+          <div class="loc-det-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Praha 3, Žižkov district
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=Seifertova+11,+Praha+3" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →" data-vi="Xem trên bản đồ →">Zobrazit na mapě →</a>
+      </div>
+    </div>
+
+    <!-- Shared interactive map -->
+    <div class="loc-map-panel">
+      <!-- Map 1 — Nové Město (shown by default) -->
+      <iframe id="locMap1" class="loc-iframe active-map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.8!2d14.4101!3d50.0754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94eae0f2bfe1%3A0x5aedef29a02f89b9!2sMasarykovo+n%C3%A1b%C5%99.+2014%2F2%2C+120+00+Nov%C3%A9+M%C4%9Bsto!5e0!3m2!1sen!2scz!4v1699000000001"
+        width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <!-- Map 2 — Žižkov -->
+      <iframe id="locMap2" class="loc-iframe"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.4!2d14.4386!3d50.0854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b953e28a8b2e7%3A0x3b0b0b0b0b0b0b0b!2sSeifertova+11%2C+130+00+Praha+3!5e0!3m2!1sen!2scz!4v1699000000002"
+        width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <div class="loc-map-hint" data-cz="Klikněte na pobočku pro zobrazení na mapě" data-en="Click a branch to show on map" data-vi="Nhấp vào chi nhánh để xem bản đồ">Klikněte na pobočku pro zobrazení na mapě</div>
+    </div>
   </div>
 </div></div>
 
@@ -1041,6 +1121,15 @@ async function sM() {
 }
 
 function qS(text) { const inp=document.getElementById('chIn'); if(inp){inp.value=text;sM();} }
+
+// ═══ LOCATION MAP SWITCHER ═══
+function switchMap(n) {
+  // Cards
+  document.getElementById('locCard1')?.classList.toggle('loc-card-sel', n===1);
+  document.getElementById('locCard2')?.classList.toggle('loc-card-sel', n===2);
+  // Maps
+  document.querySelectorAll('.loc-iframe').forEach((f,i) => f.classList.toggle('active-map', i+1===n));
+}
 
 // ═══ DELIVERY ZONE SELECTOR ═══
 function selectZone(z) {
