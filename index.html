@@ -27,7 +27,7 @@
   "telephone":["+420777057696","+420773601999"],
   "email":"bamico.prg@gmail.com",
   "url":"https://bamico.cz",
-  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"11:00","closes":"22:00"},
+  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"10:00","closes":"20:00"},
   "menu":"https://bamico.cz/menu",
   "hasMenu":{"@type":"Menu","hasMenuSection":[
     {"@type":"MenuSection","name":"Bánh mì","hasMenuItem":[
@@ -518,14 +518,14 @@ img{display:block;max-width:100%}
   <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague" data-vi="Hai chi nhánh tại Praha">Dvě pobočky v Praze</span>
   <span class="mq-item" data-cz="Egg coffee & Matcha" data-en="Egg coffee & Matcha">Egg coffee & Matcha</span>
   <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora" data-vi="Giao hàng qua Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
-  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00" data-vi="Mở cửa 11:00–22:00">Otevřeno 11:00–22:00</span>
+  <span class="mq-item" data-cz="Otevřeno Po–So 10:00–20:00" data-en="Open Mon–Sat 10:00–20:00" data-vi="Mở cửa T2–T7 10:00–20:00">Otevřeno Po–So 10:00–20:00</span>
   <!-- duplicate items for seamless loop -->
   <span class="mq-item" data-cz="Čerstvé bagety denně" data-en="Fresh baguettes daily" data-vi="Bánh mì tươi mỗi ngày">Čerstvé bagety denně</span>
   <span class="mq-item" data-cz="Vietnamské pouliční jídlo" data-en="Vietnamese street food" data-vi="Ẩm thực đường phố Việt Nam">Vietnamské pouliční jídlo</span>
   <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague" data-vi="Hai chi nhánh tại Praha">Dvě pobočky v Praze</span>
   <span class="mq-item" data-cz="Egg coffee & Matcha" data-en="Egg coffee & Matcha">Egg coffee & Matcha</span>
   <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora" data-vi="Giao hàng qua Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
-  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00" data-vi="Mở cửa 11:00–22:00">Otevřeno 11:00–22:00</span>
+  <span class="mq-item" data-cz="Otevřeno Po–So 10:00–20:00" data-en="Open Mon–Sat 10:00–20:00" data-vi="Mở cửa T2–T7 10:00–20:00">Otevřeno Po–So 10:00–20:00</span>
 </div></div>
 
 <!-- ═══ FEATURED ═══ -->
@@ -812,7 +812,7 @@ img{display:block;max-width:100%}
         <div class="loc-det">
           <div class="loc-det-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            Po – Ne · 11:00 – 22:00
+            Po – So · 10:00 – 20:00
           </div>
           <div class="loc-det-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>
@@ -835,7 +835,7 @@ img{display:block;max-width:100%}
         <div class="loc-det">
           <div class="loc-det-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            Po – Ne · 11:00 – 22:00
+            Po – So · 10:00 – 20:00
           </div>
           <div class="loc-det-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>
@@ -1017,7 +1017,7 @@ const SYS = `You are BAMICO's friendly restaurant assistant. You ONLY help with 
 
 2. RESERVATIONS — We are a walk-in bistro. We do NOT take table reservations. Customers can just come in.
 
-3. OPENING HOURS — Mon–Sat 10:00–19:30 (Wolt delivery), walk-in hours may vary. Sunday: limited availability. Always suggest customers check Wolt for current availability.
+3. OPENING HOURS — Mon–Sat 10:00–20:00 (may sell out earlier). CLOSED on Sundays. Wolt delivery Mon–Sat 10:00–19:30. If asked about Sunday, tell them we are closed.
 
 4. LOCATIONS — Two branches:
    (1) Masarykovo nábřeží 2014/2, Praha 2 – Nové Město, phone +420 777 057 696.
@@ -1038,8 +1038,8 @@ const SYS = `You are BAMICO's friendly restaurant assistant. You ONLY help with 
    End with: "Want me to suggest a full meal based on your needs?"
 
 8. SMART HOURS — Current time matters:
-   - After 21:30: warn "We close at 22:00 — order quickly on Wolt to make it! 🛵"
-   - Before 11:00: "We open at 11:00 — you can pre-order on Wolt now!"
+   - After 19:00: warn "We close at 20:00 — order quickly on Wolt before 19:30! 🛵"
+   - Before 10:00: "We open at 10:00 — you can pre-order on Wolt now!"
 
 STRICT RULES:
 - If asked about ANYTHING outside these 8 topics, politely say you can only help with menu, hours, locations, allergens, or orders, and suggest bamico.prg@gmail.com for other questions.
