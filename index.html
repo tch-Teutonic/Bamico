@@ -391,10 +391,8 @@ img{display:block;max-width:100%}
 
 /* ═══ DELIVERY MAP ═══ */
 .del-layout{display:grid;grid-template-columns:1fr 420px;gap:32px;margin-top:44px;align-items:start}
-.del-map-wrap{position:relative;width:100%}
+.del-map-wrap{position:relative;width:100%;min-height:420px}
 .del-map-svg{display:none}
-.del-map-embed{position:relative;width:100%;height:420px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
-.del-map-embed iframe{position:absolute;inset:0;width:100%;height:100%}
 .del-circle{position:absolute;border-radius:50%;border:2px dashed rgba(212,32,32,0.7);cursor:pointer;transition:all 0.25s;transform:translate(-50%,-50%);left:50%;top:50%}
 .del-circle:hover{background:rgba(212,32,32,0.15)!important}
 .del-c1{width:80px;height:80px;background:rgba(212,32,32,0.18);border-style:solid}
@@ -691,45 +689,91 @@ img{display:block;max-width:100%}
   <div class="del-layout">
     <!-- Interactive Map with delivery circles -->
     <div class="del-map-wrap">
-      <svg class="del-map-svg" viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg">
-        <!-- Map tiles via iframe underneath, SVG overlay on top -->
-        <image href="https://maps.googleapis.com/maps/api/staticmap?center=50.0755,14.4378&zoom=12&size=600x440&style=element:geometry%7Ccolor:0x1a1a1a&style=element:labels.text.fill%7Ccolor:0x666666&style=feature:road%7Celement:geometry%7Ccolor:0x2a2a2a&style=feature:water%7Ccolor:0x111111" width="600" height="440" preserveAspectRatio="xMidYMid slice"/>
-        <!-- Delivery zone circles centred on BAMICO Nové Město ~50.0755,14.4128 -->
-        <!-- Zone 3: 6km -->
-        <circle cx="285" cy="220" r="195" fill="rgba(212,32,32,0.08)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="6,4" class="del-zone" data-zone="3" style="cursor:pointer"/>
+      <!-- Pure SVG map — no API key needed -->
+      <svg class="del-map-svg-main" viewBox="0 0 560 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;border-radius:12px;background:#111;border:1px solid rgba(255,255,255,0.08)">
+
+        <!-- Dark city grid background -->
+        <!-- Road grid lines -->
+        <line x1="0" y1="130" x2="560" y2="130" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="0" y1="200" x2="560" y2="200" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="0" y1="270" x2="560" y2="270" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="0" y1="340" x2="560" y2="340" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="0" y1="410" x2="560" y2="410" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="70" y1="0" x2="70" y2="520" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="140" y1="0" x2="140" y2="520" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="210" y1="0" x2="210" y2="520" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="280" y1="0" x2="280" y2="520" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="350" y1="0" x2="350" y2="520" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="420" y1="0" x2="420" y2="520" stroke="#1e1e1e" stroke-width="1"/>
+        <line x1="490" y1="0" x2="490" y2="520" stroke="#1e1e1e" stroke-width="1"/>
+
+        <!-- Major roads (brighter) -->
+        <!-- Vltava river (diagonal) -->
+        <path d="M 160 0 Q 230 120 200 260 Q 180 360 220 520" stroke="#1a2535" stroke-width="18" fill="none" opacity="0.9"/>
+        <path d="M 160 0 Q 230 120 200 260 Q 180 360 220 520" stroke="#1e3050" stroke-width="12" fill="none" opacity="0.6"/>
+
+        <!-- Main roads -->
+        <line x1="0" y1="255" x2="560" y2="255" stroke="#252525" stroke-width="3"/>
+        <line x1="0" y1="258" x2="560" y2="258" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="270" y1="0" x2="270" y2="520" stroke="#252525" stroke-width="3"/>
+        <line x1="0" y1="180" x2="560" y2="135" stroke="#222" stroke-width="2"/>
+        <line x1="0" y1="330" x2="560" y2="380" stroke="#222" stroke-width="2"/>
+        <line x1="80" y1="0" x2="140" y2="520" stroke="#1f1f1f" stroke-width="2"/>
+        <line x1="400" y1="0" x2="380" y2="520" stroke="#1f1f1f" stroke-width="2"/>
+
+        <!-- City blocks -->
+        <rect x="230" y="160" width="28" height="20" fill="#181818" rx="2"/>
+        <rect x="300" y="175" width="22" height="16" fill="#181818" rx="2"/>
+        <rect x="310" y="230" width="30" height="18" fill="#181818" rx="2"/>
+        <rect x="220" y="290" width="25" height="20" fill="#181818" rx="2"/>
+        <rect x="150" y="200" width="30" height="22" fill="#181818" rx="2"/>
+        <rect x="380" y="220" width="28" height="18" fill="#181818" rx="2"/>
+        <rect x="370" y="290" width="24" height="20" fill="#181818" rx="2"/>
+        <rect x="130" y="300" width="26" height="18" fill="#181818" rx="2"/>
+        <rect x="420" y="160" width="30" height="22" fill="#181818" rx="2"/>
+        <rect x="90" y="180" width="28" height="18" fill="#181818" rx="2"/>
+        <rect x="460" y="300" width="26" height="20" fill="#181818" rx="2"/>
+        <rect x="100" y="350" width="30" height="18" fill="#181818" rx="2"/>
+        <rect x="430" y="360" width="28" height="22" fill="#181818" rx="2"/>
+
+        <!-- Subtle Praha district labels -->
+        <text x="100" y="155" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 6</text>
+        <text x="390" y="155" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 8</text>
+        <text x="90" y="380" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 5</text>
+        <text x="390" y="390" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 10</text>
+        <text x="165" y="465" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 4</text>
+
+        <!-- Zone 3: 6km — outermost -->
+        <circle cx="268" cy="258" r="210" fill="rgba(212,32,32,0.05)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="8,5" style="cursor:pointer" onclick="selectZone(3)"/>
+
         <!-- Zone 2: 3km -->
-        <circle cx="285" cy="220" r="120" fill="rgba(212,32,32,0.12)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="6,4" class="del-zone" data-zone="2" style="cursor:pointer"/>
-        <!-- Zone 1: 1km -->
-        <circle cx="285" cy="220" r="40" fill="rgba(212,32,32,0.2)" stroke="#D42020" stroke-width="2" class="del-zone" data-zone="1" style="cursor:pointer"/>
-        <!-- Zone labels -->
-        <text x="285" y="174" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">6 KM</text>
-        <text x="285" y="100" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">3 KM</text>
-        <text x="285" y="52" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">FREE DELIVERY</text>
-        <!-- Location pin -->
-        <circle cx="285" cy="220" r="8" fill="#D42020"/>
-        <circle cx="285" cy="220" r="4" fill="white"/>
-        <text x="302" y="216" fill="white" font-size="11" font-family="Outfit,sans-serif" font-weight="600">BAMICO</text>
+        <circle cx="268" cy="258" r="128" fill="rgba(212,32,32,0.09)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="6,4" style="cursor:pointer" onclick="selectZone(2)"/>
+
+        <!-- Zone 1: 1km — innermost -->
+        <circle cx="268" cy="258" r="42" fill="rgba(212,32,32,0.18)" stroke="#D42020" stroke-width="2" style="cursor:pointer" onclick="selectZone(1)"/>
+
+        <!-- Animated pulse on pin -->
+        <circle cx="268" cy="258" r="28" fill="rgba(212,32,32,0.12)">
+          <animate attributeName="r" values="28;48;28" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.3;0;0.3" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Zone distance labels -->
+        <text x="268" y="212" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="2">1 KM</text>
+        <text x="268" y="126" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="2">3 KM</text>
+        <text x="268" y="44" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="2">6 KM · FREE FROM 800 Kč</text>
+
+        <!-- BAMICO pin -->
+        <circle cx="268" cy="258" r="10" fill="#D42020" stroke="white" stroke-width="2"/>
+        <circle cx="268" cy="258" r="4" fill="white"/>
+
+        <!-- BAMICO label -->
+        <rect x="278" y="246" width="62" height="20" fill="#D42020" rx="4"/>
+        <text x="309" y="260" text-anchor="middle" fill="white" font-size="10" font-family="Outfit,sans-serif" font-weight="700" letter-spacing="1">BAMICO</text>
+
+        <!-- Click hint -->
+        <text x="268" y="508" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="10" font-family="Outfit,sans-serif">Click a zone to see pricing</text>
       </svg>
-      <!-- Actual interactive map embed -->
-      <div class="del-map-embed">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m16!1m8!1m3!1d10374.8!2d14.4269!3d50.0805!3m2!1i1024!2i768!4f13.1!2m5!1e0!2s!4m1!2i50!4m5!1s0x470b94eae0f2bfe1%3A0x5aedef29a02f89b9!2sMasarykovo+n%C3%A1b%C5%99.+2014%2F2%2C+120+00+Nov%C3%A9+M%C4%9Bsto!3m2!1d50.0754!2d14.4124!5e0!3m2!1sen!2scz!4v1699000000000"
-          width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-        <!-- Overlay circles drawn via CSS -->
-        <div class="del-circle del-c1" data-zone="1" onclick="selectZone(1)"></div>
-        <div class="del-circle del-c2" data-zone="2" onclick="selectZone(2)"></div>
-        <div class="del-circle del-c3" data-zone="3" onclick="selectZone(3)"></div>
-        <div class="del-pin">
-          <div class="del-pin-dot"></div>
-          <span>BAMICO</span>
-        </div>
-        <div class="del-zone-labels">
-          <div class="del-zlbl" style="bottom:58%;left:50%;transform:translateX(-50%)">1 km</div>
-          <div class="del-zlbl" style="bottom:72%;left:50%;transform:translateX(-50%)">3 km</div>
-          <div class="del-zlbl" style="bottom:88%;left:50%;transform:translateX(-50%)">6 km</div>
-        </div>
-      </div>
     </div>
 
     <!-- Pricing panels -->
