@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAMICO — Vietnamské bagety · Praha</title>
+<meta name="description" content="BAMICO — autentické vietnamské bagety bánh mì v Praze. Čerstvě pečené každý den. Dvě pobočky: Nové Město a Žižkov.">
+<meta property="og:title" content="BAMICO — Vietnamese Baguettes · Prague">
+<meta property="og:description" content="Authentic Vietnamese bánh mì, baked fresh daily in Prague. Two locations.">
+<meta property="og:image" content="https://cdn-media.choiceqr.com/prod-eat-bamico2/KFGGYJU-HFxCQCJ-uYEWbrD.png">
+<meta property="og:type" content="restaurant">
+<meta property="og:url" content="https://bamico.cz">
+<link rel="canonical" href="https://bamico.cz">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"BAMICO | Vietnamese baguettes",
+  "image":"https://cdn-media.choiceqr.com/prod-eat-bamico2/KFGGYJU-HFxCQCJ-uYEWbrD.png",
+  "servesCuisine":"Vietnamese",
+  "priceRange":"$$",
+  "address":[
+    {"@type":"PostalAddress","streetAddress":"Masarykovo nábř. 2014/2","addressLocality":"Praha 2","postalCode":"120 00","addressCountry":"CZ"},
+    {"@type":"PostalAddress","streetAddress":"Seifertova 11","addressLocality":"Praha 3","postalCode":"130 00","addressCountry":"CZ"}
+  ],
+  "telephone":["+420777057696","+420773601999"],
+  "email":"bamico.prg@gmail.com",
+  "url":"https://bamico.cz",
+  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"11:00","closes":"22:00"},
+  "menu":"https://bamico.cz/menu",
+  "hasMenu":{"@type":"Menu","hasMenuSection":[
+    {"@type":"MenuSection","name":"Bánh mì","hasMenuItem":[
+      {"@type":"MenuItem","name":"Vietnamese Ham Bánh Mì","offers":{"@type":"Offer","price":"145","priceCurrency":"CZK"}},
+      {"@type":"MenuItem","name":"BBQ Pork Bánh Mì","offers":{"@type":"Offer","price":"160","priceCurrency":"CZK"}},
+      {"@type":"MenuItem","name":"Grilled Pork Bánh Mì","offers":{"@type":"Offer","price":"160","priceCurrency":"CZK"}},
+      {"@type":"MenuItem","name":"Crispy Pork Bánh Mì","offers":{"@type":"Offer","price":"170","priceCurrency":"CZK"}}
+    ]}
+  ]}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0A0A0A;--white:#FAFAFA;--off-white:#F0F0F0;--g100:#E8E8E8;--g200:#D0D0D0;--g400:#8A8A8A;--g600:#555;--g800:#2A2A2A;--red:#D42020;--red-d:#B01818;--green:#2D8A4E;--amber:#C77D15}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:var(--white)}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+.hidden{display:none!important}
+
+/* ═══ NAV ═══ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-in{max-width:1400px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-icon{width:34px;height:34px;background:var(--white);display:flex;align-items:center;justify-content:center;clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%)}
+.nav-icon span{font-family:'DM Serif Display',serif;font-size:13px;color:var(--black);margin-top:2px}
+.nav-name{font-family:'DM Serif Display',serif;font-size:18px;color:var(--white)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:500;transition:color 0.2s;padding:4px 0}
+.nav-links a:hover{color:var(--white)}
+.nav-order{background:var(--red)!important;color:var(--white)!important;padding:9px 22px!important;font-weight:600!important;transition:background 0.2s!important}
+.nav-order:hover{background:var(--red-d)!important}
+.lang-btn{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:5px 10px;font-size:11px;font-weight:600;letter-spacing:0.1em;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;margin-left:8px}
+.lang-btn:hover{border-color:var(--white);color:var(--white)}
+.nav-ham{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+.nav-ham span{display:block;width:22px;height:1.5px;background:var(--white);transition:0.2s}
+
+/* Mobile nav */
+.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(20px);padding:24px;border-bottom:1px solid rgba(255,255,255,0.06);z-index:999}
+.mob-menu.open{display:flex;flex-direction:column;gap:16px;animation:fadeDown 0.25s ease}
+.mob-menu a{font-size:14px;color:rgba(255,255,255,0.7);letter-spacing:0.1em;text-transform:uppercase;font-weight:500;padding:8px 0}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ═══ HERO ═══ */
+.hero{background:var(--black);min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;padding-top:68px}
+.hero-bg{position:absolute;inset:0;opacity:0.25;filter:grayscale(100%) contrast(1.1);transition:opacity 1s}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-grain{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.05'/%3E%3C/svg%3E")}
+.hero-ct{position:relative;z-index:2;padding:0 64px 80px;max-width:1400px;margin:0 auto;width:100%}
+.hero-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:var(--red);margin-bottom:20px;opacity:0;animation:sUp 0.7s 0.2s forwards}
+.hero-h{font-family:'DM Serif Display',serif;font-size:clamp(56px,8.5vw,130px);color:var(--white);line-height:0.88;letter-spacing:-0.02em;opacity:0;animation:sUp 0.8s 0.35s forwards}
+.hero-h em{font-style:italic;color:var(--red)}
+.hero-line{width:72px;height:2px;background:var(--red);margin:32px 0;opacity:0;animation:sUp 0.7s 0.5s forwards}
+.hero-sub{font-size:15px;line-height:1.75;color:rgba(255,255,255,0.45);max-width:400px;font-weight:300;opacity:0;animation:sUp 0.7s 0.6s forwards}
+.hero-ctas{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;opacity:0;animation:sUp 0.7s 0.75s forwards}
+.btn-r{background:var(--red);color:var(--white);padding:15px 32px;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;display:inline-block}
+.btn-r:hover{background:var(--red-d);transform:translateY(-2px)}
+.btn-o{background:transparent;color:var(--white);padding:15px 32px;font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.2);cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;display:inline-block}
+.btn-o:hover{border-color:var(--white);background:rgba(255,255,255,0.04)}
+
+/* ═══ MARQUEE ═══ */
+.mq{background:var(--red);padding:13px 0;overflow:hidden;white-space:nowrap}
+.mq-track{display:flex;animation:mqS 35s linear infinite}
+.mq-item{font-family:'DM Serif Display',serif;font-size:13px;color:var(--white);padding:0 36px;flex-shrink:0;display:flex;align-items:center;gap:36px}
+.mq-item::after{content:'◆';font-size:5px;color:rgba(255,255,255,0.5)}
+@keyframes mqS{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══ SECTIONS ═══ */
+.sec{padding:100px 48px;max-width:1400px;margin:0 auto}
+.sec-dk{background:var(--black);color:var(--white)}
+.sec-alt{background:var(--off-white)}
+.sec-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:14px}
+.sec-lbl::before{content:'';width:20px;height:1px;background:var(--red)}
+.sec-h{font-family:'DM Serif Display',serif;font-size:clamp(34px,4.5vw,60px);line-height:1.05;letter-spacing:-0.01em;margin-bottom:16px}
+.sec-sub{font-size:14px;line-height:1.8;color:var(--g600);font-weight:300;max-width:500px}
+
+/* ═══ FEATURED ═══ */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:48px}
+.feat-card{background:var(--off-white);position:relative;overflow:hidden;cursor:pointer;transition:all 0.35s;group:true}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transition:transform 0.3s;z-index:2}
+.feat-card:hover::before{transform:scaleX(1)}
+.feat-card:hover{background:var(--black)}
+.feat-card:hover .feat-info *{color:var(--white)}
+.feat-card:hover .feat-price{color:var(--red)}
+.feat-card:hover .feat-img img{filter:grayscale(0);transform:scale(1.06)}
+.feat-img{height:200px;overflow:hidden;background:var(--g100)}
+.feat-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:all 0.5s}
+.feat-info{padding:24px 28px}
+.feat-name{font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:5px;transition:color 0.3s}
+.feat-desc{font-size:12px;color:var(--g400);line-height:1.5;margin-bottom:14px;transition:color 0.3s}
+.feat-row{display:flex;justify-content:space-between;align-items:center}
+.feat-price{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:600;transition:color 0.3s}
+.feat-tags{display:flex;gap:4px}
+.allergen-tag{font-size:9px;font-weight:600;padding:2px 6px;letter-spacing:0.05em;border-radius:2px}
+.tag-g{background:#FEF3C7;color:#92400E}
+.tag-p{background:#FEE2E2;color:#991B1B}
+.tag-d{background:#DBEAFE;color:#1E40AF}
+.tag-v{background:#D1FAE5;color:#065F46}
+.tag-e{background:#F3E8FF;color:#6B21A8}
+
+/* ═══ MENU ═══ */
+.menu-controls{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:36px}
+.menu-tabs{display:flex;gap:0;border-bottom:1px solid var(--g200);overflow-x:auto;-webkit-overflow-scrolling:touch;flex:1}
+.menu-tab{padding:12px 20px;font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--g400);cursor:pointer;white-space:nowrap;font-family:'Outfit',sans-serif;transition:all 0.2s}
+.menu-tab.active,.menu-tab:hover{color:var(--black);border-bottom-color:var(--red)}
+.filter-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.filter-label{font-size:11px;color:var(--g400);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-right:4px}
+.filter-btn{font-size:10px;font-weight:600;padding:5px 10px;border:1px solid var(--g200);background:var(--white);color:var(--g600);cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.15s;letter-spacing:0.05em}
+.filter-btn.active{background:var(--black);color:var(--white);border-color:var(--black)}
+.filter-btn:hover:not(.active){border-color:var(--black)}
+.menu-cat{display:none}
+.menu-cat.active{display:block}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.menu-card{background:var(--white);border:1px solid var(--g100);overflow:hidden;transition:all 0.25s;cursor:default}
+.menu-card:hover{border-color:var(--black);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.menu-card-img{height:160px;overflow:hidden;background:var(--g100);position:relative}
+.menu-card-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(80%);transition:all 0.4s}
+.menu-card:hover .menu-card-img img{filter:grayscale(0);transform:scale(1.04)}
+.menu-card-badge{position:absolute;top:10px;right:10px;background:var(--red);color:var(--white);font-size:10px;font-weight:600;padding:3px 8px;letter-spacing:0.05em;font-family:'JetBrains Mono',monospace}
+.menu-card-body{padding:18px 20px}
+.menu-card-name{font-family:'DM Serif Display',serif;font-size:16px;margin-bottom:4px}
+.menu-card-desc{font-size:12px;color:var(--g400);line-height:1.5;margin-bottom:12px}
+.menu-card-foot{display:flex;justify-content:space-between;align-items:center}
+.menu-card-price{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--red)}
+.menu-card-tags{display:flex;gap:3px}
+
+/* ═══ ABOUT ═══ */
+.about-lay{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:48px}
+.about-img{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--g200)}
+.about-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.05);transition:filter 0.5s}
+.about-img:hover img{filter:grayscale(0)}
+.about-txt h3{font-family:'DM Serif Display',serif;font-size:30px;margin-bottom:20px;line-height:1.15}
+.about-txt p{font-size:14px;line-height:1.85;color:var(--g600);font-weight:300;margin-bottom:14px}
+.about-txt strong{color:var(--black);font-weight:600}
+.about-stats{display:flex;gap:36px;margin-top:36px;padding-top:28px;border-top:1px solid var(--g100)}
+.stat-n{font-family:'DM Serif Display',serif;font-size:38px;color:var(--red);line-height:1}
+.stat-l{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--g400);margin-top:4px;font-weight:500}
+
+/* ═══ REVIEWS ═══ */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.review-card{background:var(--white);border:1px solid var(--g100);padding:28px 24px;position:relative;transition:all 0.25s}
+.review-card:hover{border-color:var(--g200);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.05)}
+.review-stars{color:var(--amber);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+.review-text{font-size:13.5px;line-height:1.7;color:var(--g600);font-style:italic;font-weight:300;margin-bottom:16px}
+.review-author{display:flex;align-items:center;gap:10px}
+.review-avatar{width:32px;height:32px;background:var(--g100);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--g400)}
+.review-name{font-size:12px;font-weight:600;letter-spacing:0.04em}
+.review-source{font-size:10px;color:var(--g400)}
+.review-quote{position:absolute;top:16px;right:20px;font-family:'DM Serif Display',serif;font-size:48px;color:var(--g100);line-height:1}
+
+/* ═══ GALLERY ═══ */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:240px 240px;gap:3px}
+.gallery-cell{overflow:hidden;position:relative;background:var(--g200)}
+.gallery-cell img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:all 0.5s}
+.gallery-cell:hover img{filter:grayscale(0);transform:scale(1.06)}
+.gallery-cell.tall{grid-row:span 2}
+.gallery-cell.wide{grid-column:span 2}
+
+/* ═══ DELIVERY ═══ */
+.del-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:44px}
+.del-tier{background:var(--g800);padding:36px 28px;text-align:center;border:1px solid rgba(255,255,255,0.06)}
+.del-dist{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.del-table{width:100%;border-collapse:collapse}
+.del-table td{padding:7px 0;font-size:12px;color:rgba(255,255,255,0.45);border-bottom:1px solid rgba(255,255,255,0.05)}
+.del-table td:last-child{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;color:var(--white)}
+.del-free{color:var(--red)!important}
+
+/* ═══ LOCATIONS ═══ */
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:44px}
+.loc-card{background:var(--black);padding:44px 40px;position:relative;overflow:hidden;transition:0.3s}
+.loc-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transition:transform 0.3s;transform-origin:top}
+.loc-card:hover::before{transform:scaleY(1)}
+.loc-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+.loc-name{font-family:'DM Serif Display',serif;font-size:26px;color:var(--white);margin-bottom:10px}
+.loc-addr{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.4);font-weight:300}
+.loc-sep{width:36px;height:1px;background:rgba(255,255,255,0.1);margin:20px 0}
+.loc-det{display:flex;flex-direction:column;gap:8px}
+.loc-det-item{display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(255,255,255,0.5)}
+.loc-det-item svg{width:14px;height:14px;stroke:var(--red);flex-shrink:0}
+.loc-map-btn{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:var(--red);cursor:pointer;transition:color 0.2s}
+.loc-map-btn:hover{color:var(--white)}
+.loc-map-btn svg{width:12px;height:12px;stroke:currentColor}
+
+/* ═══ FOOTER ═══ */
+.footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.05)}
+.footer-main{max-width:1400px;margin:0 auto;padding:64px 48px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+.footer-brand-name{font-family:'DM Serif Display',serif;font-size:22px;color:var(--white);margin-bottom:10px}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.6;font-weight:300;font-style:italic}
+.footer h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer ul li a{font-size:12.5px;color:rgba(255,255,255,0.35);transition:color 0.2s;font-weight:300}
+.footer ul li a:hover{color:var(--white)}
+.footer-bot{max-width:1400px;margin:0 auto;padding:16px 48px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center}
+.footer-bot p{font-size:10px;color:rgba(255,255,255,0.18);font-family:'JetBrains Mono',monospace}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes sUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease}
+.rv.v{opacity:1;transform:none}
+.rv-d1{transition-delay:0.1s}.rv-d2{transition-delay:0.2s}.rv-d3{transition-delay:0.3s}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .feat-grid,.reviews-grid{grid-template-columns:1fr}
+  .about-lay{grid-template-columns:1fr;gap:36px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+  .gallery-cell.tall{grid-row:auto}.gallery-cell.wide{grid-column:auto}
+  .del-tiers,.loc-grid{grid-template-columns:1fr}
+  .footer-main{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none!important}.nav-ham{display:flex}
+  .nav-in{padding:0 20px}
+  .hero-ct{padding:0 24px 56px}
+  .sec{padding:56px 20px}
+  .hero-ctas{flex-direction:column}
+  .about-stats{flex-direction:column;gap:20px}
+  .menu-controls{flex-direction:column}
+  .footer-main{grid-template-columns:1fr;gap:28px;padding:40px 20px}
+  .footer-bot{padding:12px 20px;flex-direction:column;gap:6px}
+}
+
+/* ═══ CHAT WIDGET ═══ */
+#cfab{position:fixed;bottom:24px;right:24px;z-index:9999;width:58px;height:58px;background:var(--black);border:1.5px solid var(--g800);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(0,0,0,0.25);transition:all 0.25s cubic-bezier(.34,1.56,.64,1)}
+#cfab:hover{transform:scale(1.06)}
+#cfab svg{width:20px;height:20px}
+#cfab .fx{display:none}
+#cfab.open .fm{display:none}
+#cfab.open .fx{display:block}
+#cfab.open{background:var(--red);border-color:var(--red)}
+.cfab-pulse{position:absolute;inset:-7px;border:1.5px solid rgba(212,32,32,0.35);animation:cPulse 2.5s ease-out infinite}
+@keyframes cPulse{0%{opacity:1;transform:scale(1)}70%{opacity:0;transform:scale(1.4)}100%{opacity:0}}
+#cpanel{position:fixed;bottom:96px;right:24px;z-index:9998;width:380px;max-height:560px;background:var(--white);border:1px solid var(--g200);box-shadow:0 20px 60px rgba(0,0,0,0.18);display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(14px) scale(0.97);transition:all 0.3s cubic-bezier(.34,1.1,.64,1)}
+#cpanel.open{opacity:1;pointer-events:all;transform:none}
+.ch-hdr{background:var(--black);padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--red)}
+.ch-ava{width:34px;height:34px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:15px;color:var(--white)}
+.ch-name{font-size:12.5px;font-weight:600;color:var(--white);letter-spacing:0.06em}
+.ch-status{font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;display:flex;align-items:center;gap:5px}
+.ch-dot{width:5px;height:5px;background:#4ADE80;border-radius:50%;animation:dotB 2s ease-in-out infinite}
+@keyframes dotB{0%,100%{opacity:1}50%{opacity:0.3}}
+.ch-msgs{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px;max-height:320px;scroll-behavior:smooth}
+.ch-msgs::-webkit-scrollbar{width:3px}.ch-msgs::-webkit-scrollbar-thumb{background:var(--g200)}
+.cm{display:flex;gap:7px;animation:cmIn 0.25s ease-out both}
+@keyframes cmIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cm.user{flex-direction:row-reverse}
+.cm-a{width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:1px}
+.cm.assistant .cm-a{background:var(--black);color:var(--white)}
+.cm.user .cm-a{background:var(--g100);color:var(--g600)}
+.cm-b{max-width:80%;padding:10px 13px;font-size:13px;line-height:1.55}
+.cm.assistant .cm-b{background:var(--off-white);color:var(--black);border:1px solid var(--g100);border-radius:0 8px 8px 8px}
+.cm.user .cm-b{background:var(--black);color:var(--white);border-radius:8px 0 8px 8px}
+.cm-t{font-size:9px;color:var(--g400);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.cm.user .cm-t{text-align:right}
+.ch-typing{display:flex;gap:4px;padding:10px 13px;background:var(--off-white);border:1px solid var(--g100);border-radius:0 8px 8px 8px}
+.td{width:5px;height:5px;background:var(--g400);border-radius:50%;animation:tUp 1.2s ease-in-out infinite}
+.td:nth-child(2){animation-delay:0.15s}.td:nth-child(3){animation-delay:0.3s}
+@keyframes tUp{0%,80%,100%{transform:translateY(0);opacity:0.4}40%{transform:translateY(-4px);opacity:1}}
+.ch-qr{padding:0 14px 10px;display:flex;flex-wrap:wrap;gap:5px}
+.ch-qb{background:var(--white);border:1px solid var(--g200);color:var(--black);padding:6px 12px;font-size:10.5px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.15s}
+.ch-qb:hover{border-color:var(--black);background:var(--black);color:var(--white)}
+.ch-in-area{padding:10px 14px;border-top:1px solid var(--g100);display:flex;gap:8px;align-items:flex-end}
+.ch-in{flex:1;background:var(--off-white);border:1px solid var(--g200);color:var(--black);padding:9px 12px;font-family:'Outfit',sans-serif;font-size:12.5px;resize:none;outline:none;line-height:1.5;max-height:80px;min-height:38px;transition:border-color 0.2s}
+.ch-in::placeholder{color:var(--g400)}
+.ch-in:focus{border-color:var(--black)}
+.ch-send{width:38px;height:38px;flex-shrink:0;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.ch-send:hover{background:var(--red-d)}
+.ch-send:disabled{background:var(--g200);cursor:not-allowed}
+.ch-send svg{width:14px;height:14px}
+.ch-note{text-align:center;font-size:9px;color:var(--g400);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;padding:5px 0 6px;border-top:1px solid var(--g100)}
+@media(max-width:500px){#cpanel{width:calc(100vw-20px);right:10px;bottom:90px}#cfab{right:10px;bottom:14px}}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="nav-brand"><div class="nav-icon"><span>B</span></div><span class="nav-name">BAMICO</span></a>
+    <div class="nav-links">
+      <a href="#menu" data-cz="Menu" data-en="Menu">Menu</a>
+      <a href="#about" data-cz="O nás" data-en="About">O nás</a>
+      <a href="#reviews" data-cz="Recenze" data-en="Reviews">Recenze</a>
+      <a href="#gallery" data-cz="Galerie" data-en="Gallery">Galerie</a>
+      <a href="#delivery" data-cz="Rozvoz" data-en="Delivery">Rozvoz</a>
+      <a href="#locations" data-cz="Pobočky" data-en="Locations">Pobočky</a>
+      <a href="#order" class="nav-order" data-cz="Objednat" data-en="Order">Objednat</a>
+      <button class="lang-btn" onclick="toggleLang()" id="langBtn">EN</button>
+    </div>
+    <button class="nav-ham" onclick="toggleMob()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#menu" onclick="closeMob()" data-cz="Menu" data-en="Menu">Menu</a>
+  <a href="#about" onclick="closeMob()" data-cz="O nás" data-en="About">O nás</a>
+  <a href="#reviews" onclick="closeMob()" data-cz="Recenze" data-en="Reviews">Recenze</a>
+  <a href="#delivery" onclick="closeMob()" data-cz="Rozvoz" data-en="Delivery">Rozvoz</a>
+  <a href="#locations" onclick="closeMob()" data-cz="Pobočky" data-en="Locations">Pobočky</a>
+  <a href="#order" onclick="closeMob()" class="btn-r" style="text-align:center;margin-top:8px" data-cz="Objednat" data-en="Order Now">Objednat</a>
+  <button class="lang-btn" onclick="toggleLang()" style="align-self:flex-start;margin-top:8px" id="langBtn2">EN</button>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=1600&q=80" alt="" loading="eager"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-ct">
+    <p class="hero-label" data-cz="Vietnamské bagety · Praha" data-en="Vietnamese Baguettes · Prague">Vietnamské bagety · Praha</p>
+    <h1 class="hero-h" data-cz-html="Bánh Mì<br><em>jak má</em><br>být." data-en-html="Bánh Mì<br><em>done</em><br>right.">Bánh Mì<br><em>jak má</em><br>být.</h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub" data-cz="Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy." data-en="Family-run. Fresh-baked every morning. Authentic pâté, house pickles, crispy baguettes — straight from Hanoi to the streets of Prague.">Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy.</p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-r" data-cz="Prohlédnout menu" data-en="Explore menu">Prohlédnout menu</a>
+      <a href="#order" class="btn-o" data-cz="Objednat rozvoz" data-en="Order delivery">Objednat rozvoz</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="mq"><div class="mq-track">
+  <span class="mq-item" data-cz="Čerstvé bagety denně" data-en="Fresh baguettes daily">Čerstvé bagety denně</span>
+  <span class="mq-item" data-cz="Vietnamské pouliční jídlo" data-en="Vietnamese street food">Vietnamské pouliční jídlo</span>
+  <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague">Dvě pobočky v Praze</span>
+  <span class="mq-item" data-cz="Egg coffee & Matcha" data-en="Egg coffee & Matcha">Egg coffee & Matcha</span>
+  <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
+  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00">Otevřeno 11:00–22:00</span>
+  <span class="mq-item" data-cz="Čerstvé bagety denně" data-en="Fresh baguettes daily">Čerstvé bagety denně</span>
+  <span class="mq-item" data-cz="Vietnamské pouliční jídlo" data-en="Vietnamese street food">Vietnamské pouliční jídlo</span>
+  <span class="mq-item" data-cz="Dvě pobočky v Praze" data-en="Two locations in Prague">Dvě pobočky v Praze</span>
+  <span class="mq-item" data-cz="Egg coffee & Matcha" data-en="Egg coffee & Matcha">Egg coffee & Matcha</span>
+  <span class="mq-item" data-cz="Rozvoz přes Wolt · Bolt · Foodora" data-en="Delivery via Wolt · Bolt · Foodora">Rozvoz přes Wolt · Bolt · Foodora</span>
+  <span class="mq-item" data-cz="Otevřeno 11:00–22:00" data-en="Open 11:00–22:00">Otevřeno 11:00–22:00</span>
+</div></div>
+
+<!-- ═══ FEATURED ═══ -->
+<div class="sec-alt">
+  <div class="sec rv">
+    <p class="sec-lbl" data-cz="Doporučujeme" data-en="Recommended">Doporučujeme</p>
+    <h2 class="sec-h" data-cz="Naše bestsellery." data-en="Our bestsellers.">Naše bestsellery.</h2>
+    <p class="sec-sub" data-cz="Tři bagety, které Prahu nepřestávají bavit." data-en="Three baguettes that keep Prague coming back.">Tři bagety, které Prahu nepřestávají bavit.</p>
+    <div class="feat-grid">
+      <div class="feat-card rv rv-d1">
+        <div class="feat-img"><img src="https://images.unsplash.com/photo-1553909489-cd47e0907980?w=600&q=75" alt="Grilled Pork Bánh Mì" loading="lazy"></div>
+        <div class="feat-info">
+          <div class="feat-name">Grilled Pork Bánh Mì</div>
+          <div class="feat-desc" data-cz="Grilované vepřové, čerstvé bylinky, domácí omáčka" data-en="Charcoal-grilled pork, fresh herbs, Bamico sauce">Grilované vepřové, čerstvé bylinky, domácí omáčka</div>
+          <div class="feat-row"><span class="feat-price">160 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
+        </div>
+      </div>
+      <div class="feat-card rv rv-d2">
+        <div class="feat-img"><img src="https://images.unsplash.com/photo-1600454309261-3dc9c52dba44?w=600&q=75" alt="Crispy Pork Bánh Mì" loading="lazy"></div>
+        <div class="feat-info">
+          <div class="feat-name">Crispy Pork Bánh Mì</div>
+          <div class="feat-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot">Křupavý vepřový bok, nakládaná ředkev a mrkev</div>
+          <div class="feat-row"><span class="feat-price">170 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
+        </div>
+      </div>
+      <div class="feat-card rv rv-d3">
+        <div class="feat-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75" alt="BBQ Pork Bánh Mì" loading="lazy"></div>
+        <div class="feat-info">
+          <div class="feat-name">BBQ Pork Bánh Mì</div>
+          <div class="feat-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky" data-en="Slow-roasted BBQ pork, cucumber, fresh herbs">Pomalu pečené BBQ vepřové, okurka, čerstvé bylinky</div>
+          <div class="feat-row"><span class="feat-price">160 Kč</span><div class="feat-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MENU ═══ -->
+<div id="menu"><div class="sec rv">
+  <p class="sec-lbl" data-cz="Kompletní menu" data-en="Full menu">Kompletní menu</p>
+  <h2 class="sec-h" data-cz="Vše, co nabízíme." data-en="Everything we serve.">Vše, co nabízíme.</h2>
+  <div class="menu-controls">
+    <div class="menu-tabs" role="tablist">
+      <button class="menu-tab active" onclick="showC(this,'mc-coffee')">Vietnamese Coffee</button>
+      <button class="menu-tab" onclick="showC(this,'mc-banh')">Bánh Mì</button>
+      <button class="menu-tab" onclick="showC(this,'mc-fried')">Fried</button>
+      <button class="menu-tab" onclick="showC(this,'mc-matcha')">Matcha</button>
+      <button class="menu-tab" onclick="showC(this,'mc-drinks')">Drinks</button>
+      <button class="menu-tab" onclick="showC(this,'mc-tea')">Fruit Tea</button>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label" data-cz="Filtr:" data-en="Filter:">Filtr:</span>
+      <button class="filter-btn" onclick="toggleFilter(this,'all')" data-active="true">All</button>
+      <button class="filter-btn" onclick="toggleFilter(this,'no-pork')" data-cz="Bez vepřového" data-en="No pork">Bez vepřového</button>
+      <button class="filter-btn" onclick="toggleFilter(this,'no-gluten')" data-cz="Bez lepku" data-en="No gluten">Bez lepku</button>
+    </div>
+  </div>
+
+  <div class="menu-cat active" id="mc-coffee"><div class="menu-grid">
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=70" alt="Milk Coffee" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Milk Coffee</div><div class="menu-card-desc" data-cz="Ledová vietnamská káva se slazeným mlékem" data-en="Iced Vietnamese coffee with condensed milk">Ledová vietnamská káva se slazeným mlékem</div><div class="menu-card-foot"><span class="menu-card-price">110 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?w=500&q=70" alt="Egg Coffee" loading="lazy"><div class="menu-card-badge">Hanoi special</div></div><div class="menu-card-body"><div class="menu-card-name">Egg Coffee</div><div class="menu-card-desc" data-cz="Robusta se šlehaným vaječným krémem" data-en="Robusta with creamy whipped egg">Robusta se šlehaným vaječným krémem</div><div class="menu-card-foot"><span class="menu-card-price">130 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span><span class="allergen-tag tag-e">Egg</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500&q=70" alt="Salted Coffee" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Salted Coffee</div><div class="menu-card-desc" data-cz="Černá Robusta se slaným šlehaným krémem" data-en="Black Robusta with salted whipped cream">Černá Robusta se slaným šlehaným krémem</div><div class="menu-card-foot"><span class="menu-card-price">130 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+  </div></div>
+
+  <div class="menu-cat" id="mc-banh"><div class="menu-grid">
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1600454309261-3dc9c52dba44?w=500&q=70" alt="Vietnamese Ham" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Vietnamese Ham Bánh Mì</div><div class="menu-card-desc" data-cz="Vietnamská šunka, paté, nakládaná zelenina, koriandr" data-en="Traditional ham, pâté, pickled vegetables, coriander">Vietnamská šunka, paté, nakládaná zelenina, koriandr</div><div class="menu-card-foot"><span class="menu-card-price">145 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1553909489-cd47e0907980?w=500&q=70" alt="BBQ Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">BBQ Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Pomalu pečené BBQ vepřové, okurka, bylinky" data-en="Slow-roasted BBQ pork, cucumber, herbs">Pomalu pečené BBQ vepřové, okurka, bylinky</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70" alt="Grilled Pork" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Grilled Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Grilované vepřové, domácí nakládaná zelenina" data-en="Charcoal-grilled pork, house pickles">Grilované vepřové, domácí nakládaná zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&q=70" alt="Shredded Chicken" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Shredded Chicken Bánh Mì</div><div class="menu-card-desc" data-cz="Trhané kuřecí, majonéza, čerstvá zelenina" data-en="Tender shredded chicken, mayo, fresh vegetables">Trhané kuřecí, majonéza, čerstvá zelenina</div><div class="menu-card-foot"><span class="menu-card-price">160 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&q=70" alt="Crispy Pork" loading="lazy"><div class="menu-card-badge">★ TOP</div></div><div class="menu-card-body"><div class="menu-card-name">Crispy Pork Bánh Mì</div><div class="menu-card-desc" data-cz="Křupavý vepřový bok, nakládaná ředkev a mrkev" data-en="Crackling pork belly, pickled daikon & carrot">Křupavý vepřový bok, nakládaná ředkev a mrkev</div><div class="menu-card-foot"><span class="menu-card-price">170 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span></div></div></div></div>
+  </div></div>
+
+  <div class="menu-cat" id="mc-fried"><div class="menu-grid">
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1630384060421-cb20afd0e7e5?w=500&q=70" alt="Bamico Fries" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Bamico Fries</div><div class="menu-card-desc" data-cz="Domácí kořeněné hranolky" data-en="House-seasoned crispy fries">Domácí kořeněné hranolky</div><div class="menu-card-foot"><span class="menu-card-price">95 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span></div></div></div></div>
+    <div class="menu-card" data-tags=""><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1585109649139-366815a0d713?w=500&q=70" alt="Bacon Cheese Fries" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Bacon & Cheese Fries</div><div class="menu-card-desc" data-cz="Hranolky se slaninou a sýrovou omáčkou" data-en="Loaded fries with bacon and cheese sauce">Hranolky se slaninou a sýrovou omáčkou</div><div class="menu-card-foot"><span class="menu-card-price">120 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-p">Pork</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1531749668029-2db88e4276c7?w=500&q=70" alt="Mozzarella Sticks" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Mozzarella Sticks · 3 pcs</div><div class="menu-card-desc" data-cz="Smažená mozzarella" data-en="Golden fried mozzarella">Smažená mozzarella</div><div class="menu-card-foot"><span class="menu-card-price">75 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1531749668029-2db88e4276c7?w=500&q=70" alt="Mozzarella Sticks 5" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Mozzarella Sticks · 5 pcs</div><div class="menu-card-desc" data-cz="Smažená mozzarella, větší porce" data-en="Golden fried mozzarella, larger">Smažená mozzarella, větší porce</div><div class="menu-card-foot"><span class="menu-card-price">115 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-g">Gluten</span><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+  </div></div>
+
+  <div class="menu-cat" id="mc-matcha"><div class="menu-grid">
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=500&q=70" alt="Matcha Latte" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Latte</div><div class="menu-card-desc" data-cz="Krémové matcha s mlékem" data-en="Creamy matcha with milk">Krémové matcha s mlékem</div><div class="menu-card-foot"><span class="menu-card-price">105 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1556881286-fc6915169721?w=500&q=70" alt="Matcha Mango" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Mango</div><div class="menu-card-desc" data-cz="Vrstvené matcha s mangovým pyré" data-en="Layered matcha with mango purée">Vrstvené matcha s mangovým pyré</div><div class="menu-card-foot"><span class="menu-card-price">125 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=500&q=70" alt="Matcha Strawberry" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Matcha Strawberry</div><div class="menu-card-desc" data-cz="Vrstvené matcha s jahodami" data-en="Layered matcha with strawberry">Vrstvené matcha s jahodami</div><div class="menu-card-foot"><span class="menu-card-price">125 Kč</span><div class="menu-card-tags"><span class="allergen-tag tag-d">Dairy</span></div></div></div></div>
+  </div></div>
+
+  <div class="menu-cat" id="mc-drinks"><div class="menu-grid">
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Coca-Cola</div><div class="menu-card-desc">Original</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Coca-Cola Zero</div><div class="menu-card-desc">Sugar-free</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Sprite</div><div class="menu-card-desc">Lemon-lime</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Fanta</div><div class="menu-card-desc">Orange</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Peach</div><div class="menu-card-desc" data-cz="Vietnamský broskvový čaj" data-en="Vietnamese peach tea">Vietnamský broskvový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Oolong Mango</div><div class="menu-card-desc" data-cz="Vietnamský oolong mangový čaj" data-en="Vietnamese oolong mango tea">Vietnamský oolong mangový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Cozy — Guava</div><div class="menu-card-desc" data-cz="Vietnamský guavový čaj" data-en="Vietnamese guava tea">Vietnamský guavový čaj</div><div class="menu-card-foot"><span class="menu-card-price">55 Kč</span></div></div></div>
+  </div></div>
+
+  <div class="menu-cat" id="mc-tea"><div class="menu-grid">
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&q=70" alt="Peach Tea" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Peach Fruit Tea</div><div class="menu-card-desc" data-cz="Čerstvý broskvový ledový čaj" data-en="Fresh peach-infused iced tea">Čerstvý broskvový ledový čaj</div><div class="menu-card-foot"><span class="menu-card-price">100 Kč</span></div></div></div>
+  </div></div>
+</div></div>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="sec-alt" id="about"><div class="sec rv">
+  <p class="sec-lbl" data-cz="Náš příběh" data-en="Our story">Náš příběh</p>
+  <h2 class="sec-h" data-cz="Autentická chuť Vietnamu v Praze." data-en="The authentic taste of Vietnam in Prague.">Autentická chuť Vietnamu v Praze.</h2>
+  <div class="about-lay">
+    <div class="about-img"><img src="https://images.unsplash.com/photo-1555992336-fb0d29498b13?w=800&q=75" alt="Making bánh mì" loading="lazy"></div>
+    <div class="about-txt">
+      <h3 data-cz="Tradice v každém soustu." data-en="Tradition in every bite.">Tradice v každém soustu.</h3>
+      <p data-cz="BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy." data-en="BAMICO is a <strong>family-run bistro</strong> serving authentic Vietnamese bánh mì baguettes. We use only the highest quality ingredients and traditional preparation methods." data-html>BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy.</p>
+      <p data-cz="Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy." data-en="Our baguettes are baked <strong>fresh every day</strong> for that perfect crispy crust. We bring the atmosphere of Vietnamese street food right to the heart of Prague." data-html>Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy.</p>
+      <div class="about-stats">
+        <div><div class="stat-n" data-count="2">0</div><div class="stat-l" data-cz="Pobočky v Praze" data-en="Prague locations">Pobočky v Praze</div></div>
+        <div><div class="stat-n" data-count="7">0</div><div class="stat-l" data-cz="Dní v týdnu" data-en="Days a week">Dní v týdnu</div></div>
+        <div><div class="stat-n">∞</div><div class="stat-l" data-cz="Chilli na přání" data-en="Chilli on request">Chilli na přání</div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═══ REVIEWS ═══ -->
+<div id="reviews"><div class="sec rv">
+  <p class="sec-lbl" data-cz="Recenze" data-en="Reviews">Recenze</p>
+  <h2 class="sec-h" data-cz="Co říkají naši zákazníci." data-en="What our customers say.">Co říkají naši zákazníci.</h2>
+  <div class="reviews-grid">
+    <div class="review-card rv rv-d1">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text" data-cz="Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden." data-en="Best bánh mì in Prague, no question! Crispy baguette, amazing meat, perfect sauce. I come here every week.">Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden.</div>
+      <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Martin K.</div><div class="review-source">Google Reviews</div></div></div>
+    </div>
+    <div class="review-card rv rv-d2">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text" data-cz="Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu." data-en="The egg coffee is absolutely fantastic — you can't get anything like it elsewhere in Prague. And the baguettes! Authentic Vietnamese taste.">Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu.</div>
+      <div class="review-author"><div class="review-avatar">T</div><div><div class="review-name">Tereza V.</div><div class="review-source">Instagram</div></div></div>
+    </div>
+    <div class="review-card rv rv-d3">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text" data-cz="Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně." data-en="Great food, wonderful staff, fast service. The Crispy Pork is absolutely addictive. Delivery via Wolt works flawlessly.">Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně.</div>
+      <div class="review-author"><div class="review-avatar">J</div><div><div class="review-name">Jakub M.</div><div class="review-source">Google Reviews</div></div></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═══ GALLERY ═══ -->
+<div id="gallery"><div class="gallery-grid">
+  <div class="gallery-cell tall"><img src="https://images.unsplash.com/photo-1600454309261-3dc9c52dba44?w=600&q=75" alt="Food prep" loading="lazy"></div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=600&q=75" alt="Baguette" loading="lazy"></div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1555992336-fb0d29498b13?w=600&q=75" alt="Bread" loading="lazy"></div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=75" alt="Coffee" loading="lazy"></div>
+  <div class="gallery-cell wide"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=75" alt="Sandwiches" loading="lazy"></div>
+  <div class="gallery-cell"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=75" alt="Fresh food" loading="lazy"></div>
+</div></div>
+
+<!-- ═══ DELIVERY ═══ -->
+<div class="sec-dk" id="delivery"><div class="sec rv">
+  <p class="sec-lbl" data-cz="Zóny rozvozu" data-en="Delivery zones">Zóny rozvozu</p>
+  <h2 class="sec-h" style="color:var(--white)" data-cz="Doručíme po celé Praze." data-en="We deliver across Prague.">Doručíme po celé Praze.</h2>
+  <p class="sec-sub" style="color:rgba(255,255,255,0.4)" data-cz="Odstupňované ceny rozvozu podle vzdálenosti. K dispozici přes Wolt, Bolt Food a Foodora." data-en="Tiered delivery pricing by distance. Available via Wolt, Bolt Food, and Foodora.">Odstupňované ceny rozvozu podle vzdálenosti. K dispozici přes Wolt, Bolt Food a Foodora.</p>
+  <div class="del-tiers">
+    <div class="del-tier"><div class="del-dist" data-cz="Do 1 km" data-en="Up to 1 km">Do 1 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>69 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>49 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>29 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>19 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free" data-cz="Zdarma" data-en="Free">Zdarma</td></tr></table></div>
+    <div class="del-tier"><div class="del-dist">1 — 3 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>99 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>79 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>49 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>29 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free" data-cz="Zdarma" data-en="Free">Zdarma</td></tr></table></div>
+    <div class="del-tier"><div class="del-dist">3 — 6 km</div><table class="del-table"><tr><td data-cz="Do 299 Kč" data-en="Up to 299 Kč">Do 299 Kč</td><td>109 Kč</td></tr><tr><td data-cz="Od 300 Kč" data-en="From 300 Kč">Od 300 Kč</td><td>89 Kč</td></tr><tr><td data-cz="Od 500 Kč" data-en="From 500 Kč">Od 500 Kč</td><td>59 Kč</td></tr><tr><td data-cz="Od 650 Kč" data-en="From 650 Kč">Od 650 Kč</td><td>39 Kč</td></tr><tr><td data-cz="Od 800 Kč" data-en="From 800 Kč">Od 800 Kč</td><td class="del-free" data-cz="Zdarma" data-en="Free">Zdarma</td></tr></table></div>
+  </div>
+  <div style="display:flex;gap:14px;justify-content:center;margin-top:44px;flex-wrap:wrap" id="order">
+    <a href="https://wolt.com" target="_blank" class="btn-r" data-cz="Objednat na Woltu" data-en="Order on Wolt">Objednat na Woltu</a>
+    <a href="https://food.bolt.eu" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Bolt Food</a>
+    <a href="https://www.foodora.cz" target="_blank" class="btn-o" style="border-color:rgba(255,255,255,0.2);color:var(--white)">Foodora</a>
+  </div>
+</div></div>
+
+<!-- ═══ LOCATIONS ═══ -->
+<div id="locations"><div class="sec rv">
+  <p class="sec-lbl" data-cz="Najdete nás" data-en="Find us">Najdete nás</p>
+  <h2 class="sec-h" data-cz="Dvě místa. Jedna vášeň." data-en="Two spots. One obsession.">Dvě místa. Jedna vášeň.</h2>
+  <div class="loc-grid">
+    <div class="loc-card"><div class="loc-tag">Nové Město</div><div class="loc-name">Masarykovo nábřeží</div><div class="loc-addr">Masarykovo nábř. 2014/2<br>120 00 Praha 2 – Nové Město</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 777 057 696</div></div><a href="https://maps.google.com/?q=Masarykovo+nábřeží+2014/2+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →">Zobrazit na mapě →</a></div>
+    <div class="loc-card"><div class="loc-tag">Žižkov</div><div class="loc-name">Seifertova</div><div class="loc-addr">Seifertova 11<br>130 00 Praha 3 – Žižkov</div><div class="loc-sep"></div><div class="loc-det"><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Po – Ne · 11:00 – 22:00</div><div class="loc-det-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72"/></svg>+420 773 601 999</div></div><a href="https://maps.google.com/?q=Seifertova+11+Praha" target="_blank" class="loc-map-btn" data-cz="Zobrazit na mapě →" data-en="View on map →">Zobrazit na mapě →</a></div>
+  </div>
+</div></div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer"><div class="footer-main">
+  <div><div class="footer-brand-name">BAMICO</div><p class="footer-tagline" data-cz="Autentické vietnamské bánh mì,<br>čerstvě pečené každé ráno v Praze." data-en="Authentic Vietnamese bánh mì,<br>baked fresh every morning in Prague.">Autentické vietnamské bánh mì,<br>čerstvě pečené každé ráno v Praze.</p></div>
+  <div><h4>Menu</h4><ul><li><a href="#menu">Bánh Mì</a></li><li><a href="#menu">Vietnamese Coffee</a></li><li><a href="#menu">Matcha Series</a></li><li><a href="#menu">Fried & Sides</a></li></ul></div>
+  <div><h4 data-cz="Pobočky" data-en="Visit">Pobočky</h4><ul><li><a href="#locations">Masarykovo, Nové Město</a></li><li><a href="#locations">Seifertova, Žižkov</a></li><li><a href="#delivery" data-cz="Zóny rozvozu" data-en="Delivery zones">Zóny rozvozu</a></li></ul></div>
+  <div><h4 data-cz="Sledujte nás" data-en="Connect">Sledujte nás</h4><ul><li><a href="https://www.instagram.com/bamico.prg/" target="_blank">Instagram</a></li><li><a href="https://www.facebook.com/p/Bamico-Vietnamese-baguettes-61572476219304/" target="_blank">Facebook</a></li><li><a href="mailto:bamico.prg@gmail.com">bamico.prg@gmail.com</a></li></ul></div>
+</div><div class="footer-bot"><p>© 2026 BAMICO · Vietnamese Baguettes</p><p>Praha, Česká republika</p></div></footer>
+
+<!-- ═══ CHAT ═══ -->
+<button id="cfab" onclick="tChat()" aria-label="Chat"><div class="cfab-pulse"></div><svg class="fm" viewBox="0 0 24 24" fill="none" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="12" y2="14"/></svg><svg class="fx" viewBox="0 0 24 24" fill="none" stroke="#FAFAFA" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+<div id="cpanel"><div class="ch-hdr"><div class="ch-ava">B</div><div><div class="ch-name">BAMICO</div><div class="ch-status"><div class="ch-dot"></div><span id="chStatusTxt">Xin chào — here to help</span></div></div></div>
+<div class="ch-msgs" id="chM"></div>
+<div class="ch-qr" id="chQ">
+  <button class="ch-qb" onclick="qS('Jaké bánh mì máte?')" data-cz="🥖 Menu" data-en="🥖 Menu">🥖 Menu</button>
+  <button class="ch-qb" onclick="qS('Kde vás najdu?')" data-cz="📍 Pobočky" data-en="📍 Locations">📍 Pobočky</button>
+  <button class="ch-qb" onclick="qS('Jaká je otevírací doba?')" data-cz="🕙 Otevírací doba" data-en="🕙 Hours">🕙 Otevírací doba</button>
+  <button class="ch-qb" onclick="qS('Máte rozvoz?')" data-cz="🛵 Rozvoz" data-en="🛵 Delivery">🛵 Rozvoz</button>
+</div>
+<div class="ch-in-area"><textarea id="chIn" class="ch-in" rows="1" onkeydown="chK(event)" oninput="aH(this)"></textarea><button class="ch-send" id="sBtn" onclick="sM()"><svg viewBox="0 0 24 24" fill="none" stroke="#FAFAFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
+<div class="ch-note">AI · bamico.prg@gmail.com</div></div>
+
+<script>
+// ═══ LANGUAGE SYSTEM ═══
+let lang = 'cz';
+function toggleLang() {
+  lang = lang === 'cz' ? 'en' : 'cz';
+  document.getElementById('langBtn').textContent = lang === 'cz' ? 'EN' : 'CZ';
+  const lb2 = document.getElementById('langBtn2');
+  if (lb2) lb2.textContent = lang === 'cz' ? 'EN' : 'CZ';
+  document.documentElement.lang = lang === 'cz' ? 'cs' : 'en';
+  document.querySelectorAll('[data-cz]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt) {
+      if (el.hasAttribute('data-html') || el.tagName === 'P' && txt.includes('<strong>')) {
+        el.innerHTML = txt;
+      } else if (el.hasAttribute('data-cz-html')) {
+        el.innerHTML = el.getAttribute('data-' + lang + '-html') || txt;
+      } else {
+        el.textContent = txt;
+      }
+    }
+  });
+  const inp = document.getElementById('chIn');
+  inp.placeholder = lang === 'cz' ? 'Zeptejte se na menu, rozvoz, alergeny…' : 'Ask about menu, delivery, allergens…';
+  document.getElementById('chStatusTxt').textContent = lang === 'cz' ? 'Xin chào — jsme tu pro vás' : 'Xin chào — here to help';
+}
+// Set initial placeholder
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('chIn').placeholder = 'Zeptejte se na menu, rozvoz, alergeny…';
+});
+
+// ═══ MOBILE NAV ═══
+function toggleMob() { document.getElementById('mobMenu').classList.toggle('open'); }
+function closeMob() { document.getElementById('mobMenu').classList.remove('open'); }
+
+// ═══ MENU TABS ═══
+function showC(btn, id) {
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.menu-cat').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  applyFilter();
+}
+
+// ═══ ALLERGEN FILTER ═══
+let activeFilter = 'all';
+function toggleFilter(btn, f) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = f;
+  applyFilter();
+}
+function applyFilter() {
+  const active = document.querySelector('.menu-cat.active');
+  if (!active) return;
+  active.querySelectorAll('.menu-card').forEach(card => {
+    if (activeFilter === 'all') {
+      card.style.display = '';
+    } else {
+      const tags = card.getAttribute('data-tags') || '';
+      card.style.display = tags.includes(activeFilter) ? '' : 'none';
+    }
+  });
+}
+
+// ═══ SCROLL REVEAL & COUNTER ═══
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('v');
+      e.target.querySelectorAll('[data-count]').forEach(el => {
+        const end = parseInt(el.getAttribute('data-count'));
+        let cur = 0;
+        const step = () => { cur++; el.textContent = cur; if (cur < end) requestAnimationFrame(step); };
+        step();
+      });
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// ═══ CHAT ═══
+let cOpen = false, ld = false;
+const H = [];
+const SYS = `You are the friendly bilingual assistant for BAMICO, a Vietnamese bánh mì bistro in Prague. CRITICAL: Detect the language of the user's message and ALWAYS reply in the SAME language. If they write in Czech, reply in Czech. If in English, reply in English. Keep answers 2-4 sentences unless listing menu items.
+
+MENU — VIETNAMESE COFFEE: Milk Coffee 110 Kč, Egg Coffee 130 Kč (Hanoi special), Salted Coffee 130 Kč
+MENU — BÁNH MÌ (each includes pâté, mayo, cucumber, pickled daikon & carrot, coriander, Bamico sauce, chilli optional): Vietnamese Ham 145 Kč, BBQ Pork 160 Kč, Grilled Pork 160 Kč, Shredded Chicken 160 Kč, Crispy Pork 170 Kč (most popular)
+MENU — FRIED: Bamico Fries 95 Kč, Bacon & Cheese Fries 120 Kč, Mozzarella Sticks 3pcs 75 Kč / 5pcs 115 Kč
+MENU — MATCHA: Latte 105 Kč, Mango 125 Kč, Strawberry 125 Kč
+MENU — DRINKS: Coca-Cola/Zero/Sprite/Fanta 55 Kč, Cozy Peach/Oolong Mango/Guava 55 Kč
+MENU — FRUIT TEA: Peach 100 Kč
+
+LOCATIONS: 1. Nové Město: Masarykovo nábř. 2014/2, Praha 2, tel +420 777 057 696. 2. Žižkov: Seifertova 11, Praha 3, tel +420 773 601 999
+HOURS: Mon-Sun 11:00-22:00 (both)
+DELIVERY: Wolt, Bolt Food, Foodora. Direct delivery tiered: <1km 19-69 Kč, 1-3km 29-99 Kč, 3-6km 39-109 Kč. Free from 800 Kč.
+EMAIL: bamico.prg@gmail.com | INSTAGRAM: @bamico.prg
+ALLERGENS: Baguettes=gluten. Pâté=pork liver. No dedicated vegan/vegetarian option.
+If unsure, suggest calling. Be warm, concise.`;
+
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => addM('assistant', lang === 'cz' ? 'Xin chào! 👋 Jsem asistent BAMICO. Zeptejte se mě na cokoliv — menu, pobočky, otevírací dobu nebo alergeny.' : 'Xin chào! 👋 I\'m the Bamico assistant. Ask me anything about our menu, locations, hours, or allergens.'), 400);
+});
+
+function tChat() {
+  cOpen = !cOpen;
+  document.getElementById('cpanel').classList.toggle('open', cOpen);
+  document.getElementById('cfab').classList.toggle('open', cOpen);
+  const p = document.querySelector('.cfab-pulse'); if (p && cOpen) p.remove();
+  if (cOpen) setTimeout(() => document.getElementById('chIn').focus(), 200);
+}
+
+function addM(r, t) {
+  const c = document.getElementById('chM');
+  const tm = new Date().toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+  const d = document.createElement('div'); d.className = `cm ${r}`;
+  d.innerHTML = `<div class="cm-a">${r === 'user' ? 'Vy' : 'B'}</div><div><div class="cm-b">${esc(t).replace(/\n/g,'<br>')}</div><div class="cm-t">${tm}</div></div>`;
+  c.appendChild(d); scr();
+  if (r === 'user') document.getElementById('chQ').style.display = 'none';
+}
+
+function shT() { const c = document.getElementById('chM'); const d = document.createElement('div'); d.className = 'cm assistant'; d.id = 'tI'; d.innerHTML = `<div class="cm-a">B</div><div class="ch-typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>`; c.appendChild(d); scr(); }
+function hT() { const e = document.getElementById('tI'); if (e) e.remove(); }
+
+async function sM() {
+  const inp = document.getElementById('chIn');
+  const t = inp.value.trim(); if (!t || ld) return;
+  inp.value = ''; inp.style.height = 'auto';
+  ld = true; document.getElementById('sBtn').disabled = true;
+  addM('user', t); H.push({ role: 'user', content: t }); shT();
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYS, messages: H }) });
+    hT(); if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json(); const reply = d.content?.[0]?.text || '?';
+    H.push({ role: 'assistant', content: reply }); addM('assistant', reply);
+  } catch (e) { hT(); addM('assistant', lang === 'cz' ? '⚠️ Něco se pokazilo. Zkuste to znovu nebo zavolejte +420 777 057 696.' : '⚠️ Something went wrong. Try again or call +420 777 057 696.'); }
+  ld = false; document.getElementById('sBtn').disabled = false; document.getElementById('chIn').focus();
+}
+
+function qS(t) { document.getElementById('chIn').value = t; sM(); }
+function chK(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sM(); } }
+function aH(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
+function scr() { const c = document.getElementById('chM'); setTimeout(() => c.scrollTop = c.scrollHeight, 30); }
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
+</body>
+</html>
