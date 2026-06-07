@@ -39,6 +39,7 @@
   ]}
 }
 </script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -392,7 +393,6 @@ img{display:block;max-width:100%}
 /* ═══ DELIVERY MAP ═══ */
 .del-layout{display:grid;grid-template-columns:1fr 420px;gap:32px;margin-top:44px;align-items:start}
 .del-map-wrap{position:relative;width:100%;min-height:420px}
-.del-map-svg{display:none}
 .del-circle{position:absolute;border-radius:50%;border:2px dashed rgba(212,32,32,0.7);cursor:pointer;transition:all 0.25s;transform:translate(-50%,-50%);left:50%;top:50%}
 .del-circle:hover{background:rgba(212,32,32,0.15)!important}
 .del-c1{width:80px;height:80px;background:rgba(212,32,32,0.18);border-style:solid}
@@ -689,92 +689,8 @@ img{display:block;max-width:100%}
   <div class="del-layout">
     <!-- Interactive Map with delivery circles -->
     <div class="del-map-wrap">
-      <!-- Pure SVG map — no API key needed -->
-      <svg class="del-map-svg-main" viewBox="0 0 560 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;border-radius:12px;background:#111;border:1px solid rgba(255,255,255,0.08)">
-
-        <!-- Dark city grid background -->
-        <!-- Road grid lines -->
-        <line x1="0" y1="130" x2="560" y2="130" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="0" y1="200" x2="560" y2="200" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="0" y1="270" x2="560" y2="270" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="0" y1="340" x2="560" y2="340" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="0" y1="410" x2="560" y2="410" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="70" y1="0" x2="70" y2="520" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="140" y1="0" x2="140" y2="520" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="210" y1="0" x2="210" y2="520" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="280" y1="0" x2="280" y2="520" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="350" y1="0" x2="350" y2="520" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="420" y1="0" x2="420" y2="520" stroke="#1e1e1e" stroke-width="1"/>
-        <line x1="490" y1="0" x2="490" y2="520" stroke="#1e1e1e" stroke-width="1"/>
-
-        <!-- Major roads (brighter) -->
-        <!-- Vltava river (diagonal) -->
-        <path d="M 160 0 Q 230 120 200 260 Q 180 360 220 520" stroke="#1a2535" stroke-width="18" fill="none" opacity="0.9"/>
-        <path d="M 160 0 Q 230 120 200 260 Q 180 360 220 520" stroke="#1e3050" stroke-width="12" fill="none" opacity="0.6"/>
-
-        <!-- Main roads -->
-        <line x1="0" y1="255" x2="560" y2="255" stroke="#252525" stroke-width="3"/>
-        <line x1="0" y1="258" x2="560" y2="258" stroke="#1a1a1a" stroke-width="1"/>
-        <line x1="270" y1="0" x2="270" y2="520" stroke="#252525" stroke-width="3"/>
-        <line x1="0" y1="180" x2="560" y2="135" stroke="#222" stroke-width="2"/>
-        <line x1="0" y1="330" x2="560" y2="380" stroke="#222" stroke-width="2"/>
-        <line x1="80" y1="0" x2="140" y2="520" stroke="#1f1f1f" stroke-width="2"/>
-        <line x1="400" y1="0" x2="380" y2="520" stroke="#1f1f1f" stroke-width="2"/>
-
-        <!-- City blocks -->
-        <rect x="230" y="160" width="28" height="20" fill="#181818" rx="2"/>
-        <rect x="300" y="175" width="22" height="16" fill="#181818" rx="2"/>
-        <rect x="310" y="230" width="30" height="18" fill="#181818" rx="2"/>
-        <rect x="220" y="290" width="25" height="20" fill="#181818" rx="2"/>
-        <rect x="150" y="200" width="30" height="22" fill="#181818" rx="2"/>
-        <rect x="380" y="220" width="28" height="18" fill="#181818" rx="2"/>
-        <rect x="370" y="290" width="24" height="20" fill="#181818" rx="2"/>
-        <rect x="130" y="300" width="26" height="18" fill="#181818" rx="2"/>
-        <rect x="420" y="160" width="30" height="22" fill="#181818" rx="2"/>
-        <rect x="90" y="180" width="28" height="18" fill="#181818" rx="2"/>
-        <rect x="460" y="300" width="26" height="20" fill="#181818" rx="2"/>
-        <rect x="100" y="350" width="30" height="18" fill="#181818" rx="2"/>
-        <rect x="430" y="360" width="28" height="22" fill="#181818" rx="2"/>
-
-        <!-- Subtle Praha district labels -->
-        <text x="100" y="155" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 6</text>
-        <text x="390" y="155" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 8</text>
-        <text x="90" y="380" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 5</text>
-        <text x="390" y="390" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 10</text>
-        <text x="165" y="465" fill="#2a2a2a" font-size="9" font-family="Outfit,sans-serif" font-weight="600" letter-spacing="2">PRAGUE 4</text>
-
-        <!-- Zone 3: 6km — outermost -->
-        <circle cx="268" cy="258" r="210" fill="rgba(212,32,32,0.05)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="8,5" style="cursor:pointer" onclick="selectZone(3)"/>
-
-        <!-- Zone 2: 3km -->
-        <circle cx="268" cy="258" r="128" fill="rgba(212,32,32,0.09)" stroke="#D42020" stroke-width="1.5" stroke-dasharray="6,4" style="cursor:pointer" onclick="selectZone(2)"/>
-
-        <!-- Zone 1: 1km — innermost -->
-        <circle cx="268" cy="258" r="42" fill="rgba(212,32,32,0.18)" stroke="#D42020" stroke-width="2" style="cursor:pointer" onclick="selectZone(1)"/>
-
-        <!-- Animated pulse on pin -->
-        <circle cx="268" cy="258" r="28" fill="rgba(212,32,32,0.12)">
-          <animate attributeName="r" values="28;48;28" dur="2.5s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.3;0;0.3" dur="2.5s" repeatCount="indefinite"/>
-        </circle>
-
-        <!-- Zone distance labels -->
-        <text x="268" y="212" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="2">1 KM</text>
-        <text x="268" y="126" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="2">3 KM</text>
-        <text x="268" y="44" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="2">6 KM · FREE FROM 800 Kč</text>
-
-        <!-- BAMICO pin -->
-        <circle cx="268" cy="258" r="10" fill="#D42020" stroke="white" stroke-width="2"/>
-        <circle cx="268" cy="258" r="4" fill="white"/>
-
-        <!-- BAMICO label -->
-        <rect x="278" y="246" width="62" height="20" fill="#D42020" rx="4"/>
-        <text x="309" y="260" text-anchor="middle" fill="white" font-size="10" font-family="Outfit,sans-serif" font-weight="700" letter-spacing="1">BAMICO</text>
-
-        <!-- Click hint -->
-        <text x="268" y="508" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="10" font-family="Outfit,sans-serif">Click a zone to see pricing</text>
-      </svg>
-    </div>
+      <div id="deliveryMap" style="width:100%;height:460px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);z-index:1;position:relative;"></div>
+    </div>    </div>
 
     <!-- Pricing panels -->
     <div class="del-pricing">
@@ -1175,15 +1091,93 @@ function switchMap(n) {
   document.querySelectorAll('.loc-iframe').forEach((f,i) => f.classList.toggle('active-map', i+1===n));
 }
 
+// ═══ LEAFLET DELIVERY MAP ═══
+function initDeliveryMap() {
+  if (!document.getElementById('deliveryMap')) return;
+  if (window._deliveryMapInit) return;
+  window._deliveryMapInit = true;
+
+  // Load Leaflet JS dynamically
+  const s = document.createElement('script');
+  s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  s.onload = function() {
+    // BAMICO Nové Město location
+    const CENTER = [50.07542, 14.41245];
+
+    const map = L.map('deliveryMap', {
+      center: CENTER,
+      zoom: 12,
+      zoomControl: true,
+      scrollWheelZoom: false,
+      attributionControl: false
+    });
+
+    // OpenStreetMap tiles — free, no API key
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+    }).addTo(map);
+
+    // Zone colours
+    const zoneStyles = [
+      { color: '#4A90D9', fillColor: '#4A90D9', fillOpacity: 0.08, weight: 2, dashArray: null },
+      { color: '#4A90D9', fillColor: '#4A90D9', fillOpacity: 0.06, weight: 2, dashArray: '8,6' },
+      { color: '#4A90D9', fillColor: '#4A90D9', fillOpacity: 0.04, weight: 2, dashArray: '8,6' },
+    ];
+
+    // Draw 3 circles: 1km, 3km, 6km
+    const radii = [1000, 3000, 6000];
+    const circles = radii.map((r, i) => {
+      const c = L.circle(CENTER, {
+        radius: r,
+        ...zoneStyles[i],
+        interactive: true
+      }).addTo(map);
+      c.on('click', () => selectZone(i + 1));
+      return c;
+    });
+
+    // Custom red pin for BAMICO
+    const pinIcon = L.divIcon({
+      className: '',
+      html: `<div style="position:relative;display:flex;flex-direction:column;align-items:center;">
+        <div style="width:18px;height:18px;background:#D42020;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="background:#D42020;color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:4px;white-space:nowrap;font-family:Outfit,sans-serif;letter-spacing:0.08em;box-shadow:0 2px 6px rgba(0,0,0,0.3)">BAMICO</div>
+      </div>`,
+      iconSize: [80, 44],
+      iconAnchor: [40, 18]
+    });
+
+    L.marker(CENTER, { icon: pinIcon, interactive: false }).addTo(map);
+
+    // Highlight zone on selectZone call
+    window._deliveryCircles = circles;
+  };
+  document.head.appendChild(s);
+}
+
+// Init map when delivery section scrolls into view
+const _delObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { initDeliveryMap(); _delObserver.disconnect(); }
+}, { threshold: 0.1 });
+const _delEl = document.getElementById('deliveryMap');
+if (_delEl) _delObserver.observe(_delEl);
+
 // ═══ DELIVERY ZONE SELECTOR ═══
 function selectZone(z) {
   document.querySelectorAll('.del-ztab').forEach((t,i) => t.classList.toggle('active', i+1===z));
   document.querySelectorAll('.del-zone-panel').forEach((p,i) => p.classList.toggle('active', i+1===z));
-  // Highlight circle
-  document.querySelectorAll('.del-circle').forEach((c,i) => {
-    c.style.borderStyle = i+1===z ? 'solid' : 'dashed';
-    c.style.background = i+1===z ? 'rgba(212,32,32,0.2)' : ['rgba(212,32,32,0.18)','rgba(212,32,32,0.10)','rgba(212,32,32,0.05)'][i];
-  });
+  // Highlight Leaflet circles
+  if (window._deliveryCircles) {
+    window._deliveryCircles.forEach((c, i) => {
+      const active = i + 1 === z;
+      c.setStyle({
+        color: active ? '#D42020' : '#4A90D9',
+        fillColor: active ? '#D42020' : '#4A90D9',
+        fillOpacity: active ? 0.15 : [0.08, 0.06, 0.04][i],
+        weight: active ? 2.5 : 2,
+      });
+    });
+  }
 }
 
 // ═══ AUTO DETECT BROWSER LANGUAGE ═══
