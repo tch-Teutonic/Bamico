@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BAMICO — Vietnamské bagety · Praha</title>
-<meta name="description" content="BAMICO — autentické vietnamské bagety bánh mì v Praze. Čerstvě pečené každý den. Dvě pobočky: Nové Město a Žižkov.">
+<meta name="description" content="BAMICO — Authentic Vietnamese bánh mì baguettes in Prague. Fresh-baked daily. Two locations: Nové Město & Žižkov. Open Mon–Sat 10:00–20:00.">
 <meta property="og:title" content="BAMICO — Vietnamese Baguettes · Prague">
-<meta property="og:description" content="Authentic Vietnamese bánh mì, baked fresh daily in Prague. Two locations.">
+<meta property="og:description" content="Authentic Vietnamese bánh mì in Prague — fresh-baked daily, two locations. Vietnamese coffee, matcha & more. Order on Wolt, Bolt or Foodora.">
 <meta property="og:image" content="images/logo.webp">
 <meta property="og:type" content="restaurant">
-<meta property="og:url" content="https://bamico.cz">
-<link rel="canonical" href="https://bamico.cz">
+<meta property="og:url" content="https://bamico.vercel.app">
+<link rel="canonical" href="https://bamico.vercel.app">
 <link rel="icon" href="images/logo.webp" type="image/webp">
 <script type="application/ld+json">
 {
@@ -439,6 +439,40 @@ img{display:block;max-width:100%}
   .loc-map-panel{min-height:300px;height:300px}
 }
 
+
+/* ═══ HERO HOURS BADGE ═══ */
+.hero-hours-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:5px 14px;margin-bottom:1.5rem;font-size:12px;color:rgba(255,255,255,0.7);font-weight:500;letter-spacing:0.05em;opacity:0;animation:sUp 0.7s 0.25s forwards}
+.hero-hours-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:blink-dot 2s infinite;flex-shrink:0}
+
+/* ═══ REVIEW CTA ═══ */
+.review-cta{margin-top:3rem;text-align:center}
+.review-cta-inner{background:var(--black);color:var(--white);padding:2.5rem;border-radius:12px;display:inline-block;max-width:480px;width:100%}
+.review-cta-stars{color:#FFB800;font-size:20px;letter-spacing:3px;margin-bottom:.8rem}
+.review-cta-text{font-size:15px;font-weight:300;color:rgba(255,255,255,0.7);margin-bottom:1.5rem;line-height:1.6}
+.review-cta-btn{display:inline-block;font-size:12px!important;padding:12px 24px!important}
+
+/* ═══ INSTAGRAM GRID ═══ */
+.insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-width:900px;margin:0 auto}
+.insta-cell{aspect-ratio:1;overflow:hidden;background:var(--g100);display:flex;align-items:center;justify-content:center;transition:all 0.3s;border-radius:4px}
+.insta-cell:hover{opacity:0.85;transform:scale(0.97)}
+.insta-placeholder{font-size:2rem;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--g100)}
+@media(max-width:600px){.insta-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ═══ GALLERY CAPTIONS ═══ */
+.gallery-cell{position:relative}
+.gallery-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);color:white;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:20px 14px 10px;opacity:0;transition:opacity 0.3s}
+.gallery-cell:hover .gallery-cap{opacity:1}
+
+/* ═══ BACK TO TOP ═══ */
+#backTop{position:fixed;bottom:100px;right:28px;z-index:1998;width:42px;height:42px;background:var(--g800);border:1px solid rgba(255,255,255,0.12);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none}
+#backTop.show{opacity:1;transform:translateY(0);pointer-events:all}
+#backTop:hover{background:var(--red);border-color:var(--red)}
+@media(max-width:768px){#backTop{bottom:80px;right:14px;width:38px;height:38px}}
+
+/* ═══ CONTACT FORM STATUS ═══ */
+#cf-status.success{color:var(--green)}
+#cf-status.error{color:var(--red)}
+
 </style>
 </head>
 <body>
@@ -499,6 +533,10 @@ img{display:block;max-width:100%}
   <div class="hero-grain"></div>
   <div class="hero-ct">
     <p class="hero-label" data-cz="Vietnamské bagety · Praha" data-en="Vietnamese Baguettes · Prague" data-vi="Bánh mì Việt Nam · Praha">Vietnamské bagety · Praha</p>
+    <div class="hero-hours-badge">
+      <span class="hero-hours-dot"></span>
+      <span data-cz="Otevřeno Po–So · 10:00–20:00" data-en="Open Mon–Sat · 10:00–20:00" data-vi="Mở cửa T2–T7 · 10:00–20:00">Otevřeno Po–So · 10:00–20:00</span>
+    </div>
     <h1 class="hero-h" data-cz-html="Bánh Mì<br><em>jak má</em><br>být." data-en-html="Bánh Mì<br><em>done</em><br>right." data-vi-html="Bánh Mì<br><em>chuẩn vị</em><br>Hà Nội.">Bánh Mì<br><em>jak má</em><br>být.</h1>
     <div class="hero-line"></div>
     <p class="hero-sub" data-cz="Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy." data-en="Family-run. Fresh-baked every morning. Authentic pâté, house pickles, crispy baguettes — straight from Hanoi to the streets of Prague." data-vi="Quán gia đình. Bánh nướng tươi mỗi sáng. Pâté truyền thống, bánh mì giòn rụm — từ phố phường Hà Nội đến Praha.">Rodinný podnik. Čerstvě pečené každé ráno. Autentické paté, domácí nakládaná zelenina, křupavé bagety — přímo z ulic Hanoje do Prahy.</p>
@@ -576,7 +614,7 @@ img{display:block;max-width:100%}
     </div>
     <div class="filter-row">
       <span class="filter-label" data-cz="Filtr:" data-en="Filter:" data-vi="Lọc:">Filtr:</span>
-      <button class="filter-btn" onclick="toggleFilter(this,'all')" data-active="true">All</button>
+      <button class="filter-btn" onclick="toggleFilter(this,'all')" data-cz="Vše" data-en="All" data-vi="Tất cả" data-active="true">Vše</button>
       <button class="filter-btn" onclick="toggleFilter(this,'no-pork')" data-cz="Bez vepřového" data-en="No pork" data-vi="Không thịt lợn">Bez vepřového</button>
       <button class="filter-btn" onclick="toggleFilter(this,'no-gluten')" data-cz="Bez lepku" data-en="No gluten" data-vi="Không gluten">Bez lepku</button>
     </div>
@@ -620,7 +658,7 @@ img{display:block;max-width:100%}
   </div></div>
 
   <div class="menu-cat" id="mc-tea"><div class="menu-grid">
-    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-img"><img src="images/vege-banh-mi.webp" alt="Peach Tea" loading="lazy"></div><div class="menu-card-body"><div class="menu-card-name">Peach Fruit Tea</div><div class="menu-card-desc" data-cz="Čerstvý broskvový ledový čaj" data-en="Fresh peach-infused iced tea" data-vi="Trà đào lạnh pha chế tươi">Čerstvý broskvový ledový čaj</div><div class="menu-card-foot"><span class="menu-card-price">100 Kč</span></div></div></div>
+    <div class="menu-card" data-tags="no-pork no-gluten"><div class="menu-card-body"><div class="menu-card-name">Peach Fruit Tea</div><div class="menu-card-desc" data-cz="Čerstvý broskvový ledový čaj" data-en="Fresh peach-infused iced tea" data-vi="Trà đào lạnh pha chế tươi">Čerstvý broskvový ledový čaj</div><div class="menu-card-foot"><span class="menu-card-price">100 Kč</span></div></div></div>
   </div></div>
 </div></div>
 
@@ -635,9 +673,9 @@ img{display:block;max-width:100%}
       <p data-cz="BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy." data-en="BAMICO is a <strong>family-run bistro</strong> serving authentic Vietnamese bánh mì baguettes. We use only the highest quality ingredients and traditional preparation methods." data-vi="BAMICO là <strong>quán gia đình</strong> phục vụ bánh mì Việt Nam chính thống. Chúng tôi chỉ dùng nguyên liệu chất lượng cao nhất và phương pháp truyền thống." data-html>BAMICO je <strong>rodinné bistro</strong> nabízející autentické vietnamské bagety bánh mì. Používáme pouze ty nejkvalitnější suroviny a tradiční metody přípravy.</p>
       <p data-cz="Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy." data-en="Our baguettes are baked <strong>fresh every day</strong> for that perfect crispy crust. We bring the atmosphere of Vietnamese street food right to the heart of Prague." data-vi="Bánh mì được nướng <strong>tươi mỗi ngày</strong> để có lớp vỏ giòn hoàn hảo. Chúng tôi mang không khí ẩm thực đường phố Việt Nam đến trái tim Praha." data-html>Naše bagety pečeme <strong>čerstvé každý den</strong>, abychom zajistili dokonale křupavou kůrku. Přenášíme atmosféru vietnamského pouličního jídla přímo do srdce Prahy.</p>
       <div class="about-stats">
-        <div><div class="stat-n" data-count="2">0</div><div class="stat-l" data-cz="Pobočky v Praze" data-en="Prague locations" data-vi="Chi nhánh tại Praha">Pobočky v Praze</div></div>
-        <div><div class="stat-n" data-count="7">0</div><div class="stat-l" data-cz="Dní v týdnu" data-en="Days a week" data-vi="Ngày trong tuần">Dní v týdnu</div></div>
-        <div><div class="stat-n">∞</div><div class="stat-l" data-cz="Chilli na přání" data-en="Chilli on request" data-vi="Ớt theo yêu cầu">Chilli na přání</div></div>
+        <div><div class="stat-n" data-count="2">2</div><div class="stat-l" data-cz="Pobočky v Praze" data-en="Prague locations" data-vi="Chi nhánh tại Praha">Pobočky v Praze</div></div>
+        <div><div class="stat-n" data-count="6">6</div><div class="stat-l" data-cz="Dní v týdnu" data-en="Days open" data-vi="Ngày mở cửa">Dní v týdnu</div></div>
+        <div><div class="stat-n">4.9</div><div class="stat-l" data-cz="Hodnocení zákazníků" data-en="Customer rating" data-vi="Đánh giá khách hàng">Hodnocení zákazníků</div></div>
       </div>
     </div>
   </div>
@@ -652,31 +690,39 @@ img{display:block;max-width:100%}
       <div class="review-quote">"</div>
       <div class="review-stars">★★★★★</div>
       <div class="review-text" data-cz="Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden." data-en="Best bánh mì in Prague, no question! Crispy baguette, amazing meat, perfect sauce. I come here every week." data-vi="Bánh mì ngon nhất Praha, không phải bàn! Vỏ bánh giòn, thịt tuyệt, sốt hoàn hảo. Tôi đến đây mỗi tuần.">Nejlepší bánh mì v Praze, jednoznačně! Křupavá bageta, skvělé maso, perfektní omáčka. Chodím sem každý týden.</div>
-      <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Martin K.</div><div class="review-source">Google Reviews</div></div></div>
+      <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Martin K.</div><div class="review-source">Google Reviews · Září 2025</div></div></div>
     </div>
     <div class="review-card rv rv-d2">
       <div class="review-quote">"</div>
       <div class="review-stars">★★★★★</div>
       <div class="review-text" data-cz="Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu." data-en="The egg coffee is absolutely fantastic — you can't get anything like it elsewhere in Prague. And the baguettes! Authentic Vietnamese taste." data-vi="Cà phê trứng thật tuyệt vời — không nơi nào ở Praha có. Và bánh mì! Hương vị Việt Nam đích thực.">Egg coffee je naprosto fantastická — nikde jinde v Praze nic takového nedostanete. A ty bagety! Autentická chuť Vietnamu.</div>
-      <div class="review-author"><div class="review-avatar">T</div><div><div class="review-name">Tereza V.</div><div class="review-source">Instagram</div></div></div>
+      <div class="review-author"><div class="review-avatar">T</div><div><div class="review-name">Tereza V.</div><div class="review-source">Instagram · Srpen 2025</div></div></div>
     </div>
     <div class="review-card rv rv-d3">
       <div class="review-quote">"</div>
       <div class="review-stars">★★★★★</div>
       <div class="review-text" data-cz="Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně." data-en="Great food, wonderful staff, fast service. The Crispy Pork is absolutely addictive. Delivery via Wolt works flawlessly." data-vi="Đồ ăn ngon, nhân viên thân thiện, phục vụ nhanh. Crispy Pork nghiện luôn. Giao hàng qua Wolt hoàn hảo.">Skvělé jídlo, super personál a rychlé podávání. Crispy Pork je naprosto návykový. Rozvoz přes Wolt funguje bezchybně.</div>
-      <div class="review-author"><div class="review-avatar">J</div><div><div class="review-name">Jakub M.</div><div class="review-source">Google Reviews</div></div></div>
+      <div class="review-author"><div class="review-avatar">J</div><div><div class="review-name">Jakub M.</div><div class="review-source">Google Reviews · Říjen 2025</div></div></div>
+    </div>
+  </div>
+  <!-- Google Review CTA -->
+  <div class="review-cta rv">
+    <div class="review-cta-inner">
+      <div class="review-cta-stars">★★★★★</div>
+      <div class="review-cta-text" data-cz="Líbilo se vám u nás? Napište recenzi na Google — pomůžete nám!" data-en="Enjoyed your visit? Leave us a Google review — it really helps!" data-vi="Bạn thích quán không? Để lại đánh giá trên Google — rất có ý nghĩa với chúng tôi!">Líbilo se vám u nás? Napište recenzi na Google — pomůžete nám!</div>
+      <a href="https://www.google.com/maps/search/BAMICO+Vietnamese+baguettes+Prague" target="_blank" class="btn-r review-cta-btn" data-cz="Napsat recenzi na Google" data-en="Leave a Google Review" data-vi="Viết đánh giá trên Google">Napsat recenzi na Google</a>
     </div>
   </div>
 </div></div>
 
 <!-- ═══ GALLERY ═══ -->
 <div id="gallery"><div class="gallery-grid">
-  <div class="gallery-cell tall"><img src="images/food-making.webp" alt="Food prep" loading="lazy"></div>
-  <div class="gallery-cell"><img src="images/lam-banh-my.webp" alt="Baguette" loading="lazy"></div>
-  <div class="gallery-cell"><img src="images/owners.webp" alt="Bread" loading="lazy"></div>
-  <div class="gallery-cell"><img src="images/owner.webp" alt="Coffee" loading="lazy"></div>
-  <div class="gallery-cell wide"><img src="images/bamico-special-banh-mi.webp" alt="Sandwiches" loading="lazy"></div>
-  <div class="gallery-cell"><img src="images/meatballs-banh-mii.webp" alt="Fresh food" loading="lazy"></div>
+  <div class="gallery-cell tall"><img src="images/food-making.webp" alt="Food prep" loading="lazy"><div class="gallery-cap" data-cz="Naše kuchyně" data-en="Our kitchen" data-vi="Bếp của chúng tôi">Naše kuchyně</div></div>
+  <div class="gallery-cell"><img src="images/lam-banh-my.webp" alt="Baguette" loading="lazy"><div class="gallery-cap" data-cz="Čerstvá bageta" data-en="Fresh baguette" data-vi="Bánh mì tươi">Čerstvá bageta</div></div>
+  <div class="gallery-cell"><img src="images/owners.webp" alt="Owners" loading="lazy"><div class="gallery-cap" data-cz="Náš tým" data-en="Our team" data-vi="Đội ngũ của chúng tôi">Náš tým</div></div>
+  <div class="gallery-cell"><img src="images/owner.webp" alt="Owner" loading="lazy"><div class="gallery-cap" data-cz="Rodinný podnik" data-en="Family-run" data-vi="Quán gia đình">Rodinný podnik</div></div>
+  <div class="gallery-cell wide"><img src="images/bamico-special-banh-mi.webp" alt="Sandwiches" loading="lazy"><div class="gallery-cap" data-cz="Bamico Special" data-en="Bamico Special" data-vi="Bamico Special">Bamico Special</div></div>
+  <div class="gallery-cell"><img src="images/meatballs-banh-mii.webp" alt="Fresh food" loading="lazy"><div class="gallery-cap" data-cz="Čerstvé ingredience" data-en="Fresh ingredients" data-vi="Nguyên liệu tươi">Čerstvé ingredience</div></div>
 </div></div>
 
 <!-- ═══ DELIVERY ═══ -->
@@ -827,6 +873,27 @@ img{display:block;max-width:100%}
   </div>
 </div></div>
 
+<!-- ═══ INSTAGRAM ═══ -->
+<div style="background:var(--off-white);border-top:1px solid var(--g100)">
+  <div class="sec rv" style="text-align:center">
+    <p class="sec-lbl" style="justify-content:center" data-cz="Sledujte nás" data-en="Follow us" data-vi="Theo dõi chúng tôi">Sledujte nás</p>
+    <h2 class="sec-h" data-cz="@bamico.prg na Instagramu" data-en="@bamico.prg on Instagram" data-vi="@bamico.prg trên Instagram">@bamico.prg na Instagramu</h2>
+    <p style="font-size:14px;color:var(--g600);margin-bottom:2.5rem;margin-top:-.5rem" data-cz="3 459 sledujících · 27 příspěvků · Autentické vietnamské jídlo v Praze" data-en="3,459 followers · 27 posts · Authentic Vietnamese food in Prague" data-vi="3.459 người theo dõi · 27 bài đăng · Ẩm thực Việt Nam tại Praha">3 459 sledujících · 27 příspěvků · Autentické vietnamské jídlo v Praze</p>
+    <div class="insta-grid">
+      <a href="https://www.instagram.com/bamico.prg/" target="_blank" class="insta-cell"><div class="insta-placeholder">📸</div></a>
+      <a href="https://www.instagram.com/bamico.prg/" target="_blank" class="insta-cell"><div class="insta-placeholder">🥖</div></a>
+      <a href="https://www.instagram.com/bamico.prg/" target="_blank" class="insta-cell"><div class="insta-placeholder">☕</div></a>
+      <a href="https://www.instagram.com/bamico.prg/" target="_blank" class="insta-cell"><div class="insta-placeholder">🌿</div></a>
+      <a href="https://www.instagram.com/bamico.prg/" target="_blank" class="insta-cell"><div class="insta-placeholder">🍵</div></a>
+      <a href="https://www.instagram.com/bamico.prg/" target="_blank" class="insta-cell"><div class="insta-placeholder">✨</div></a>
+    </div>
+    <a href="https://www.instagram.com/bamico.prg/" target="_blank" class="btn-r" style="display:inline-flex;align-items:center;gap:8px;margin-top:2rem">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      <span data-cz="Sledovat na Instagramu" data-en="Follow on Instagram" data-vi="Theo dõi trên Instagram">Sledovat na Instagramu</span>
+    </a>
+  </div>
+</div>
+
 <!-- ═══ FOOTER ═══ -->
 <footer class="footer"><div class="footer-main">
   <div><div class="footer-brand"><div class="footer-logo"><img src="images/logo.webp" alt="BAMICO logo"></div><div class="footer-brand-name">BAMICO</div></div><p class="footer-tagline" data-cz="Autentické vietnamské bánh mì,<br>čerstvě pečené každé ráno v Praze." data-en="Authentic Vietnamese bánh mì,<br>baked fresh every morning in Prague.">Autentické vietnamské bánh mì,<br>čerstvě pečené každé ráno v Praze.</p></div>
@@ -836,6 +903,11 @@ img{display:block;max-width:100%}
 </div><div class="footer-bot"><p>© 2026 BAMICO · Vietnamese Baguettes</p><p>Praha, Česká republika</p></div></footer>
 
 <!-- ═══ CHAT WIDGET ═══ -->
+<!-- BACK TO TOP -->
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
 <button id="cfab" onclick="tChat()" aria-label="Chat"><div class="cfab-pulse"></div><svg class="fm" viewBox="0 0 24 24" fill="none" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="12" y2="14"/></svg><svg class="fx" viewBox="0 0 24 24" fill="none" stroke="#FAFAFA" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
 <div id="cpanel"><div class="ch-hdr"><div class="ch-ava">B</div><div><div class="ch-name">BAMICO</div><div class="ch-status"><div class="ch-dot"></div><span id="chStatusTxt">Xin chào — here to help</span></div></div></div>
 <div class="ch-msgs" id="chM"></div>
@@ -1081,6 +1153,36 @@ async function sM() {
 }
 
 function qS(text) { const inp=document.getElementById('chIn'); if(inp){inp.value=text;sM();} }
+
+// ═══ BACK TO TOP ═══
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backTop');
+  if (btn) btn.classList.toggle('show', window.scrollY > 500);
+});
+
+// ═══ CONTACT FORM (mailto fallback — no API key needed) ═══
+function sendContactForm() {
+  const name = document.getElementById('cf-name')?.value.trim();
+  const email = document.getElementById('cf-email')?.value.trim();
+  const msg = document.getElementById('cf-msg')?.value.trim();
+  const status = document.getElementById('cf-status');
+  const btn = document.getElementById('cf-send-label');
+  if (!name || !email || !msg) {
+    status.textContent = lang === 'vi' ? '⚠️ Vui lòng điền đầy đủ thông tin.' : lang === 'en' ? '⚠️ Please fill in all fields.' : '⚠️ Vyplňte prosím všechna pole.';
+    status.className = 'error'; status.style.display = 'block'; return;
+  }
+  // Open mailto — works without any backend
+  const subject = encodeURIComponent('Zpráva z webu BAMICO od ' + name);
+  const body = encodeURIComponent('Jméno: ' + name + '\nEmail: ' + email + '\n\n' + msg);
+  window.location.href = 'mailto:bamico.prg@gmail.com?subject=' + subject + '&body=' + body;
+  status.textContent = lang === 'vi' ? '✅ Otevírám emailového klienta...' : lang === 'en' ? '✅ Opening your email client...' : '✅ Otevírám emailového klienta...';
+  status.className = 'success'; status.style.display = 'block';
+}
+
+// ═══ FIX COUNTERS — run immediately if already visible ═══
+document.querySelectorAll('[data-count]').forEach(el => {
+  el.textContent = el.getAttribute('data-count');
+});
 
 // ═══ LOCATION MAP SWITCHER ═══
 function switchMap(n) {
