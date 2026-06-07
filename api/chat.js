@@ -1,14 +1,19 @@
 export default async function handler(req, res) {
-  // Only allow POST
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return res.status(500).json({ error: 'ANTHROPIC_API_KEY not set in environment' });
   }
 
-  // Basic rate limit check (optional but good practice)
-  const { messages, system } = req.body;
+  const { messages, system } = req.body || {};
 
-  if (!messages || !Array.isArray(messages)) {
-    return res.status(400).json({ error: 'Invalid request body' });
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return res.status(400).json({ error: 'messages array is required' });
   }
 
   try {
@@ -16,27 +21,28 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY, // ← stored securely in Vercel
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
         system: system || '',
         messages: messages,
       }),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const error = await response.text();
-      return res.status(response.status).json({ error });
+      // Return the exact Anthropic error so we can see it in the chat
+      const errDetail = data?.error?.message || JSON.stringify(data);
+      return res.status(response.status).json({ error: errDetail });
     }
 
-    const data = await response.json();
     return res.status(200).json(data);
 
-  } catch (error) {
-    console.error('API error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+  } catch (err) {
+    return res.status(500).json({ error: 'Fetch failed: ' + err.message });
   }
 }

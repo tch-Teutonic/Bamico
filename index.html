@@ -753,13 +753,19 @@ async function sM() {
   try {
     const res = await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:SYS,messages:H})});
     hideTyping();
-    if(!res.ok) throw new Error('HTTP '+res.status);
     const data = await res.json();
-    const reply = data.content?.[0]?.text || '?';
-    H.push({role:'assistant',content:reply}); addM('assistant',reply);
+    if(!res.ok) {
+      const errMsg = data?.error || 'HTTP ' + res.status;
+      console.error('Chat API error:', res.status, errMsg);
+      addM('assistant', '⚠️ Error: ' + errMsg);
+    } else {
+      const reply = data.content?.[0]?.text || '?';
+      H.push({role:'assistant',content:reply}); addM('assistant',reply);
+    }
   } catch(e) {
     hideTyping();
-    addM('assistant',{cz:'⚠️ Něco se pokazilo. Zavolejte nám: +420 777 057 696.',en:'⚠️ Something went wrong. Please call: +420 777 057 696.',vi:'⚠️ Đã xảy ra lỗi. Vui lòng gọi: +420 777 057 696.'}[lang]||'');
+    console.error('Fetch error:', e.message);
+    addM('assistant','⚠️ Network error: ' + e.message);
   }
   ld=false; if(btn) btn.disabled=false; inp.focus();
 }
