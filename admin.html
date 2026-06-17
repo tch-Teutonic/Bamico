@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BAMICO Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#f5f7fa;color:#2c3e50}
+  /* LOGIN */
+  #login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea,#764ba2)}
+  .login-box{background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:2.5rem;width:100%;max-width:380px}
+  .login-box h1{color:#667eea;text-align:center;margin-bottom:.25rem}
+  .login-box p{color:#999;text-align:center;font-size:.85rem;margin-bottom:1.5rem}
+  .fg{margin-bottom:1rem}
+  .fg label{display:block;margin-bottom:.4rem;font-weight:500;font-size:.9rem}
+  .fg input,.fg select,.fg textarea{width:100%;padding:.7rem;border:1px solid #ddd;border-radius:8px;font:inherit}
+  .fg input:focus{outline:none;border-color:#667eea}
+  .btn{background:#667eea;color:#fff;border:none;padding:.7rem 1.2rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:.95rem}
+  .btn:hover{background:#5568d3}
+  .btn-sm{padding:.4rem .8rem;font-size:.85rem;border-radius:6px}
+  .btn-danger{background:#e74c3c}.btn-danger:hover{background:#c0392b}
+  .btn-green{background:#27ae60}.btn-green:hover{background:#219150}
+  .btn-ghost{background:#eee;color:#333}.btn-ghost:hover{background:#ddd}
+  .err{color:#e74c3c;text-align:center;font-size:.85rem;margin-top:.8rem;display:none}
+  /* APP */
+  #app{display:none;min-height:100vh}
+  #app.on{display:flex}
+  .sidebar{width:230px;background:#2c3e50;color:#fff;padding:1.5rem 0;flex-shrink:0}
+  .sidebar h2{color:#8fa4f3;padding:0 1.3rem;margin-bottom:1.5rem}
+  .menu a{display:block;padding:.7rem 1.3rem;color:#ecf0f1;text-decoration:none;border-left:3px solid transparent;cursor:pointer;font-size:.95rem}
+  .menu a:hover,.menu a.active{background:rgba(143,164,243,.12);border-left-color:#8fa4f3;color:#8fa4f3}
+  .menu .role-tag{font-size:.7rem;color:#7f8c9a;padding:.5rem 1.3rem;text-transform:uppercase;letter-spacing:.05em}
+  .main{flex:1;padding:1.5rem;overflow-y:auto;max-height:100vh}
+  .topbar{background:#fff;border-radius:10px;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .topbar .who{font-size:.85rem;color:#888}
+  .sec{display:none}.sec.on{display:block}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.2rem;margin-bottom:1.5rem}
+  .stat{background:#fff;border-radius:10px;padding:1.3rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .stat .n{font-size:1.8rem;font-weight:700;color:#667eea}
+  .stat .l{color:#999;font-size:.85rem;margin-top:.3rem}
+  .card{background:#fff;border-radius:10px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:1.5rem}
+  .card h3{margin-bottom:1rem;font-size:1.1rem}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th{background:#f5f7fa;text-align:left;padding:.8rem;font-weight:600}
+  td{padding:.8rem;border-bottom:1px solid #eee}
+  tr:hover{background:#fafbff}
+  .pill{padding:.2rem .6rem;border-radius:20px;font-size:.78rem;font-weight:500;display:inline-block}
+  .p-pending{background:#fff3cd;color:#856404}
+  .p-preparing{background:#cce5ff;color:#004085}
+  .p-ready{background:#d4edda;color:#155724}
+  .p-completed{background:#e2e3e5;color:#383d41}
+  .p-paid{background:#d4edda;color:#155724}
+  .p-unpaid{background:#f8d7da;color:#721c24}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .ok{background:#d4edda;color:#155724;padding:.8rem;border-radius:8px;margin-bottom:1rem;display:none}
+  .ok.show{display:block}
+  .row-actions{display:flex;gap:.4rem;flex-wrap:wrap}
+  @media(max-width:820px){#app.on{flex-direction:column}.sidebar{width:100%}.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <h1>🥖 BAMICO</h1>
+    <p>Admin Dashboard</p>
+    <div class="fg"><label>Username</label><input id="u" value="admin"/></div>
+    <div class="fg"><label>Password</label><input id="p" type="password" value="bamico12" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <button class="btn" style="width:100%" onclick="doLogin()">Login</button>
+    <div class="err" id="loginErr">Invalid credentials</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="sidebar">
+    <h2>🥖 BAMICO</h2>
+    <div class="menu" id="menu">
+      <a onclick="nav('dash',this)" class="active">📊 Dashboard</a>
+      <a onclick="nav('orders',this)">📦 Orders</a>
+      <a onclick="nav('products',this)" data-role="admin,manager">🥖 Products</a>
+      <a onclick="nav('analytics',this)" data-role="admin,manager">📈 Analytics</a>
+      <a onclick="nav('special',this)" data-role="admin,manager">⭐ Daily Special</a>
+      <a onclick="nav('loyalty',this)" data-role="admin,manager">💳 Loyalty</a>
+      <a onclick="nav('report',this)" data-role="admin,manager">🧾 End of Day</a>
+      <a onclick="nav('staff',this)" data-role="admin">👥 Staff</a>
+      <a onclick="nav('activity',this)" data-role="admin">📜 Activity Log</a>
+      <a onclick="logout()" style="color:#e74c3c">↩ Logout</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <h1 id="title" style="font-size:1.3rem">Dashboard</h1>
+      <div class="who" id="who"></div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="sec on" id="dash">
+      <div class="grid">
+        <div class="stat"><div class="n" id="s_today">0</div><div class="l">Today's Orders</div></div>
+        <div class="stat"><div class="n" id="s_todayrev">0 Kč</div><div class="l">Today's Revenue</div></div>
+        <div class="stat"><div class="n" id="s_total">0</div><div class="l">Total Orders</div></div>
+        <div class="stat"><div class="n" id="s_rev">0 Kč</div><div class="l">Total Revenue</div></div>
+      </div>
+      <div class="card">
+        <h3>🔴 Live Orders <span id="liveDot" style="font-size:.8rem;color:#27ae60">● polling</span></h3>
+        <table><thead><tr><th>#</th><th>Customer</th><th>Items</th><th>Total</th><th>Pay</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="liveOrders"><tr><td colspan="7" style="text-align:center;color:#999">Loading…</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="sec" id="orders">
+      <div class="card">
+        <h3>All Orders <button class="btn btn-sm btn-ghost" style="float:right" onclick="exportCSV()">📥 Export CSV</button></h3>
+        <table><thead><tr><th>#</th><th>Customer</th><th>Phone</th><th>Items</th><th>Total</th><th>Pickup</th><th>Pay</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="allOrders"><tr><td colspan="9" style="text-align:center;color:#999">Loading…</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="sec" id="products">
+      <div class="card">
+        <h3>Add Product</h3>
+        <div class="form-grid">
+          <div class="fg"><label>Name</label><input id="pr_name"/></div>
+          <div class="fg"><label>Price (Kč)</label><input id="pr_price" type="number"/></div>
+          <div class="fg"><label>Category</label>
+            <select id="pr_cat"><option>Bánh Mì</option><option>Combo</option><option>Drink</option><option>Side</option></select></div>
+          <div class="fg"><label>Stock</label><input id="pr_stock" type="number" value="100"/></div>
+          <div class="fg" style="grid-column:1/3"><label>Description</label><textarea id="pr_desc"></textarea></div>
+        </div>
+        <button class="btn" onclick="addProduct()">Add Product</button>
+      </div>
+      <div class="card">
+        <h3>Products</h3>
+        <table><thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead>
+        <tbody id="prodTable"><tr><td colspan="5" style="text-align:center;color:#999">Loading…</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="sec" id="analytics">
+      <div class="grid">
+        <div class="stat"><div class="n" id="a_avg">0 Kč</div><div class="l">Avg Order</div></div>
+        <div class="stat"><div class="n" id="a_cust">0</div><div class="l">Customers</div></div>
+        <div class="stat"><div class="n" id="a_repeat">0</div><div class="l">Repeat Customers</div></div>
+        <div class="stat"><div class="n" id="a_top">-</div><div class="l">Top Product</div></div>
+      </div>
+      <div class="card"><h3>Revenue — Last 14 Days</h3><canvas id="revChart" height="90"></canvas></div>
+      <div class="card"><h3>Top Products</h3><canvas id="prodChart" height="90"></canvas></div>
+    </div>
+
+    <!-- STAFF -->
+    <div class="sec" id="staff">
+      <div class="card">
+        <h3>Add Staff</h3>
+        <div class="form-grid">
+          <div class="fg"><label>Username</label><input id="st_user"/></div>
+          <div class="fg"><label>Password</label><input id="st_pass" type="password"/></div>
+          <div class="fg"><label>Full name</label><input id="st_name"/></div>
+          <div class="fg"><label>Role</label><select id="st_role"><option value="cashier">Cashier</option><option value="manager">Manager</option><option value="admin">Admin</option></select></div>
+        </div>
+        <button class="btn" onclick="addStaff()">Add Staff</button>
+        <div class="ok" id="staffOk">Staff added!</div>
+      </div>
+      <div class="card">
+        <h3>Staff Accounts</h3>
+        <table><thead><tr><th>Username</th><th>Name</th><th>Role</th><th>Actions</th></tr></thead>
+        <tbody id="staffTable"><tr><td colspan="4" style="text-align:center;color:#999">Loading…</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- DAILY SPECIAL -->
+    <div class="sec" id="special">
+      <div class="card">
+        <h3>Today's Special</h3>
+        <div class="form-grid">
+          <div class="fg"><label>Product</label>
+            <select id="sp_product"></select></div>
+          <div class="fg"><label>Discount (%)</label><input id="sp_discount" type="number" min="0" max="100" value="15"/></div>
+          <div class="fg" style="grid-column:1/3"><label>Description</label>
+            <textarea id="sp_desc" placeholder="e.g. Fresh bánh mì, limited quantity today!"></textarea></div>
+        </div>
+        <button class="btn" onclick="saveSpecial()">Update Special</button>
+        <div class="ok" id="spOk">Special updated!</div>
+      </div>
+      <div class="card">
+        <h3>Currently Live</h3>
+        <div id="spPreview" style="padding:1rem;background:#fff8f0;border-radius:8px;border-left:4px solid #f39c12">No special set</div>
+      </div>
+    </div>
+
+    <!-- LOYALTY -->
+    <div class="sec" id="loyalty">
+      <div class="card">
+        <h3>Loyalty Settings</h3>
+        <div class="form-grid">
+          <div class="fg"><label>Points per 1 Kč spent</label><input id="lo_per" type="number" step="0.1" value="1"/></div>
+          <div class="fg"><label>Points for free item</label><input id="lo_free" type="number" value="50"/></div>
+          <div class="fg"><label>Reward value (Kč)</label><input id="lo_reward" type="number" value="50"/></div>
+          <div class="fg"><label>Max points per order</label><input id="lo_max" type="number" value="100"/></div>
+        </div>
+        <button class="btn" onclick="saveLoyalty()">Save Settings</button>
+        <div class="ok" id="loOk">Saved!</div>
+      </div>
+      <div class="card">
+        <h3>Members</h3>
+        <table><thead><tr><th>Phone</th><th>Name</th><th>Points</th><th>Reward Ready?</th></tr></thead>
+        <tbody id="memTable"><tr><td colspan="4" style="text-align:center;color:#999">Loading…</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- END OF DAY REPORT -->
+    <div class="sec" id="report">
+      <div class="card">
+        <h3>End of Day — <span id="rpDate"></span> <button class="btn btn-sm btn-ghost" style="float:right" onclick="printReport()">🖨 Print</button></h3>
+        <div class="grid" style="margin-bottom:1rem">
+          <div class="stat"><div class="n" id="rp_orders">0</div><div class="l">Orders</div></div>
+          <div class="stat"><div class="n" id="rp_rev">0 Kč</div><div class="l">Revenue</div></div>
+          <div class="stat"><div class="n" id="rp_completed">0</div><div class="l">Completed</div></div>
+          <div class="stat"><div class="n" id="rp_unpaid">0 Kč</div><div class="l">Unpaid</div></div>
+        </div>
+        <h3 style="margin-top:1rem">Cash Drawer</h3>
+        <table><tbody id="rpPay"></tbody></table>
+        <h3 style="margin-top:1.5rem">By Product</h3>
+        <table><thead><tr><th>Product</th><th>Qty Sold</th><th>Revenue</th></tr></thead>
+        <tbody id="rpProd"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <div class="sec" id="activity">
+      <div class="card">
+        <h3>Activity Log</h3>
+        <table><thead><tr><th>Time</th><th>Staff</th><th>Action</th><th>Details</th></tr></thead>
+        <tbody id="actTable"><tr><td colspan="4" style="text-align:center;color:#999">Loading…</td></tr></tbody></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API = '';
+
+// ============ PREVIEW MOCK MODE ============
+const MOCK_ORDERS = [
+  {id:1042, customer_name:'Petr Novák', phone:'+420776123456', items:JSON.stringify([{name:'Bánh Mì Thịt',qty:2,price:95},{name:'Cà Phê Sữa',qty:1,price:65}]), total:255, pickup_time:'17:30', status:'pending', payment_status:'paid', payment_method:'stripe', created_at:new Date().toISOString()},
+  {id:1041, customer_name:'Jana Svobodová', phone:'+420603987654', items:JSON.stringify([{name:'Combo Đặc Biệt',qty:1,price:185}]), total:185, pickup_time:'ASAP', status:'preparing', payment_status:'paid', payment_method:'gopay', created_at:new Date().toISOString()},
+  {id:1040, customer_name:'Tomáš Dvořák', phone:'+420605111222', items:JSON.stringify([{name:'Bánh Mì Chay',qty:1,price:85},{name:'Trà Đào',qty:2,price:55}]), total:195, pickup_time:'18:00', status:'ready', payment_status:'unpaid', payment_method:'cash', created_at:new Date().toISOString()},
+  {id:1039, customer_name:'Eva Černá', phone:'+420777333444', items:JSON.stringify([{name:'Bánh Mì Thịt',qty:3,price:95}]), total:285, pickup_time:'16:45', status:'completed', payment_status:'paid', payment_method:'stripe', created_at:new Date(Date.now()-3600000).toISOString()},
+  {id:1038, customer_name:'Martin Procházka', phone:'+420608555666', items:JSON.stringify([{name:'Combo Đặc Biệt',qty:2,price:185}]), total:370, pickup_time:'ASAP', status:'completed', payment_status:'paid', payment_method:'gopay', created_at:new Date(Date.now()-7200000).toISOString()},
+];
+const MOCK_PRODUCTS = [
+  {id:1,name:'Bánh Mì Thịt',category:'Bánh Mì',price:95,stock:48,description:'Classic pork bánh mì'},
+  {id:2,name:'Bánh Mì Chay',category:'Bánh Mì',price:85,stock:7,description:'Vegetarian'},
+  {id:3,name:'Combo Đặc Biệt',category:'Combo',price:185,stock:25,description:'Bánh mì + drink + side'},
+  {id:4,name:'Cà Phê Sữa',category:'Drink',price:65,stock:100,description:'Vietnamese iced coffee'},
+  {id:5,name:'Trà Đào',category:'Drink',price:55,stock:4,description:'Peach tea'},
+];
+const MOCK_USERS = [
+  {id:1,username:'admin',full_name:'BAMICO Admin',role:'admin'},
+  {id:2,username:'manager1',full_name:'Linh Tran',role:'manager'},
+  {id:3,username:'cashier1',full_name:'Pavel K.',role:'cashier'},
+];
+function mockDaily(){
+  const out=[];const today=new Date();
+  for(let i=13;i>=0;i--){const d=new Date(today);d.setDate(d.getDate()-i);
+    out.push({day:d.toISOString().slice(0,10),orders:Math.floor(Math.random()*15)+5,revenue:Math.floor(Math.random()*4000)+1500});}
+  return out;
+}
+
+const MOCK_SPECIAL = {product_id:1,product_name:'Bánh Mì Thịt',product_price:95,discount:15,description:'Fresh today — limited quantity!'};
+const MOCK_LOYALTY = {
+  settings:{points_per_czk:1,points_for_free:50,reward_value:50,max_points:100},
+  members:[
+    {phone:'+420776123456',name:'Petr Novák',points:62},
+    {phone:'+420603987654',name:'Jana Svobodová',points:48},
+    {phone:'+420605111222',name:'Tomáš Dvořák',points:120},
+    {phone:'+420777333444',name:'Eva Černá',points:25},
+  ]
+};
+const MOCK_REPORT = {
+  date:new Date().toISOString().slice(0,10),
+  totals:{orders:18,revenue:3420,completed:15,cancelled:1,cash:980,stripe:1640,gopay:800,unpaid:195},
+  byProduct:[
+    {name:'Bánh Mì Thịt',qty:22,revenue:2090},
+    {name:'Combo Đặc Biệt',qty:6,revenue:1110},
+    {name:'Cà Phê Sữa',qty:9,revenue:585},
+    {name:'Trà Đào',qty:7,revenue:385},
+  ]
+};
+const MOCK_ACTIVITY = [
+  {id:5,username:'cashier1',action:'update_order',details:{id:1042,status:'preparing'},created_at:new Date().toISOString()},
+  {id:4,username:'admin',action:'update_special',details:{product_id:1,discount:15},created_at:new Date(Date.now()-1800000).toISOString()},
+  {id:3,username:'manager1',action:'update_loyalty',details:{points_for_free:50},created_at:new Date(Date.now()-3600000).toISOString()},
+  {id:2,username:'cashier1',action:'update_order',details:{id:1040,status:'ready'},created_at:new Date(Date.now()-5400000).toISOString()},
+  {id:1,username:'admin',action:'update_order',details:{id:1039,payment_status:'paid'},created_at:new Date(Date.now()-7200000).toISOString()},
+];
+
+const MOCK_ANALYTICS = {
+  summary:{total_orders:342,total_revenue:64850,avg_order:190,today_orders:18,today_revenue:3420,unique_customers:156,repeat_customers:47},
+  daily:mockDaily(),
+  topProducts:[{name:'Bánh Mì Thịt',qty:412},{name:'Combo Đặc Biệt',qty:238},{name:'Cà Phê Sữa',qty:195},{name:'Trà Đào',qty:142},{name:'Bánh Mì Chay',qty:88}],
+  payments:[{method:'stripe',count:180,total:34200},{method:'gopay',count:120,total:22800},{method:'cash',count:42,total:7850}]
+};
+
+// Override the real API with mock responses
+async function api(path, opts={}){
+  await new Promise(r=>setTimeout(r,150)); // simulate latency
+  const method = (opts.method||'GET').toUpperCase();
+  if(path==='orders' && method==='GET') return JSON.parse(JSON.stringify(MOCK_ORDERS));
+  if(path==='orders' && method==='PUT'){const b=JSON.parse(opts.body);const o=MOCK_ORDERS.find(x=>x.id===b.id);if(o){if(b.status)o.status=b.status;if(b.payment_status)o.payment_status=b.payment_status;}return o;}
+  if(path==='products' && method==='GET') return JSON.parse(JSON.stringify(MOCK_PRODUCTS));
+  if(path==='products' && method==='POST'){const b=JSON.parse(opts.body);const n={id:Date.now(),...b,stock:b.stock||100};MOCK_PRODUCTS.push(n);return n;}
+  if(path==='products' && method==='DELETE'){const b=JSON.parse(opts.body);const i=MOCK_PRODUCTS.findIndex(x=>x.id==b.id);if(i>=0)MOCK_PRODUCTS.splice(i,1);return{ok:true};}
+  if(path==='users' && method==='GET') return JSON.parse(JSON.stringify(MOCK_USERS));
+  if(path==='users' && method==='POST'){const b=JSON.parse(opts.body);const n={id:Date.now(),...b};MOCK_USERS.push(n);return n;}
+  if(path==='users' && method==='DELETE'){const b=JSON.parse(opts.body);const i=MOCK_USERS.findIndex(x=>x.id==b.id);if(i>=0)MOCK_USERS.splice(i,1);return{ok:true};}
+  if(path==='analytics') return JSON.parse(JSON.stringify(MOCK_ANALYTICS));
+  if(path==='special' && method==='GET') return JSON.parse(JSON.stringify(MOCK_SPECIAL));
+  if(path==='special' && method==='PUT'){const b=JSON.parse(opts.body);Object.assign(MOCK_SPECIAL,b);const p=MOCK_PRODUCTS.find(x=>x.id==b.product_id);MOCK_SPECIAL.product_name=p?p.name:'';MOCK_SPECIAL.product_price=p?p.price:0;return MOCK_SPECIAL;}
+  if(path==='loyalty' && method==='GET') return JSON.parse(JSON.stringify(MOCK_LOYALTY));
+  if(path==='loyalty' && method==='PUT'){const b=JSON.parse(opts.body);Object.assign(MOCK_LOYALTY.settings,b);return MOCK_LOYALTY.settings;}
+  if(path.startsWith('report')) return JSON.parse(JSON.stringify(MOCK_REPORT));
+  if(path==='activity') return JSON.parse(JSON.stringify(MOCK_ACTIVITY));
+
+  if(path==='notify-sms') return {ok:true,sid:'PREVIEW'};
+  return {};
+}
+// Override login to accept the preview password instantly
+async function doLogin(){
+  const password=document.getElementById('p').value;
+  if(password==='bamico12'){
+    token='preview'; me={id:1,username:'admin',role:'admin',name:'BAMICO Admin (Preview)'};
+    startApp();
+  } else {
+    document.getElementById('loginErr').style.display='block';
+  }
+}
+// Disable real polling interval spam in preview (still poll once)
+ // same origin. If admin is on a different domain, put the base URL here.
+let token = localStorage.getItem('bam_token') || '';
+let me = JSON.parse(localStorage.getItem('bam_me') || 'null');
+let lastSeenId = 0, revChart, prodChart;
+
+const czk = n => (n||0).toLocaleString('cs-CZ') + ' Kč';
+const headers = () => ({ 'Content-Type':'application/json', 'Authorization':'Bearer '+token });
+
+async function api(path, opts={}) {
+  const r = await fetch(API + '/api/' + path, { headers: headers(), ...opts });
+  if (r.status === 401) { logout(); throw new Error('unauthorized'); }
+  return r.json();
+}
+
+// ---------- AUTH ----------
+// (real doLogin removed in preview — mock version above is used)
+function logout() {
+  localStorage.removeItem('bam_token'); localStorage.removeItem('bam_me');
+  token=''; me=null;
+  document.getElementById('app').classList.remove('on');
+  document.getElementById('login').style.display='flex';
+}
+function startApp() {
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').classList.add('on');
+  document.getElementById('who').textContent = `${me.name||me.username} · ${me.role}`;
+  // hide menu items the role can't use
+  document.querySelectorAll('#menu a[data-role]').forEach(a=>{
+    const roles = a.getAttribute('data-role').split(',');
+    if (!roles.includes(me.role)) a.style.display='none';
+  });
+  loadDash(); 
+  pollOrders();
+  setInterval(pollOrders, 15000); // live polling every 15s
+}
+
+// ---------- NAV ----------
+function nav(id, el) {
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('#menu a').forEach(a=>a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const titles = {dash:'Dashboard',orders:'Orders',products:'Products',analytics:'Analytics',special:'Daily Special',loyalty:'Loyalty',report:'End of Day',staff:'Staff',activity:'Activity Log'};
+  document.getElementById('title').textContent = titles[id]||'';
+  if (id==='orders') loadOrders();
+  if (id==='products') loadProducts();
+  if (id==='analytics') loadAnalytics();
+  if (id==='staff') loadStaff();
+  if (id==='special') loadSpecial();
+  if (id==='loyalty') loadLoyalty();
+  if (id==='report') loadReport();
+  if (id==='activity') loadActivity();
+}
+
+// ---------- DASHBOARD + LIVE ----------
+let allOrdersCache = [];
+async function loadDash(){ await pollOrders(true); }
+
+async function pollOrders(full=false) {
+  try {
+    const orders = await api('orders');
+    allOrdersCache = orders;
+    // new-order sound
+    const maxId = orders.length ? Math.max(...orders.map(o=>o.id)) : 0;
+    if (lastSeenId && maxId > lastSeenId) beep();
+    lastSeenId = maxId;
+
+    // stats
+    const today = new Date().toISOString().slice(0,10);
+    const todays = orders.filter(o=>(o.created_at||'').slice(0,10)===today);
+    document.getElementById('s_today').textContent = todays.length;
+    document.getElementById('s_todayrev').textContent = czk(todays.reduce((s,o)=>s+o.total,0));
+    document.getElementById('s_total').textContent = orders.length;
+    document.getElementById('s_rev').textContent = czk(orders.reduce((s,o)=>s+o.total,0));
+
+    // live table (active orders only)
+    const live = orders.filter(o=>['pending','preparing','ready'].includes(o.status)).slice(0,15);
+    document.getElementById('liveOrders').innerHTML = live.length ? live.map(rowLive).join('') :
+      '<tr><td colspan="7" style="text-align:center;color:#999">No active orders</td></tr>';
+  } catch(e){ /* handled in api() */ }
+}
+
+function statusPill(s){ return `<span class="pill p-${s}">${s}</span>`; }
+function payPill(s){ return `<span class="pill p-${s==='paid'?'paid':'unpaid'}">${s}</span>`; }
+function itemSummary(items){ try{const a=typeof items==='string'?JSON.parse(items):items;return a.map(i=>`${i.qty}× ${i.name}`).join(', ');}catch{return '-';} }
+
+function rowLive(o){
+  return `<tr>
+    <td>#${o.id}</td><td>${o.customer_name}</td><td>${itemSummary(o.items)}</td>
+    <td>${czk(o.total)}</td><td>${payPill(o.payment_status)}</td><td>${statusPill(o.status)}</td>
+    <td class="row-actions">${nextBtns(o)}</td></tr>`;
+}
+function nextBtns(o){
+  let b='';
+  if(o.status==='pending')   b+=`<button class="btn btn-sm" onclick="setStatus(${o.id},'preparing')">Start</button>`;
+  if(o.status==='preparing') b+=`<button class="btn btn-sm btn-green" onclick="setStatus(${o.id},'ready');smsReady(${o.id})">Ready+SMS</button>`;
+  if(o.status==='ready')     b+=`<button class="btn btn-sm btn-ghost" onclick="setStatus(${o.id},'completed')">Complete</button>`;
+  return b;
+}
+
+async function setStatus(id,status){
+  await api('orders',{method:'PUT',body:JSON.stringify({id,status})});
+  pollOrders(); if(document.getElementById('orders').classList.contains('on')) loadOrders();
+}
+async function smsReady(id){
+  try{ await api('notify-sms',{method:'POST',body:JSON.stringify({order_id:id,type:'ready'})}); }
+  catch{ /* SMS optional */ }
+}
+
+// ---------- ORDERS PAGE ----------
+function loadOrders(){
+  const o = allOrdersCache;
+  document.getElementById('allOrders').innerHTML = o.length ? o.map(r=>`
+    <tr><td>#${r.id}</td><td>${r.customer_name}</td><td>${r.phone||'-'}</td>
+    <td>${itemSummary(r.items)}</td><td>${czk(r.total)}</td><td>${r.pickup_time||'ASAP'}</td>
+    <td>${payPill(r.payment_status)}</td><td>${statusPill(r.status)}</td>
+    <td class="row-actions">${nextBtns(r)}${r.payment_status!=='paid'?`<button class="btn btn-sm btn-ghost" onclick="markPaid(${r.id})">Mark paid</button>`:''}</td></tr>`).join('')
+    : '<tr><td colspan="9" style="text-align:center;color:#999">No orders</td></tr>';
+}
+async function markPaid(id){ await api('orders',{method:'PUT',body:JSON.stringify({id,payment_status:'paid'})}); pollOrders(); loadOrders(); }
+
+function exportCSV(){
+  const o = allOrdersCache;
+  let csv='Order ID,Customer,Phone,Items,Total (Kč),Pickup,Payment,Status,Date\n';
+  o.forEach(r=>{csv+=`#${r.id},"${r.customer_name}","${r.phone||''}","${itemSummary(r.items)}",${r.total},"${r.pickup_time||'ASAP'}",${r.payment_status},${r.status},"${(r.created_at||'').slice(0,16)}"\n`;});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`bamico_orders_${new Date().toISOString().slice(0,10)}.csv`; a.click();
+}
+
+// ---------- PRODUCTS ----------
+async function loadProducts(){
+  const p = await api('products');
+  document.getElementById('prodTable').innerHTML = p.length ? p.map(x=>`
+    <tr><td>${x.name}</td><td>${x.category}</td><td>${czk(x.price)}</td>
+    <td style="${x.stock<10?'color:#e74c3c;font-weight:600':''}">${x.stock}${x.stock<10?' ⚠️':''}</td>
+    <td><button class="btn btn-sm btn-danger" onclick="delProduct(${x.id})">Delete</button></td></tr>`).join('')
+    : '<tr><td colspan="5" style="text-align:center;color:#999">No products</td></tr>';
+}
+async function addProduct(){
+  const body={ name:pr_name.value, price:+pr_price.value, category:pr_cat.value, stock:+pr_stock.value, description:pr_desc.value };
+  if(!body.name||!body.price){alert('Name and price required');return;}
+  await api('products',{method:'POST',body:JSON.stringify(body)});
+  pr_name.value=pr_price.value=pr_desc.value='';pr_stock.value=100;
+  loadProducts();
+}
+async function delProduct(id){ if(confirm('Delete product?')){ await api('products',{method:'DELETE',body:JSON.stringify({id})}); loadProducts(); } }
+
+// ---------- ANALYTICS ----------
+async function loadAnalytics(){
+  const d = await api('analytics');
+  a_avg.textContent=czk(d.summary.avg_order);
+  a_cust.textContent=d.summary.unique_customers;
+  a_repeat.textContent=d.summary.repeat_customers;
+  a_top.textContent=d.topProducts[0]?.name||'-';
+
+  const labels=d.daily.map(x=>x.day.slice(5));
+  const rev=d.daily.map(x=>x.revenue);
+  if(revChart) revChart.destroy();
+  revChart=new Chart(revChart_ctx(),{type:'line',data:{labels,datasets:[{label:'Revenue (Kč)',data:rev,borderColor:'#667eea',backgroundColor:'rgba(102,126,234,.1)',fill:true,tension:.3}]},options:{plugins:{legend:{display:false}}}});
+
+  const pl=d.topProducts.map(x=>x.name), pq=d.topProducts.map(x=>x.qty);
+  if(prodChart) prodChart.destroy();
+  prodChart=new Chart(prodChart_ctx(),{type:'bar',data:{labels:pl,datasets:[{label:'Sold',data:pq,backgroundColor:'#764ba2'}]},options:{plugins:{legend:{display:false}}}});
+}
+function revChart_ctx(){return document.getElementById('revChart').getContext('2d');}
+function prodChart_ctx(){return document.getElementById('prodChart').getContext('2d');}
+
+// ---------- STAFF ----------
+async function loadStaff(){
+  const u = await api('users');
+  document.getElementById('staffTable').innerHTML = u.map(x=>`
+    <tr><td>${x.username}</td><td>${x.full_name||'-'}</td><td><span class="pill p-completed">${x.role}</span></td>
+    <td>${x.username!=='admin'?`<button class="btn btn-sm btn-danger" onclick="delStaff(${x.id})">Remove</button>`:'—'}</td></tr>`).join('');
+}
+async function addStaff(){
+  const body={username:st_user.value,password:st_pass.value,full_name:st_name.value,role:st_role.value};
+  if(!body.username||!body.password){alert('Username and password required');return;}
+  const r = await api('users',{method:'POST',body:JSON.stringify(body)});
+  if(r.error){alert(r.error);return;}
+  st_user.value=st_pass.value=st_name.value='';
+  const ok=document.getElementById('staffOk');ok.classList.add('show');setTimeout(()=>ok.classList.remove('show'),2500);
+  loadStaff();
+}
+async function delStaff(id){ if(confirm('Remove staff?')){ await api('users',{method:'DELETE',body:JSON.stringify({id})}); loadStaff(); } }
+
+// ---------- DAILY SPECIAL ----------
+async function loadSpecial(){
+  const products = await api('products');
+  const sel = document.getElementById('sp_product');
+  sel.innerHTML = products.map(p=>`<option value="${p.id}">${p.name} — ${czk(p.price)}</option>`).join('');
+  const s = await api('special');
+  if(s.product_id) sel.value = s.product_id;
+  if(s.discount!=null) document.getElementById('sp_discount').value = s.discount;
+  if(s.description) document.getElementById('sp_desc').value = s.description;
+  renderSpecialPreview(s);
+}
+function renderSpecialPreview(s){
+  const el = document.getElementById('spPreview');
+  if(!s || !s.product_name){el.textContent='No special set';return;}
+  const newPrice = s.product_price ? Math.round(s.product_price*(1-(s.discount||0)/100)) : null;
+  el.innerHTML = `<b>⭐ ${s.product_name}</b> ${s.discount?`<span style="color:#c0392b">−${s.discount}%</span> `:''}` +
+    (newPrice!=null?`<span style="text-decoration:line-through;color:#aaa">${czk(s.product_price)}</span> <b>${czk(newPrice)}</b>`:'') +
+    (s.description?`<div style="margin-top:.5rem;color:#777">${s.description}</div>`:'');
+}
+async function saveSpecial(){
+  const body={product_id:+document.getElementById('sp_product').value,discount:+document.getElementById('sp_discount').value,description:document.getElementById('sp_desc').value};
+  const s=await api('special',{method:'PUT',body:JSON.stringify(body)});
+  renderSpecialPreview(s);
+  const ok=document.getElementById('spOk');ok.classList.add('show');setTimeout(()=>ok.classList.remove('show'),2500);
+}
+
+// ---------- LOYALTY ----------
+async function loadLoyalty(){
+  const d = await api('loyalty');
+  lo_per.value=d.settings.points_per_czk; lo_free.value=d.settings.points_for_free;
+  lo_reward.value=d.settings.reward_value; lo_max.value=d.settings.max_points;
+  const threshold=d.settings.points_for_free;
+  document.getElementById('memTable').innerHTML = d.members.length ? d.members.map(m=>`
+    <tr><td>${m.phone}</td><td>${m.name||'-'}</td><td><b>${m.points}</b></td>
+    <td>${m.points>=threshold?'<span class="pill p-ready">🎁 Yes</span>':`<span style="color:#999">${threshold-m.points} more</span>`}</td></tr>`).join('')
+    : '<tr><td colspan="4" style="text-align:center;color:#999">No members</td></tr>';
+}
+async function saveLoyalty(){
+  const body={points_per_czk:+lo_per.value,points_for_free:+lo_free.value,reward_value:+lo_reward.value,max_points:+lo_max.value};
+  await api('loyalty',{method:'PUT',body:JSON.stringify(body)});
+  const ok=document.getElementById('loOk');ok.classList.add('show');setTimeout(()=>ok.classList.remove('show'),2500);
+  loadLoyalty();
+}
+
+// ---------- END OF DAY ----------
+async function loadReport(){
+  const d = await api('report?date='+new Date().toISOString().slice(0,10));
+  document.getElementById('rpDate').textContent=d.date;
+  rp_orders.textContent=d.totals.orders;
+  rp_rev.textContent=czk(d.totals.revenue);
+  rp_completed.textContent=d.totals.completed;
+  rp_unpaid.textContent=czk(d.totals.unpaid);
+  document.getElementById('rpPay').innerHTML=`
+    <tr><td>💵 Cash</td><td style="text-align:right"><b>${czk(d.totals.cash)}</b></td></tr>
+    <tr><td>💳 Stripe (card)</td><td style="text-align:right"><b>${czk(d.totals.stripe)}</b></td></tr>
+    <tr><td>📱 GoPay</td><td style="text-align:right"><b>${czk(d.totals.gopay)}</b></td></tr>`;
+  document.getElementById('rpProd').innerHTML=d.byProduct.map(p=>`
+    <tr><td>${p.name}</td><td>${p.qty}</td><td>${czk(p.revenue)}</td></tr>`).join('');
+}
+function printReport(){ window.print(); }
+
+// ---------- ACTIVITY LOG ----------
+async function loadActivity(){
+  const rows = await api('activity');
+  document.getElementById('actTable').innerHTML = rows.length ? rows.map(r=>`
+    <tr><td style="white-space:nowrap">${new Date(r.created_at).toLocaleString('cs-CZ')}</td>
+    <td>${r.username||'-'}</td><td><span class="pill p-preparing">${r.action}</span></td>
+    <td style="color:#777;font-size:.85rem">${JSON.stringify(r.details)}</td></tr>`).join('')
+    : '<tr><td colspan="4" style="text-align:center;color:#999">No activity yet</td></tr>';
+}
+
+// ---------- SOUND ----------
+function beep(){
+  try{const c=new(window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator();const g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=880;o.type='sine';
+  g.gain.setValueAtTime(.3,c.currentTime);g.gain.exponentialRampToValueAtTime(.01,c.currentTime+.5);
+  o.start();o.stop(c.currentTime+.5);}catch{}
+}
+
+// ---------- BOOT ----------
+if (token && me) startApp();
+</script>
+<div style="position:fixed;bottom:0;left:0;right:0;background:#764ba2;color:#fff;text-align:center;padding:.5rem;font:13px Inter,sans-serif;z-index:9999">
+🔍 PREVIEW MODE — sample data, no database. Login password: <b>bamico12</b></div>
+</body>
+</html>

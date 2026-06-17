@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BAMICO — Sledování objednávky</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#fff8f0,#ffe9d6);min-height:100vh;color:#3a2b1f}
+  .wrap{max-width:520px;margin:0 auto;padding:2rem 1.2rem}
+  .logo{text-align:center;font-size:2rem;font-weight:700;color:#c0392b;margin-bottom:.3rem}
+  .tag{text-align:center;color:#a07a5a;margin-bottom:2rem}
+  .card{background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(192,57,43,.1);padding:1.5rem;margin-bottom:1.5rem}
+  .fg{margin-bottom:1rem}
+  .fg label{display:block;font-weight:500;margin-bottom:.4rem;font-size:.9rem}
+  .fg input{width:100%;padding:.8rem;border:1px solid #e8d5c4;border-radius:10px;font:inherit}
+  .fg input:focus{outline:none;border-color:#c0392b}
+  .btn{width:100%;background:#c0392b;color:#fff;border:none;padding:.85rem;border-radius:10px;font-weight:600;font-size:1rem;cursor:pointer}
+  .btn:hover{background:#a93226}
+  .or{text-align:center;color:#bba;margin:.8rem 0;font-size:.85rem}
+  /* progress tracker */
+  .track{display:none}
+  .track.on{display:block}
+  .order-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:.5rem}
+  .order-id{font-size:1.3rem;font-weight:700}
+  .steps{display:flex;justify-content:space-between;position:relative;margin:2rem 0}
+  .steps::before{content:'';position:absolute;top:18px;left:8%;right:8%;height:3px;background:#eee;z-index:0}
+  .step{position:relative;z-index:1;text-align:center;flex:1}
+  .dot{width:38px;height:38px;border-radius:50%;background:#eee;color:#999;display:flex;align-items:center;justify-content:center;margin:0 auto .5rem;font-size:1.1rem;transition:all .3s}
+  .step.done .dot{background:#27ae60;color:#fff}
+  .step.active .dot{background:#c0392b;color:#fff;box-shadow:0 0 0 5px rgba(192,57,43,.15);animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 5px rgba(192,57,43,.15)}50%{box-shadow:0 0 0 9px rgba(192,57,43,.05)}}
+  .step .lbl{font-size:.78rem;color:#777}
+  .step.done .lbl,.step.active .lbl{color:#3a2b1f;font-weight:600}
+  .items{border-top:1px solid #f0e5d8;padding-top:1rem;margin-top:1rem}
+  .item-row{display:flex;justify-content:space-between;padding:.35rem 0;font-size:.92rem}
+  .total-row{display:flex;justify-content:space-between;padding-top:.7rem;margin-top:.4rem;border-top:1px solid #f0e5d8;font-weight:700}
+  .status-msg{text-align:center;background:#fff4e6;color:#a05a00;border-radius:10px;padding:.8rem;margin-top:1rem;font-weight:500}
+  .status-msg.ready{background:#e9f9ee;color:#1d8348}
+  .back{display:block;text-align:center;margin-top:1rem;color:#c0392b;cursor:pointer;font-size:.9rem}
+  .err{color:#c0392b;text-align:center;margin-top:.8rem;font-size:.9rem;display:none}
+  .demo-note{position:fixed;bottom:0;left:0;right:0;background:#3a2b1f;color:#fff;text-align:center;padding:.5rem;font-size:.78rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">🥖 BAMICO</div>
+  <div class="tag">Sledujte svou objednávku</div>
+
+  <!-- SEARCH -->
+  <div class="card" id="search">
+    <div class="fg">
+      <label>Číslo objednávky</label>
+      <input id="orderId" placeholder="např. 1042" inputmode="numeric"/>
+    </div>
+    <button class="btn" onclick="lookupById()">Najít objednávku</button>
+    <div class="or">— nebo —</div>
+    <div class="fg">
+      <label>Telefonní číslo</label>
+      <input id="phone" placeholder="+420 776 123 456"/>
+    </div>
+    <button class="btn" onclick="lookupByPhone()" style="background:#a07a5a">Najít podle telefonu</button>
+    <div class="err" id="err">Objednávka nenalezena. Zkuste to znovu.</div>
+  </div>
+
+  <!-- TRACKER -->
+  <div class="track" id="tracker">
+    <div class="card">
+      <div class="order-head">
+        <div class="order-id" id="t_id">#1042</div>
+        <div style="color:#a07a5a;font-size:.85rem" id="t_pickup">Vyzvednutí: 17:30</div>
+      </div>
+
+      <div class="steps" id="steps">
+        <div class="step" data-s="pending"><div class="dot">📝</div><div class="lbl">Přijato</div></div>
+        <div class="step" data-s="preparing"><div class="dot">👨‍🍳</div><div class="lbl">Připravujeme</div></div>
+        <div class="step" data-s="ready"><div class="dot">✅</div><div class="lbl">Hotovo</div></div>
+        <div class="step" data-s="completed"><div class="dot">🎉</div><div class="lbl">Vyzvednuto</div></div>
+      </div>
+
+      <div class="status-msg" id="statusMsg">Vaše objednávka byla přijata.</div>
+
+      <div class="items" id="items"></div>
+      <div class="total-row"><span>Celkem</span><span id="t_total">255 Kč</span></div>
+    </div>
+    <span class="back" onclick="reset()">← Hledat jinou objednávku</span>
+  </div>
+</div>
+
+<div class="demo-note">🔍 DEMO — zkuste objednávku <b>1042</b>, <b>1041</b>, <b>1040</b> nebo telefon <b>+420776123456</b></div>
+
+<script>
+// ---- DEMO sample data (in production this comes from /api/track) ----
+const DEMO = {
+  '1042': {id:1042,pickup_time:'17:30',status:'pending',total:255,items:[{name:'Bánh Mì Thịt',qty:2,price:95},{name:'Cà Phê Sữa',qty:1,price:65}]},
+  '1041': {id:1041,pickup_time:'ASAP',status:'preparing',total:185,items:[{name:'Combo Đặc Biệt',qty:1,price:185}]},
+  '1040': {id:1040,pickup_time:'18:00',status:'ready',total:195,items:[{name:'Bánh Mì Chay',qty:1,price:85},{name:'Trà Đào',qty:2,price:55}]},
+  '1039': {id:1039,pickup_time:'16:45',status:'completed',total:285,items:[{name:'Bánh Mì Thịt',qty:3,price:95}]},
+};
+const PHONE_INDEX = { '+420776123456':'1042' };
+
+const ORDER = ['pending','preparing','ready','completed'];
+const MSG = {
+  pending:   {t:'Vaše objednávka byla přijata. 📝', cls:''},
+  preparing: {t:'Připravujeme vaši objednávku. 👨‍🍳', cls:''},
+  ready:     {t:'Vaše objednávka je připravená k vyzvednutí! ✅', cls:'ready'},
+  completed: {t:'Objednávka byla vyzvednuta. Děkujeme! 🎉', cls:'ready'},
+};
+
+function show(order){
+  if(!order){document.getElementById('err').style.display='block';return;}
+  document.getElementById('err').style.display='none';
+  document.getElementById('search').style.display='none';
+  document.getElementById('tracker').classList.add('on');
+
+  document.getElementById('t_id').textContent='#'+order.id;
+  document.getElementById('t_pickup').textContent='Vyzvednutí: '+order.pickup_time;
+  document.getElementById('t_total').textContent=order.total+' Kč';
+
+  const idx=ORDER.indexOf(order.status);
+  document.querySelectorAll('.step').forEach((el,i)=>{
+    el.classList.remove('done','active');
+    if(i<idx)el.classList.add('done');
+    else if(i===idx)el.classList.add('active');
+  });
+
+  const m=MSG[order.status];
+  const sm=document.getElementById('statusMsg');
+  sm.textContent=m.t; sm.className='status-msg '+m.cls;
+
+  document.getElementById('items').innerHTML=order.items.map(it=>
+    `<div class="item-row"><span>${it.qty}× ${it.name}</span><span>${it.qty*it.price} Kč</span></div>`).join('');
+}
+
+function lookupById(){
+  const id=document.getElementById('orderId').value.trim();
+  show(DEMO[id]); // production: fetch(`/api/track?order_id=${id}`)
+}
+function lookupByPhone(){
+  const p=document.getElementById('phone').value.replace(/\s/g,'');
+  const id=PHONE_INDEX[p];
+  show(id?DEMO[id]:null); // production: fetch(`/api/track?phone=${encodeURIComponent(p)}`)
+}
+function reset(){
+  document.getElementById('tracker').classList.remove('on');
+  document.getElementById('search').style.display='block';
+  document.getElementById('orderId').value='';document.getElementById('phone').value='';
+}
+</script>
+</body>
+</html>
